@@ -1,0 +1,72 @@
+@import url("https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Roboto:wght@100;400;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.rowContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.rowTitle {
+  font-family: "Amiri", serif;
+  font-weight: 400;
+  font-size: 48px;
+}
+
+.contentWrapper {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.contentWrapper > .pictureContainer > img {
+  display: flex;
+  margin-left: 25px;
+  border-radius: 150px;
+  width: 200px;
+  height: 200px;
+}
+
+.contentWrapper > .pictureContainer2 > img {
+  display: flex;
+  margin-left: 25px;
+  border-radius: 2px;
+  width: 200px;
+  height: 200px;
+}
+
+.pictureContainer > h2 {
+  font-family: "Amiri", serif;
+  font-weight: 400;
+  font-size: 24px;
+  display: flex;
+  margin-top: 16px;
+  flex-direction: column;
+  margin-left: 15%;
+}
+
+.pictureContainer2 > h2 {
+  font-family: "Amiri", serif;
+  font-weight: 400;
+  font-size: 24px;
+  display: flex;
+  margin-bottom: 16px;
+  flex-direction: column;
+  margin-left: 15%;
+}
+
+.borderSolidLine {
+  margin-top: 33px;
+  border-bottom: solid grey;
+  opacity: 0.6;
+  width: 100%;
+}
