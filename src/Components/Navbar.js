@@ -4,7 +4,6 @@ import Logo from "../assets/Logo.svg"
 import MenuIcon from "../assets/menu-Icon.svg"
 
 
-
 /* 
 TO DO:
 -Fix css, icons
@@ -27,9 +26,9 @@ export default function Navbar() {
                     <img id="logoText--svg" src={Logo} alt="ARTZY Logo" />
                 </div>
                 <div className='menuWrapper'>
-                    <h1 id='styleSettings'>Category</h1>
+                    <h1 id='styleSettings'><a href='/category'>Category</a></h1>
                     <img src={MenuIcon} alt="Icon Menu" />
-                    <h1 id='styleSettings'>Artists</h1>
+                    <h1 id='styleSettings'><a href='/artist'>Artist</a></h1>
                 </div>
                 <div className='inputWrapper'>
 
@@ -37,9 +36,9 @@ export default function Navbar() {
                     {/*<div><i class="fa-light fa-magnifying-glass"></i></div>*/}
                 </div>
                 <div className='customerWrapper'>
-                    <h1 id='styleSettings'>Wishlist <i class="fa-solid fa-heart"></i></h1>
-                    <h1 id='styleSettings'>Cart <i class="fa-solid fa-cart-shopping"></i></h1>
-                    <h1 id='styleSettings'>Sign In <i class="fa-solid fa-user"></i></h1>
+                    <h1 id='styleSettings'><a href='/wishlist'>Wishlist</a> <i class="fa-solid fa-heart"></i></h1>
+                    <h1 id='styleSettings'><a href='/cart'>Cart</a> <i class="fa-solid fa-cart-shopping"></i></h1>
+                    <h1 id='styleSettings'><a href='/signin'>Sign In</a> <i class="fa-solid fa-user"></i></h1>
                 </div>
             </div>
 

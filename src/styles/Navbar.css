@@ -5,6 +5,11 @@
   padding: 0;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .logoContainer {
   margin: 28px 90px -15px 5px;
   display: flex;
