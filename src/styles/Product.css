@@ -29,6 +29,16 @@
     text-align: center;
     align-items: center;
     justify-content: center;
+    position: relative;
+}
+
+.imagefavoriteIcon{
+    position: absolute;
+    color: rgba(131, 99, 40, 0.8);
+    top: 16px;
+    right: 9px;
+    font-size: 24px;
+    background-color: transparent;
 }
 
 .imageContainer > img {
@@ -42,6 +52,7 @@
     flex-direction: row;
     width: 200px;
     height: 35px;
+    position: relative;
 }
 
 .priceText {
@@ -50,6 +61,7 @@
     width: 100px;
     height: 35px;
 }
+
 
 button {
     text-align: center;
@@ -60,4 +72,12 @@ button {
     font-family: "Amiri", serif;
     font-weight: 400;
     font-size: 15px;
+}
+.addCartIcon{
+    position: absolute;
+    top:8px;
+    right:10px;
+    z-index: 99;
+    font-size: 15px;
+    background-color: transparent;
 }
