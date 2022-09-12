@@ -19,7 +19,7 @@ export default function Product() {
             <div className='priceContainer'>
                 <h2 className='priceText'>29$</h2>
                 <i className="fa-solid fa-cart-shopping  addCartIcon"></i>
-                <button>Add</button>
+                <button className="addToCart" >Add</button>
             </div>
         </div>
         <div className='productSingleItemContainer'>
@@ -33,7 +33,7 @@ export default function Product() {
             <div className='priceContainer'>
                 <h2 className='priceText'>29$</h2>
                 <i className="fa-solid fa-cart-shopping  addCartIcon"></i>
-                <button>Add</button>
+                <button className="addToCart">Add</button>
             </div>
         </div>
         <div className='productSingleItemContainer'>
@@ -47,7 +47,7 @@ export default function Product() {
             <div className='priceContainer'>
                 <h2 className='priceText'>29$</h2>
                 <i className="fa-solid fa-cart-shopping  addCartIcon"></i>
-                <button>Add</button>
+                <button className="addToCart">Add</button >
             </div>
         </div>
         <div className='productSingleItemContainer'>
@@ -61,7 +61,7 @@ export default function Product() {
             <div className='priceContainer'>
                 <h2 className='priceText'>29$</h2>
                 <i className="fa-solid fa-cart-shopping  addCartIcon"></i>
-                <button>Add</button>
+                <button className="addToCart">Add</button >
             </div>
         </div>
         <div className='productSingleItemContainer'>
@@ -75,7 +75,7 @@ export default function Product() {
             <div className='priceContainer'>
                 <h2 className='priceText'>29$</h2>
                 <i className="fa-solid fa-cart-shopping  addCartIcon"></i>
-                <button>Add</button>
+                <button className="addToCart">Add</button >
             </div>
         </div>
         <div className='productSingleItemContainer'>
@@ -89,7 +89,7 @@ export default function Product() {
             <div className='priceContainer'>
                 <h2 className='priceText'>29$</h2>
                 <i className="fa-solid fa-cart-shopping  addCartIcon"></i>
-                <button>Add</button>
+                <button className="addToCart">Add</button >
             </div>
         </div>
         <div className='productSingleItemContainer'>
@@ -103,7 +103,7 @@ export default function Product() {
             <div className='priceContainer'>
                 <h2 className='priceText'>29$</h2>
                 <i className="fa-solid fa-cart-shopping  addCartIcon"></i>
-                <button>Add</button>
+                <button className="addToCart">Add</button >
             </div>
         </div>
 
@@ -118,7 +118,7 @@ export default function Product() {
             <div className='priceContainer'>
                 <h2 className='priceText'>29$</h2>
                 <i className="fa-solid fa-cart-shopping  addCartIcon"></i>
-                <button>Add</button>
+                <button className="addToCart">Add</button >
             </div>
         
         </div>
@@ -133,7 +133,7 @@ export default function Product() {
             <div className='priceContainer'>
                 <h2 className='priceText'>29$</h2>
                 <i className="fa-solid fa-cart-shopping  addCartIcon"></i>
-                <button>Add</button>
+                <button className="addToCart">Add</button >
             </div>
         
         </div>
@@ -148,7 +148,7 @@ export default function Product() {
             <div className='priceContainer'>
                 <h2 className='priceText'>29$</h2>
                 <i className="fa-solid fa-cart-shopping  addCartIcon"></i>
-                <button>Add</button>
+                <button className="addToCart">Add</button >
             </div>
         
         </div>
@@ -163,7 +163,7 @@ export default function Product() {
             <div className='priceContainer'>
                 <h2 className='priceText'>29$</h2>
                 <i className="fa-solid fa-cart-shopping  addCartIcon"></i>
-                <button>Add</button>
+                <button className="addToCart">Add</button >
             </div>
         
         </div>
@@ -178,7 +178,7 @@ export default function Product() {
             <div className='priceContainer'>
                 <h2 className='priceText'>300$</h2>
                 <i className="fa-solid fa-cart-shopping  addCartIcon"></i>
-                <button>Add</button>
+                <button className="addToCart">Add</button >
             </div>
         </div>
 
