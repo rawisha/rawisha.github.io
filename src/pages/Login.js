@@ -12,7 +12,7 @@ export default function Login() {
         <h1>Sign In</h1>
         <input placeholder="Username"></input>
         <input placeholder="Password"></input>
-        <button>Login</button>
+        <button><h2>Login</h2></button>
         <p>Not a Member? </p><a>Sign Up!</a>
         </div>
         <Footer />

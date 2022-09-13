@@ -4,3 +4,47 @@
   margin: 0;
   padding: 0;
 }
+
+.loginForm {
+display: flex;
+justify-content: center;
+text-align: center;
+align-items: center;
+flex-direction: column;
+margin-top: 40px;
+}
+
+.loginForm > input {
+  border: none;
+  border-bottom: 1px solid grey;
+  width: 250px;
+  height: 30px;
+  margin-top: 28px;
+  font-family: 'Amiri', 'Serif';
+  
+}
+
+.loginForm > button {
+  background: #272727;
+  width: 210px;
+  height: 45px;
+  margin-top: 20px;
+  background-color: #272727;
+}
+
+.loginForm > button > h2 {
+  background:none;
+  color: white;
+  text-align: center;
+  font-size: 28px;
+  font-weight: 400;
+  align-items: center;
+}
+
+
+.loginForm > input::placeholder {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 35.16px;
+ 
+}
