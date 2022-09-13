@@ -6,6 +6,8 @@ import Cart from "./pages/Cart";
 import Login from './pages/Login';
 import Wishlist from './pages/Wishlist';
 import Category from './pages/Category';
+import Signup from './pages/Signup';
+
 function App() {
   return (
     <div className="App">
@@ -18,6 +20,7 @@ function App() {
           <Route path="/signin" element={<Login />} />
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/category" element={<Category />} />
+          <Route path="/signup" element={<Signup />} />
           
         </Routes>
       </Router>

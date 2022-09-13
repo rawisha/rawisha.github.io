@@ -1,6 +1,7 @@
-import React from 'react'
-import '../styles/Row.css'
-import bild from '../assets/bild.jpg'
+import React from 'react';
+import '../styles/Row.css';
+import bild from '../assets/bild.jpg';
+import News from './News';
 
 /* 
 TO DO:
@@ -66,6 +67,11 @@ export default function Row() {
                 </div>
             </div>
             <div className='borderSolidLine'></div>
+            <div className="newsDiv">
+            <News />
+            </div>
+
+            
         </div>
 
     )
