@@ -1,0 +1,44 @@
+@import url("https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Roboto:wght@100;400;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.wishlistHeader {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 40px;
+    font-family: 'amiri', 'serif';
+}
+
+.wishlistHeader > h1 {
+    font-size: 48px;
+}
+
+.wishlistContainer {
+    display: flex;
+justify-content: center;
+text-align: center;
+align-items: center;
+flex-direction: column;
+margin-top: 40px;
+border-width: 1px;
+
+}
+
+.wishlistContainer > ul {
+font-size: 14px;
+
+}
+
+.wishlistContainer > ul > li > button {
+    background-color: #F18E8E;
+    color: #222222;
+    width: 100px;
+    height: 69px;
+    border: none;
+}
