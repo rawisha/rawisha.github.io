@@ -1,0 +1,29 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.wishlistContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.wishlistProductWrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+    margin-top: 40px;
+    border: solid 1px grey;
+    width: 800px;
+}
+
+#thumbnail {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-left: 18px;
+    margin-right: 34px;
+}

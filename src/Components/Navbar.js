@@ -33,12 +33,12 @@ export default function Navbar() {
                 <div className='inputWrapper'>
 
                     <input className='inputField' type="text" placeholder='Sök efter Product eller Artist' />
-                    {/*<div><i class="fa-light fa-magnifying-glass"></i></div>*/}
+                    {/*<div><i className="fa-light fa-magnifying-glass"></i></div>*/}
                 </div>
                 <div className='customerWrapper'>
-                    <h1 id='styleSettings'><a href='/wishlist'>Wishlist</a> <i class="fa-solid fa-heart"></i></h1>
-                    <h1 id='styleSettings'><a href='/cart'>Cart</a> <i class="fa-solid fa-cart-shopping"></i></h1>
-                    <h1 id='styleSettings'><a href='/signin'>Sign In</a> <i class="fa-solid fa-user"></i></h1>
+                    <h1 id='styleSettings'><a href='/wishlist'>Wishlist</a> <i className="fa-solid fa-heart"></i></h1>
+                    <h1 id='styleSettings'><a href='/cart'>Cart</a> <i className="fa-solid fa-cart-shopping"></i></h1>
+                    <h1 id='styleSettings'><a href='/signin'>Sign In</a> <i className="fa-solid fa-user"></i></h1>
                 </div>
             </div>
 

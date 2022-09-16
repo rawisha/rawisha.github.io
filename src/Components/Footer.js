@@ -21,24 +21,24 @@ export default function Footer() {
 
             <div className='linkContainer'>
                 <ul>
-                    <li><a href="#"><h3>Home</h3></a></li>
-                    <li><a href="#"><h3>Experince</h3></a></li>
-                    <li><a href="#"><h3>News</h3></a></li>
-                    <li><a href="#"><h3>About Us</h3></a></li>
-                    <li><a href="#"><h3>Jobs</h3></a></li>
-                    <li><a href="#"><h3>Contact</h3></a></li>
+                    <li><a href="https://google.com"><h3>Home</h3></a></li>
+                    <li><a href="https://google.com"><h3>Experince</h3></a></li>
+                    <li><a href="https://google.com"><h3>News</h3></a></li>
+                    <li><a href="https://google.com"><h3>About Us</h3></a></li>
+                    <li><a href="https://google.com"><h3>Jobs</h3></a></li>
+                    <li><a href="https://google.com"><h3>Contact</h3></a></li>
                 </ul>
             </div>
             <div className='socialsContainer'>
                 <ul>
-                    <li><i class="fa-brands fa-facebook-f"></i></li>
-                    <li><i class="fa-brands fa-twitter"></i></li>
-                    <li><i class="fa-brands fa-instagram"></i></li>
+                    <li><i className="fa-brands fa-facebook-f"></i></li>
+                    <li><i className="fa-brands fa-twitter"></i></li>
+                    <li><i className="fa-brands fa-instagram"></i></li>
                 </ul>
 
             </div>
             <div className='copyright'>
-                <h4><i class="fa-regular fa-copyright"></i> Copyright 2022 - Artzy</h4>
+                <h4><i className="fa-regular fa-copyright"></i> Copyright 2022 - Artzy</h4>
             </div>
         </div>
     )

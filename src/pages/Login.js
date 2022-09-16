@@ -15,6 +15,7 @@ export default function Login() {
         <button><h2>Login</h2></button>
         <p>Not a Member? </p><a>Sign Up!</a>
         </div>
+        <div className='borderSolidLine'></div>
         <Footer />
     </div>
   )
