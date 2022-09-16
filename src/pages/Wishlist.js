@@ -1,4 +1,5 @@
 import React from 'react'
+<<<<<<< HEAD
 import "../styles/Wishlist.css"
 
 import bild from "../assets/bild.jpg"
@@ -37,6 +38,33 @@ export default function Wishlist() {
             <button>X</button>
           </div>
         </div>
+=======
+import Navbar from '../Components/Navbar';
+import Footer from '../Components/Footer'
+import "../styles/Wishlist.css"
+
+export default function Wishlist() {
+  return (
+    <div>
+        <Navbar />
+    <div className="wishlistHeader">
+      <h1>Wishlist</h1>
+      <div/>
+      <div className="wishlistContainer">
+          <ul>
+            <li>Product: Color: Artist: Prod nr: 428539 129 USD <button>Add</button></li>
+            <li>Product: Color: Artist: Prod nr: 428539 129 USD <button>Add</button></li>
+            <li>Product: Color: Artist: Prod nr: 428539 129 USD <button>Add</button></li>
+            <li>Product: Color: Artist: Prod nr: 428539 129 USD <button>Add</button></li>
+            <li>Product: Color: Artist: Prod nr: 428539 129 USD <button>Add</button></li>
+            <li>Product: Color: Artist: Prod nr: 428539 129 USD <button>Add</button></li>
+          </ul>
+      </div>
+      <Footer />
+>>>>>>> 8fa30d18a8f324f6a2597791b7d48e1c5fc2326f
     </div>
+    </div>
+
+
   )
 }

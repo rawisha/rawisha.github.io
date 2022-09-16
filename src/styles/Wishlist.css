@@ -1,10 +1,33 @@
+<<<<<<< HEAD
 * {
     margin: 0;
     padding: 0;
+=======
+@import url("https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Roboto:wght@100;400;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.wishlistHeader {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 40px;
+    font-family: 'amiri', 'serif';
+}
+
+.wishlistHeader > h1 {
+    font-size: 48px;
+>>>>>>> 8fa30d18a8f324f6a2597791b7d48e1c5fc2326f
 }
 
 .wishlistContainer {
     display: flex;
+<<<<<<< HEAD
     justify-content: center;
     flex-direction: column;
     align-items: center;
@@ -26,4 +49,26 @@
     border-radius: 50%;
     margin-left: 18px;
     margin-right: 34px;
+=======
+justify-content: center;
+text-align: center;
+align-items: center;
+flex-direction: column;
+margin-top: 40px;
+border-width: 1px;
+
+}
+
+.wishlistContainer > ul {
+font-size: 14px;
+
+}
+
+.wishlistContainer > ul > li > button {
+    background-color: #F18E8E;
+    color: #222222;
+    width: 100px;
+    height: 69px;
+    border: none;
+>>>>>>> 8fa30d18a8f324f6a2597791b7d48e1c5fc2326f
 }
