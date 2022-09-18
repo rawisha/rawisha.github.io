@@ -13,7 +13,7 @@ export default function Login() {
         <input placeholder="Username"></input>
         <input placeholder="Password"></input>
         <button><h2>Login</h2></button>
-        <p>Not a Member? </p><a>Sign Up!</a>
+        <p>Not a Member? </p><a href="/signup">Sign Up!</a>
         </div>
         <Footer />
     </div>
