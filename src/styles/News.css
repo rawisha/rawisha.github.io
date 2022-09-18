@@ -6,13 +6,36 @@
 }
 
 .newsDiv > img {
+ display: flex;
+ width: 638px;
+ height: 488px;
+ margin-left: 82px;
  
 }
 
-.newsDiv > h1 {
-
+.textDiv > h1 {
+display: flex;
+justify-content: center;
+font-family: 'amiri', 'serif';
+font-size: 48px;
+margin-top: 40px;
+weight: 400px;
+color: #222222;
 }
-.newsDiv > h2 {
+.textDiv > h2 {
+display: flex;
+justify-content: right;
+font-family: 'amiri', 'serif';
+margin-top: 125px;
+color: #222222;
+}
 
+.textDiv > p {
+  display: flex;
+  justify-content: right;
+  flex-direction: column;
+  color: #222222;
+  flex-direction: column;
+  flex-wrap: wrap;
 
 }
