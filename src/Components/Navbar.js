@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../styles/Navbar.css'
 import Logo from "../assets/Logo.svg"
 import MenuIcon from "../assets/menu-Icon.svg"
+import { useEffect } from 'react';
+import { db } from '../firebase-config'
+import { onSnapshot, collection } from 'firebase/firestore'
 
 
 /* 
@@ -18,6 +21,30 @@ TO DO:
 
 export default function Navbar() {
 
+    /*backend search*/
+
+        const [value, setValue] = useState("");
+        const [results, setResults] = useState([]);
+
+        const onChange = (event) => {
+            setValue(event.target.value)
+            
+        };
+
+        const onSearch = (searchTerm) => {
+            setValue(searchTerm);
+            console.log("search", searchTerm);
+            
+        };
+       
+        useEffect(() => {
+            onSnapshot(collection(db, 'artists'), snapshot => {
+                setResults(snapshot.docs.map(doc => doc.data()
+                ))
+            })
+        }, [])
+        console.log('artist', results)
+
     return (
         <div className='Navbar'>
             <div className='logoContainer'>
@@ -32,14 +59,41 @@ export default function Navbar() {
                 </div>
                 <div className='inputWrapper'>
 
-                    <input className='inputField' type="text" placeholder='Sök efter Product eller Artist' />
-                    {/*<div><i className="fa-light fa-magnifying-glass"></i></div>*/}
+                    <input className='inputField' type="text" placeholder='Sök efter Product eller Artist'
+                    onChange={onChange} value={value}
+                    />
+                   <button onClick={() => onSearch(value)}>Sök</button>
+                    {/*<div><i class="fa-light fa-magnifying-glass"></i></div>*/}
+                </div>
+                <div className='dropdown'>
+                {results
+            .filter((item) => {
+              const searchTerm = value;
+              const fullName = item.artistname;
+
+              return (
+                searchTerm &&
+                fullName.startsWith(searchTerm) &&
+                fullName !== searchTerm
+              );
+            })
+            .slice(0, 10)
+            .map((item) => (
+              <div
+                onClick={() => onSearch(item.artistname)}
+                className="dropdown-row"
+                key={item.artistname}
+              >
+                {item.artistname}
+              </div>
+            ))}
                 </div>
                 <div className='customerWrapper'>
-                    <h1 id='styleSettings'><a href='/wishlist'>Wishlist</a> <i className="fa-solid fa-heart"></i></h1>
-                    <h1 id='styleSettings'><a href='/cart'>Cart</a> <i className="fa-solid fa-cart-shopping"></i></h1>
-                    <h1 id='styleSettings'><a href='/signin'>Sign In</a> <i className="fa-solid fa-user"></i></h1>
+                    <h1 id='styleSettings'><a href='/wishlist'>Wishlist</a> <i class="fa-solid fa-heart"></i></h1>
+                    <h1 id='styleSettings'><a href='/cart'>Cart</a> <i class="fa-solid fa-cart-shopping"></i></h1>
+                    <h1 id='styleSettings'><a href='/signin'>Sign In</a> <i class="fa-solid fa-user"></i></h1>
                 </div>
+                
             </div>
 
             <div className='borderSolidLine'></div>
