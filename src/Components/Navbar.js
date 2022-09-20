@@ -33,7 +33,7 @@ export default function Navbar() {
 
         const onSearch = (searchTerm) => {
             setValue(searchTerm);
-            console.log("search", searchTerm);
+            /* console.log("search", searchTerm); */
             
         };
        
@@ -43,7 +43,7 @@ export default function Navbar() {
                 ))
             })
         }, [])
-        console.log('artist', results)
+        /* console.log('artist', results) */
 
     return (
         <div className='Navbar'>
