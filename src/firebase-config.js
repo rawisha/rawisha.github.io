@@ -1,6 +1,6 @@
 
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, onSnapshot } from "firebase/firestore";
 import { getAuth , createUserWithEmailAndPassword,sendEmailVerification, sendPasswordResetEmail} from "firebase/auth";
 import { getStorage } from 'firebase/storage'
 
@@ -29,3 +29,4 @@ export function signup(email,password){
 export function emailVerification(){
   return sendEmailVerification(auth.currentUser);
 }
+
