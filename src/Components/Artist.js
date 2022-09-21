@@ -5,7 +5,7 @@ import Footer from '../Components/Footer'
 import bild from '../assets/bild.jpg'
 import { collection, onSnapshot, query, where } from 'firebase/firestore'
 import { db } from '../firebase-config'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 export default function Artist() {
     const [artists, setArtists] = useState(null)
