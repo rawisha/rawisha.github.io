@@ -1,10 +1,10 @@
 import React from 'react'
 import '../styles/Product.css'
-import useFirestore from '../hooks/useFirestore'
+import useGetAll from '../hooks/useGetAll'
 
 export default function Product() {
 
-    const products = useFirestore('products')
+    const products = useGetAll('products')
 
   return (
     <div className='productsContainer'>
