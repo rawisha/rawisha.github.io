@@ -1,8 +1,9 @@
 
 import { initializeApp } from "firebase/app";
-/* import { getAnalytics } from "firebase/analytics"; */
 import { getFirestore } from "firebase/firestore";
 import { getAuth , createUserWithEmailAndPassword,sendEmailVerification, sendPasswordResetEmail} from "firebase/auth";
+import { getStorage } from 'firebase/storage'
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyDADvlLhOibfEVyk7TRSl-LuWfxDv4KIio",
@@ -16,9 +17,9 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-/* const analytics = getAnalytics(app); */
 export const auth = getAuth();
 export const db = getFirestore(app); 
+export const storage = getStorage(app);
 
 //Signup/create user function Firebase
 export function signup(email,password){
