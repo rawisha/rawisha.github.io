@@ -3,9 +3,9 @@ import Navbar from '../Components/Navbar'
 import "../styles/Signup.css"
 import Footer from '../Components/Footer'
 
-import { signup, db } from '../firebase-config'
-import { useRef,useState } from 'react'
-import { doc , setDoc} from 'firebase/firestore'
+import { signup, db, emailVerification } from '../firebase-config'
+import { useRef, useState } from 'react'
+import { doc , setDoc, serverTimestamp} from 'firebase/firestore'
 
 export default function Signup() {
 
@@ -16,6 +16,7 @@ export default function Signup() {
   const firstNameRef = useRef();
   const lastNameRef = useRef();
   const userNameRef = useRef();
+  
 
   async function handleSignup(){
     setLoading(true);
@@ -25,8 +26,11 @@ export default function Signup() {
           firstName : firstNameRef.current.value,
           lastName : lastNameRef.current.value,
           userName : userNameRef.current.value,
-          eMail : emailRef.current.value
+          eMail : emailRef.current.value,
+          timestamp : serverTimestamp()
+          
         })
+        emailVerification();
       })
     } catch (error){
       console.log(error);
@@ -44,7 +48,8 @@ export default function Signup() {
         <input type= "text" ref ={lastNameRef} placeholder="Last Name"></input>
         <input type= "text" ref ={userNameRef} placeholder="Username"></input>
         <input type = "email" ref = { emailRef }placeholder="Email" required></input>
-        <input type = "password" ref= { passwordRef } placeholder="Password (8 Digits)" minlength="8" required></input>
+        <input type = "password" ref= { passwordRef } placeholder="Password (8 Digits)" minLength="8" required></input>
+        {/* <label><input type="checkbox"></input>Artist Application? Check this box to apply</label>  */}
         <button disabled = {loading} onClick={handleSignup}>Create</button>
         </div>
         
