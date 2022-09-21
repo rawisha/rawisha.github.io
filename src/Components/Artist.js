@@ -49,10 +49,6 @@ export default function Artist() {
         })
     }
 
-    useEffect(() => {
-        console.log(artists)
-    }, [artists])
-
   return (
     <div>
         <Navbar />
