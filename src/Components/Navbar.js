@@ -5,6 +5,7 @@ import MenuIcon from "../assets/menu-Icon.svg"
 import { useEffect } from 'react';
 import { db } from '../firebase-config'
 import { onSnapshot, collection } from 'firebase/firestore'
+import { Link } from 'react-router-dom';
 
 
 /* 
@@ -48,10 +49,10 @@ export default function Navbar() {
     return (
         <div className='Navbar'>
             <div className='logoContainer'>
-                <div className='logoWrapperNav'>
+                <Link to="/"> <div className='logoWrapperNav'>
                     <h1 id="logoText">ART<span id="logoText--span">ZY</span></h1>
                     <img id="logoText--svg" src={Logo} alt="ARTZY Logo" />
-                </div>
+                </div></Link>
                 <div className='menuWrapper'>
                     <h1 id='styleSettings'><a href='/category'>Category</a></h1>
                     <img src={MenuIcon} alt="Icon Menu" />
