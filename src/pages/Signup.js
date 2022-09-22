@@ -27,6 +27,7 @@ export default function Signup() {
           lastName : lastNameRef.current.value,
           userName : userNameRef.current.value,
           eMail : emailRef.current.value,
+          wishList: [],
           timestamp : serverTimestamp()
           
         })

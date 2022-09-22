@@ -3,9 +3,10 @@ import '../styles/Navbar.css'
 import Logo from "../assets/Logo.svg"
 import MenuIcon from "../assets/menu-Icon.svg"
 import { useEffect } from 'react';
-import { db } from '../firebase-config'
+import { db, logout } from '../firebase-config'
 import { onSnapshot, collection } from 'firebase/firestore'
 import { Link } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
 
 
 /* 
@@ -22,6 +23,11 @@ TO DO:
 
 export default function Navbar() {
 
+    const currentUser = useAuth()
+
+    const handleSignOut = () => {
+        logout();
+    }
     /*backend search*/
 
         const [value, setValue] = useState("");
@@ -92,7 +98,8 @@ export default function Navbar() {
                 <div className='customerWrapper'>
                     <h1 id='styleSettings'><a href='/wishlist'>Wishlist</a> <i className="fa-solid fa-heart"></i></h1>
                     <h1 id='styleSettings'><a href='/cart'>Cart</a> <i className="fa-solid fa-cart-shopping"></i></h1>
-                    <h1 id='styleSettings'><a href='/signin'>Sign In</a> <i className="fa-solid fa-user"></i></h1>
+                    { !currentUser && <h1 id='styleSettings'><a href='/signin'>Sign In</a> <i className="fa-solid fa-user"></i></h1>}
+                    { currentUser && <h1 id='styleSettings' onClick={handleSignOut}><a href='/'>Sign out</a><i className="fa-solid fa-user"></i></h1>}
                 </div>
                 
             </div>

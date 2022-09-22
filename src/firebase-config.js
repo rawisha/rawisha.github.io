@@ -1,7 +1,7 @@
 
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { getAuth , createUserWithEmailAndPassword,sendEmailVerification, sendPasswordResetEmail} from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword,sendEmailVerification, sendPasswordResetEmail, signOut, signInWithEmailAndPassword} from "firebase/auth";
 import { getStorage } from 'firebase/storage'
 
 
@@ -23,10 +23,18 @@ export const storage = getStorage(app);
 
 //Signup/create user function Firebase
 export function signup(email,password){
-    return createUserWithEmailAndPassword(auth,email, password);
+    return createUserWithEmailAndPassword(auth, email, password);
 }
 
 export function emailVerification(){
   return sendEmailVerification(auth.currentUser);
+}
+
+export function logout() {
+  signOut(auth)
+}
+
+export function login(email, password) {
+  return signInWithEmailAndPassword(auth, email, password)
 }
 
