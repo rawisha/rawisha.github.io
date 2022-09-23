@@ -23,6 +23,8 @@ export default function Artist() {
                 const filteredArtists = data.filter( result => result.artistname.charAt(0) === searchHandle.toLowerCase() || result.artistname.charAt(0) === searchHandle.toUpperCase())
                 setArtists(filteredArtists)
             })
+            console.log("data snapshot", data)
+            console.log(snapshot)
         })
     }
 
@@ -46,6 +48,7 @@ export default function Artist() {
                 const filteredArtists = data.filter(result => result.artistname.startsWith(searchHandle) || result.artistname.startsWith(searchHandleUppercase))
                 setArtists(filteredArtists)
             })
+            
         })
     }
 
@@ -105,7 +108,7 @@ export default function Artist() {
                 <div className='articleCardResultContainer'>
 
                     {artists && artists.map(artist => (
-
+                        
                         <div key={artist.id} className='articleCardResult'>
                             <h2>{artist.artistname}</h2>
                             <img src={artist.imageUrl} alt="profile_picture" />

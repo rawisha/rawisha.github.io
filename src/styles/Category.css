@@ -18,3 +18,33 @@
     width: 100%;
   }
   
+.categoryView {
+    margin-right: 100px;
+    margin-left: 100px;
+    margin-top: 96px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.categoryView img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+}
+
+.categoryItem {
+    margin-right: 40px;
+    margin-top: 24px;
+    flex-basis: 10%;
+}
+
+.categoryItem > h2{
+    font-size: 24px;
+}
+
+
+.FOOTER {
+    margin-top: 150px;
+}

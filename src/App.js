@@ -7,7 +7,7 @@ import Login from './pages/Login';
 import Wishlist from './pages/Wishlist';
 import Category from './pages/Category';
 import Signup from './pages/Signup';
-
+import BrowsingBy from './pages/BrowsingBy'
 function App() {
   return (
     <div className="App">
@@ -21,7 +21,7 @@ function App() {
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/category" element={<Category />} />
           <Route path="/signup" element={<Signup />} />
-          
+          <Route path="/category/browsingby" element={<BrowsingBy />} />
         </Routes>
       </Router>
 

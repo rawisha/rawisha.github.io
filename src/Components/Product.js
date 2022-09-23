@@ -6,10 +6,19 @@ import { arrayUnion, arrayRemove, collection, doc, onSnapshot, query, updateDoc,
 import { db } from '../firebase-config';
 import { useState, useEffect } from 'react';
 
+
+/*
+FIX WISHLIST, CHECK WITH DAVID
+
+*/
+
+
 export default function Product() {
+    const [wishlist, setWishlist] = useState(false)
+    const [saved, setSaved] = useState(false)
 
     const products = useGetAll('products')
-
+        
     const currentUser = useAuth()
     const [user, setUser] = useState(null)
   
@@ -27,21 +36,18 @@ export default function Product() {
       }
     }, [currentUser])
 
-    const addToWishList = (id) => {
+    const addToWishList = async (id) => {
         const docRef = doc(db, 'users', user.id)
-        updateDoc(docRef, {
+        setWishlist(!wishlist)
+        setSaved(true)
+        await updateDoc(docRef, {
             wishList: arrayUnion(id)
         })
         console.log(id + ' added')
-    }
+        setWishlist(true)
 
-    const removeFromWishList = (id) => {
-        const docRef = doc(db, 'users', user.id)
-        updateDoc(docRef, {
-            wishList: arrayRemove(id)
-        })
-        console.log(id + ' removed')
     }
+    
 
     const [checkList, setCheckList] = useState(null)
 
@@ -52,12 +58,12 @@ export default function Product() {
             console.log(checkList)
             return unsub
         })
-        const isIncluded = checkList.includes(id)
-        return isIncluded
+        //const isIncluded = checkList.includes(id)
+        //return isIncluded
     }
 
-    console.log('balls')
-
+    
+    
   return (
     <div className='productsContainer'>
         <div className='productCardContainer'>
@@ -70,7 +76,9 @@ export default function Product() {
                         {/* {checkIfIsInWishList(product.id) && 
                         <i onClick={() => removeFromWishList(product.id)} id="heart" className='fa-solid fa-heart imagefavoriteIcon' aria-hidden="true"></i>
                         } */}
-                        <i onClick={() => addToWishList(product.id)} id="heart" className='fa-regular fa-heart imagefavoriteIcon' aria-hidden="true"></i>
+                        <p onClick={() => addToWishList(product.id)}>
+                        {wishlist ? <i  id="heart" className='fa-solid fa-heart imagefavoriteIcon' ></i> : <i id="heart" className='fa-regular fa-heart imagefavoriteIcon' ></i>}
+                        </p>
                         <img src={product.imageUrl} alt="bild"></img>
                     </div>
                     <div className='priceContainer'>

@@ -65,14 +65,26 @@ export default function Navbar() {
                     <h1 id='styleSettings'><a href='/artist'>Artist</a></h1>
                 </div>
                 <div className='inputWrapper'>
-
-                    <input className='inputField' type="text" placeholder='Sök efter Product eller Artist'
+                    <input className='inputField' type="text" placeholder='Sök efter Product eller Artist' 
                     onChange={onChange} value={value}
                     />
-                   <button onClick={() => onSearch(value)}>Sök</button>
+                    <button className='button' onClick={() => onSearch(value)}><i className="fa-solid fa-magnifying-glass searchIcon"></i></button>
+                   {/**/}
                     {/*<div><i className="fa-light fa-magnifying-glass"></i></div>*/}
+                    
                 </div>
-                <div className='dropdown'>
+                
+                <div className='customerWrapper'>
+                    <h1 id='styleSettings'><a href='/wishlist'>Wishlist</a> <i className="fa-solid fa-heart"></i></h1>
+                    <h1 id='styleSettings'><a href='/cart'>Cart</a> <i className="fa-solid fa-cart-shopping"></i></h1>
+                    { !currentUser && <h1 id='styleSettings'><a href='/signin'>Sign In</a> <i className="fa-solid fa-user"></i></h1>}
+                    { currentUser && <h1 id='styleSettings' onClick={handleSignOut}><a href='/'>Sign out</a><i className="fa-solid fa-user"></i></h1>}
+                </div>
+                
+            </div>
+                
+            <div className='borderSolidLine'></div>
+            <div className='dataResult'>
                 {results
             .filter((item) => {
               const searchTerm = value;
@@ -95,17 +107,6 @@ export default function Navbar() {
               </div>
             ))}
                 </div>
-                <div className='customerWrapper'>
-                    <h1 id='styleSettings'><a href='/wishlist'>Wishlist</a> <i className="fa-solid fa-heart"></i></h1>
-                    <h1 id='styleSettings'><a href='/cart'>Cart</a> <i className="fa-solid fa-cart-shopping"></i></h1>
-                    { !currentUser && <h1 id='styleSettings'><a href='/signin'>Sign In</a> <i className="fa-solid fa-user"></i></h1>}
-                    { currentUser && <h1 id='styleSettings' onClick={handleSignOut}><a href='/'>Sign out</a><i className="fa-solid fa-user"></i></h1>}
-                </div>
-                
-            </div>
-
-            <div className='borderSolidLine'></div>
-
         </div>
     )
 }
