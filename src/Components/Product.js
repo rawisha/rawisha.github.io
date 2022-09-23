@@ -13,7 +13,8 @@ FIX WISHLIST, CHECK WITH DAVID
 */
 
 
-export default function Product() {
+export default function Product({prods}) {
+
     const [wishlist, setWishlist] = useState(false)
     const [saved, setSaved] = useState(false)
 
@@ -44,7 +45,6 @@ export default function Product() {
             wishList: arrayUnion(id)
         })
         console.log(id + ' added')
-        setWishlist(true)
 
     }
     
@@ -67,15 +67,13 @@ export default function Product() {
   return (
     <div className='productsContainer'>
         <div className='productCardContainer'>
-            {products.map(product => (
+            {prods.length > 0 ? prods.map(product => (
                 <div key={product.id} className='productSingleItemContainer'>
                         <h2 className='cardTitle'>{product.title}</h2>
                         <h3 className='cardSubTitle'>by {product.by}</h3>
                         
                     <div className='imageContainer'>
-                        {/* {checkIfIsInWishList(product.id) && 
-                        <i onClick={() => removeFromWishList(product.id)} id="heart" className='fa-solid fa-heart imagefavoriteIcon' aria-hidden="true"></i>
-                        } */}
+                       
                         <p onClick={() => addToWishList(product.id)}>
                         {wishlist ? <i  id="heart" className='fa-solid fa-heart imagefavoriteIcon' ></i> : <i id="heart" className='fa-regular fa-heart imagefavoriteIcon' ></i>}
                         </p>
@@ -87,7 +85,7 @@ export default function Product() {
                         <button className="addToCart" >Add</button>
                     </div>
                 </div>
-            ))}
+            )): <h2>Ohh noo, No products in here (</h2>}
         </div>
     </div>
   )

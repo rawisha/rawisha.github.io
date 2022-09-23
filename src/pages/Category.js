@@ -4,11 +4,12 @@ import Navbar from '../Components/Navbar'
 import Footer from '../Components/Footer'
 import { Link } from 'react-router-dom';
 import useCategories from '../hooks/useCategories';
+import BrowsingBy from './BrowsingBy';
 
 export default function Category() {
 
   const categories = useCategories()
-
+  
   return (
     <div>
       <Navbar />
@@ -19,16 +20,16 @@ export default function Category() {
         <div className='categoryView'>
           {categories.map(category => (
             <div key={category.id} className='categoryItem'>
-            <Link to="browsingby"><img src={category.imageUrl}  alt="category_picture"></img>
+              
+            <Link to={category.handle}><img src={category.imageUrl}  alt="category_picture"></img>
             <h2>{category.name}</h2></Link>
             </div>
           ))}
         </div>
+
       </div>
-      <div className='FOOTER'>
-        <div className='borderSolidLine'></div>
-        <Footer />
-      </div>  
+      <Footer />
+      
     </div>
   )
 }

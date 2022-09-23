@@ -21,7 +21,7 @@ function App() {
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/category" element={<Category />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/category/browsingby" element={<BrowsingBy />} />
+          <Route path="/category/:id" element={<BrowsingBy />} />
         </Routes>
       </Router>
 

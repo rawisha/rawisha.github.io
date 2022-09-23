@@ -11,6 +11,7 @@ Fix newsletter design (form, field icon) + js
 export default function Footer() {
     return (
         <div className='footerContainer'>
+            <div className='borderSolidLine'></div>
             <div className='newsLetterWrapper'>
                 <h2 className='newsletterText'>Newsletter</h2>
                 <input className='inputField' type="text" placeholder='Your email' />
@@ -40,6 +41,7 @@ export default function Footer() {
             <div className='copyright'>
                 <h4><i className="fa-regular fa-copyright"></i> Copyright 2022 - Artzy</h4>
             </div>
+
         </div>
     )
 }
