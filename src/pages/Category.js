@@ -19,8 +19,8 @@ export default function Category() {
         <div className='categoryView'>
           {categories.map(category => (
             <div key={category.id} className='categoryItem'>
-            <img src={category.imageUrl}  alt="category_picture"></img>
-            <h2><Link to="browsingby">{category.name}</Link></h2>
+            <Link to="browsingby"><img src={category.imageUrl}  alt="category_picture"></img>
+            <h2>{category.name}</h2></Link>
             </div>
           ))}
         </div>

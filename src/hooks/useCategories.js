@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { onSnapshot, collection, where, orderBy, query } from 'firebase/firestore'
+import { onSnapshot, collection, orderBy, query } from 'firebase/firestore'
 import { db } from '../firebase-config'
 
 const useCategories = () => {
