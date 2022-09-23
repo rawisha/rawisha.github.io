@@ -3,107 +3,32 @@ import '../styles/Category.css'
 import Navbar from '../Components/Navbar'
 import Footer from '../Components/Footer'
 import { Link } from 'react-router-dom';
-import bild from "../assets/bild.jpg"
+import useCategories from '../hooks/useCategories';
+
 export default function Category() {
+
+  const categories = useCategories()
+
   return (
     <div>
       <Navbar />
       <div className='categoryContainer'>
         <div className='Title container'>
-        <h1 className='categoryTitle'>Category</h1>
+          <h1 className='categoryTitle'>Category</h1>
         </div>
-
         <div className='categoryView'>
-        <div className='categoryItem'>
-        <img src={bild}  alt="bild"></img>
-        <h2> <Link to="browsingby">Ceramics</Link></h2>
+          {categories.map(category => (
+            <div key={category.id} className='categoryItem'>
+            <Link to="browsingby"><img src={category.imageUrl}  alt="category_picture"></img>
+            <h2>{category.name}</h2></Link>
+            </div>
+          ))}
         </div>
-
-        <div className='categoryItem'>
-        <img src={bild} alt="bild"></img>
-        <h2>Product</h2>
-        </div>
-
-        <div className='categoryItem'>
-        <img src={bild} alt="bild"></img>
-        <h2>Product</h2>
-        </div>
-
-        <div className='categoryItem'>
-        <img src={bild} alt="bild"></img>
-        <h2>Product</h2>
-        </div>
-
-        <div className='categoryItem'>
-        <img src={bild} alt="bild"></img>
-        <h2>Product</h2>
-        </div>
-
-        <div className='categoryItem'>
-        <img src={bild} alt="bild"></img>
-        <h2>Product</h2>
-        </div>
-
-        <div className='categoryItem'>
-        <img src={bild} alt="bild"></img>
-        <h2>Product</h2>
-        </div>
-
-        <div className='categoryItem'>
-        <img src={bild} alt="bild"></img>
-        <h2>Product</h2>
-        </div>
-
-        <div className='categoryItem'>
-        <img src={bild} alt="bild"></img>
-        <h2>Product</h2>
-        </div>
-
-        <div className='categoryItem'>
-        <img src={bild} alt="bild"></img>
-        <h2>Product</h2>
-        </div>
-
-        <div className='categoryItem'>
-        <img src={bild} alt="bild"></img>
-        <h2>Product</h2>
-        </div>
-
-        <div className='categoryItem'>
-        <img src={bild} alt="bild"></img>
-        <h2>Product</h2>
-        </div>
-        
-        <div className='categoryItem'>
-        <img src={bild} alt="bild"></img>
-        <h2>Product</h2>
-        </div>
-
-        <div className='categoryItem'>
-        <img src={bild} alt="bild"></img>
-        <h2>Product</h2>
-        </div>
-
-        <div className='categoryItem'>
-        <img src={bild} alt="bild"></img>
-        <h2>Product</h2>
-        </div>
-
-        <div className='categoryItem'>
-        <img src={bild} alt="bild"></img>
-        <h2>Product</h2>
-        </div>
-        </div>
-        
-
-  
       </div>
-        
-        <div className='FOOTER'>
+      <div className='FOOTER'>
         <div className='borderSolidLine'></div>
-      <Footer />
-        </div>
-        
+        <Footer />
+      </div>  
     </div>
   )
 }
