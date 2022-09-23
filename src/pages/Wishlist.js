@@ -40,11 +40,10 @@ export default function Wishlist() {
             <img src={bild} alt="bild"></img>
             
             <div className='productInfo'>
-              <h2>Product: Wait Here
+              <h2>Product: Wait Here</h2>
               <p id="prodNr">Prod nr: 428539</p>
               
               <h2 id="artistInfo">Arist: Stefan Marxx</h2>
-              </h2>
               
             </div>
             <h2 className='productColor'>Color: Black</h2>
@@ -58,16 +57,16 @@ export default function Wishlist() {
             </div>
             </div>
             </div>
+
             <div className='product'>
             <div className='productImage'>
             <img src={bild} alt="bild"></img>
             
             <div className='productInfo'>
-              <h2>Product: Wait Here
+              <h2>Product: Wait Here</h2>
               <p id="prodNr">Prod nr: 428539</p>
               
               <h2 id="artistInfo">Arist: Stefan Marxx</h2>
-              </h2>
               
             </div>
             <h2 className='productColor'>Color: Black</h2>
@@ -81,16 +80,16 @@ export default function Wishlist() {
             </div>
             </div>
             </div>
+
             <div className='product'>
             <div className='productImage'>
             <img src={bild} alt="bild"></img>
             
             <div className='productInfo'>
-              <h2>Product: Wait Here
+              <h2>Product: Wait Here</h2>
               <p id="prodNr">Prod nr: 428539</p>
               
               <h2 id="artistInfo">Arist: Stefan Marxx</h2>
-              </h2>
               
             </div>
             <h2 className='productColor'>Color: Black</h2>
@@ -104,16 +103,16 @@ export default function Wishlist() {
             </div>
             </div>
             </div>
+
             <div className='product'>
             <div className='productImage'>
             <img src={bild} alt="bild"></img>
             
             <div className='productInfo'>
-              <h2>Product: Wait Here
+              <h2>Product: Wait Here</h2>
               <p id="prodNr">Prod nr: 428539</p>
               
               <h2 id="artistInfo">Arist: Stefan Marxx</h2>
-              </h2>
               
             </div>
             <h2 className='productColor'>Color: Black</h2>
@@ -127,16 +126,16 @@ export default function Wishlist() {
             </div>
             </div>
             </div>
+
             <div className='product'>
             <div className='productImage'>
             <img src={bild} alt="bild"></img>
             
             <div className='productInfo'>
-              <h2>Product: Wait Here
+              <h2>Product: Wait Here</h2>
               <p id="prodNr">Prod nr: 428539</p>
               
               <h2 id="artistInfo">Arist: Stefan Marxx</h2>
-              </h2>
               
             </div>
             <h2 className='productColor'>Color: Black</h2>
@@ -150,16 +149,16 @@ export default function Wishlist() {
             </div>
             </div>
             </div>
+
             <div className='product'>
             <div className='productImage'>
             <img src={bild} alt="bild"></img>
             
             <div className='productInfo'>
-              <h2>Product: Wait Here
+              <h2>Product: Wait Here</h2>
               <p id="prodNr">Prod nr: 428539</p>
               
               <h2 id="artistInfo">Arist: Stefan Marxx</h2>
-              </h2>
               
             </div>
             <h2 className='productColor'>Color: Black</h2>
@@ -173,16 +172,16 @@ export default function Wishlist() {
             </div>
             </div>
             </div>
+
             <div className='product'>
             <div className='productImage'>
             <img src={bild} alt="bild"></img>
             
             <div className='productInfo'>
-              <h2>Product: Wait Here
+              <h2>Product: Wait Here</h2>
               <p id="prodNr">Prod nr: 428539</p>
               
               <h2 id="artistInfo">Arist: Stefan Marxx</h2>
-              </h2>
               
             </div>
             <h2 className='productColor'>Color: Black</h2>
@@ -196,98 +195,9 @@ export default function Wishlist() {
             </div>
             </div>
             </div>
-            <div className='product'>
-            <div className='productImage'>
-            <img src={bild} alt="bild"></img>
+
+
             
-            <div className='productInfo'>
-              <h2>Product: Wait Here
-              <p id="prodNr">Prod nr: 428539</p>
-              
-              <h2 id="artistInfo">Arist: Stefan Marxx</h2>
-              </h2>
-              
-            </div>
-            <h2 className='productColor'>Color: Black</h2>
-          
-            <div className='productPrice'>
-              <h2>129.00 USD</h2>
-            </div>
-            <div className='adddelButton'>
-            <button id="addButton">Add</button>
-            <button id="delButton">Delete</button>
-            </div>
-            </div>
-            </div>
-            <div className='product'>
-            <div className='productImage'>
-            <img src={bild} alt="bild"></img>
-            
-            <div className='productInfo'>
-              <h2>Product: Wait Here
-              <p id="prodNr">Prod nr: 428539</p>
-              
-              <h2 id="artistInfo">Arist: Stefan Marxx</h2>
-              </h2>
-              
-            </div>
-            <h2 className='productColor'>Color: Black</h2>
-          
-            <div className='productPrice'>
-              <h2>129.00 USD</h2>
-            </div>
-            <div className='adddelButton'>
-            <button id="addButton">Add</button>
-            <button id="delButton">Delete</button>
-            </div>
-            </div>
-            </div>
-            <div className='product'>
-            <div className='productImage'>
-            <img src={bild} alt="bild"></img>
-            
-            <div className='productInfo'>
-              <h2>Product: Wait Here
-              <p id="prodNr">Prod nr: 428539</p>
-              
-              <h2 id="artistInfo">Arist: Stefan Marxx</h2>
-              </h2>
-              
-            </div>
-            <h2 className='productColor'>Color: Black</h2>
-          
-            <div className='productPrice'>
-              <h2>129.00 USD</h2>
-            </div>
-            <div className='adddelButton'>
-            <button id="addButton">Add</button>
-            <button id="delButton">Delete</button>
-            </div>
-            </div>
-            </div>
-            <div className='product'>
-            <div className='productImage'>
-            <img src={bild} alt="bild"></img>
-            
-            <div className='productInfo'>
-              <h2>Product: Wait Here
-              <p id="prodNr">Prod nr: 428539</p>
-              
-              <h2 id="artistInfo">Arist: Stefan Marxx</h2>
-              </h2>
-              
-            </div>
-            <h2 className='productColor'>Color: Black</h2>
-          
-            <div className='productPrice'>
-              <h2>129.00 USD</h2>
-            </div>
-            <div className='adddelButton'>
-            <button id="addButton">Add</button>
-            <button id="delButton">Delete</button>
-            </div>
-            </div>
-            </div>
           </div>
         </div>
  
