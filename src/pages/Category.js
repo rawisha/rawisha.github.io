@@ -4,7 +4,6 @@ import Navbar from '../Components/Navbar'
 import Footer from '../Components/Footer'
 import { Link } from 'react-router-dom';
 import useCategories from '../hooks/useCategories';
-import BrowsingBy from './BrowsingBy';
 
 export default function Category() {
 

@@ -26,7 +26,7 @@ export default function Login() {
       setSuccess('You are now logged in')
       setTimeout(() => {
         navigate('/')
-      }, 1000)
+      }, 200)
     } catch (err) {
       setError('Login failed, try again!')
       emailRef.current.value = ''
@@ -51,7 +51,6 @@ export default function Login() {
             <p>Not a Member? </p><a href="/signup">Sign Up!</a>
           </form>
         </div>
-        <div className='borderSolidLine'></div>
         <Footer />
     </div>
   )
