@@ -65,8 +65,8 @@ export default function Navbar() {
                 <div className='customerWrapper'>
                     <Link to="/wishlist"><h1 id='styleSettings'>Wishlist<i className="fa-solid fa-heart"></i></h1></Link>
                     <Link to="/cart"><h1 id='styleSettings'>Cart<i className="fa-solid fa-cart-shopping"></i></h1></Link>
-                    { !currentUser && <Link to="/signin"><h1 id='styleSettings'>Sign In<i className="fa-solid fa-user"></i></h1></Link>}
-                    { currentUser && <Link to="/"><h1 id='styleSettings' onClick={handleSignOut}>Sign out<i className="fa-solid fa-user"></i></h1></Link>}
+                    { !currentUser && <Link to="/signin"><h1 className="signX" id='styleSettings'>Sign In<i className="fa-solid fa-user"></i></h1></Link>}
+                    { currentUser && <Link to="/"><h1 className="signX" id='styleSettings' onClick={handleSignOut}>Sign out<i className="fa-solid fa-user"></i></h1></Link>}
                 </div>
             </div>
                 
