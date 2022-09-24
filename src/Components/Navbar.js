@@ -21,6 +21,7 @@ export default function Navbar() {
 
         const [value, setValue] = useState("");
         const [results, setResults] = useState([]);
+        const [prodResulsts, setProdResolts] = useState([]);
 
         const onChange = (event) => {
             setValue(event.target.value)
@@ -39,7 +40,12 @@ export default function Navbar() {
                 ))
             })
         }, [])
-        /* console.log('artist', results) */
+        useEffect(() => {
+            onSnapshot(collection(db, 'products'), snapshot => {
+                setProdResolts(snapshot.docs.map(doc => doc.data()
+                ))
+            })
+        }, [])
 
     return (
         <div className='Navbar'>
@@ -94,7 +100,33 @@ export default function Navbar() {
                 {item.artistname}
               </div>
             ))}
+            
                 </div>
+                <div className='dataResult'>
+                    {prodResulsts
+                    .filter((item) => {
+                        const searchTerm = value;
+                        const prodName = item.title;
+                        
+                        return (
+                            searchTerm && 
+                            prodName.startsWith(searchTerm) &&
+                            prodName != searchTerm
+                        );
+                    })
+                    .slice(0, 10)
+                    .map((item) => (
+                        <div
+                            onClick={() => onSearch(item.title)}
+                            className="dropdown-row"
+                            key={item.title}
+                        >
+                            {item.title}
+                        </div>
+                    ))
+                    }
+                </div>
+                
         </div>
     )
 }
