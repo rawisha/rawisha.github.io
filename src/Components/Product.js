@@ -8,10 +8,6 @@ import { useState, useEffect } from 'react';
 import ProductItem from './ProductItem';
 
 
-/*
-FIX WISHLIST, CHECK WITH DAVID
-
-*/
 
 
 export default function Product({prods}) {
