@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { onSnapshot, collection, orderBy, where, query } from 'firebase/firestore'
+import { onSnapshot, collection, where, query } from 'firebase/firestore'
 import { db } from '../firebase-config'
 
 const useProductsBy = (categoryRef) => {
