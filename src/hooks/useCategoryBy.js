@@ -15,7 +15,7 @@ const useCategoryBy = (categoryRef) => {
         return unsub
     }, [categoryRef])
     
-    return data
+    return data 
 }
 
 export default useCategoryBy;
