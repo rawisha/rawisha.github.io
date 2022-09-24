@@ -4,7 +4,7 @@ import Logo from "../assets/Logo.svg"
 import MenuIcon from "../assets/menu-Icon.svg"
 import { useEffect } from 'react';
 import { db, logout } from '../firebase-config'
-import { onSnapshot, collection,startsWith } from 'firebase/firestore'
+import { onSnapshot, collection } from 'firebase/firestore'
 import { Link } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 
@@ -111,7 +111,7 @@ export default function Navbar() {
                         return (
                             searchTerm && 
                             prodName.startsWith(searchTerm) &&
-                            prodName != searchTerm
+                            prodName !== searchTerm
                         );
                     })
                     .slice(0, 10)
