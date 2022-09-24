@@ -5,8 +5,8 @@ import Footer from '../Components/Footer'
 
 import { signup, db, emailVerification,storage } from '../firebase-config'
 import { useRef, useState } from 'react'
-import { doc , setDoc, serverTimestamp, refEqual} from 'firebase/firestore'
-import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage"
+import { doc , setDoc, serverTimestamp} from 'firebase/firestore'
+import { ref,uploadBytesResumable } from "firebase/storage"
 
 
 export default function Signup() {
@@ -24,13 +24,11 @@ export default function Signup() {
   const [urls, setUrls] = useState([])
   // State to store uploaded file
   const [images, setImages] = useState([]);
-  // progress
-  const [percent, setPercent] = useState(0);
   const [progress, setProgress] = useState(0);
+  
 
-
-  // Handle files upload event and update state
   const handleChange = (e) => {
+    
     for (let i = 0; i < e.target.files.length; i++) {
       const newImage = e.target.files[i];
       newImage["id"] = Math.random();
@@ -38,24 +36,21 @@ export default function Signup() {
     }
   };
 
-  const  handleUpload = async () => {
+  const handleUpload = () => {
     const promises = [];
     images.map((image) => {
-      const storageRef = ref(storage,`testing/${image.name}`).put(image);
-      const uploadTask = uploadBytesResumable(storageRef, image);
-
+      const uploadTask = storage.ref(`testing/${image.name}`).put(image);
       promises.push(uploadTask);
-
       uploadTask.on(
         "state_changed",
         (snapshot) => {
-          const percent = Math.round(
+          const progress = Math.round(
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100
           );
-          setPercent(percent);
+          setProgress(progress);
         },
         (error) => {
-          console.error(error);
+          console.log(error);
         },
         async () => {
           await storage
@@ -67,24 +62,20 @@ export default function Signup() {
             });
         }
       );
-    )
     });
 
     Promise.all(promises)
       .then(() => alert("All images uploaded"))
-      .catch((err) => console.error(err));
+      .catch((err) => console.log(err));
   };
 
   console.log("images: ", images);
-  console.log("urls: ", urls);
-
+  console.log("urls", urls);
 
   function showApplicationArtist(){
     setChecked((checked) => !checked);
   }
-
   
-
 
   async function handleSignupUser(){
     setLoading(true);
@@ -127,11 +118,6 @@ export default function Signup() {
     setLoading(false);
   }
 
-
-
-
-
-
   return (
     <div>
       <Navbar />
@@ -142,7 +128,7 @@ export default function Signup() {
         <input type= "text" ref ={userNameRef} placeholder="Username"></input>
         <input type = "email" ref = { emailRef }placeholder="Email" required></input>
         <input type = "password" ref= { passwordRef } placeholder="Password (8 Digits)" minLength="8" required></input>
-        <button disabled = {loading} onClick={handleSignupUser}><h2>Create</h2></button>
+        <button disabled = {loading} /* onClick={handleSignupUser} */><h2>Create</h2></button>
         
       <div className="checkboxDiv">
         <input type ="checkbox" id="checkbox" onClick={showApplicationArtist}></input>
@@ -150,31 +136,31 @@ export default function Signup() {
       </div>
       
       <div style={{ display: checked ? "block" : "none" }} className="applicationDiv">
-        <div className="signupForm">
-        <h1>Artist Application</h1>
-        <p>Let us know more about you, please upload pictures of your work and tell us about yourself</p>
-        <input type= "text" ref ={firstNameRef} placeholder="First Name"></input>
-        <input type= "text" ref ={lastNameRef} placeholder="Last Name"></input>
-        <input type= "text" ref ={artistNameRef} placeholder="Artist Name"></input>
-        <input type = "email" ref = { emailRef }placeholder="Email" required></input>
-        <input type = "password" ref= { passwordRef } placeholder="Password (8 Digits)" minLength="8" required></input>
-        </div>
-
-        <div className="uploadForm"> 
-        <input type="file" accept='image/*'onChange={handleChange} multiple/>
-        <button disabled = {loading} onClick={handleSignupArtist}><h3>Register and upload</h3></button>
-
+          <div className="signupForm">
+          <h1>Artist Application</h1>
+          <p>Let us know more about you, please upload pictures of your work and tell us about yourself</p>
+          <input type= "text" ref ={firstNameRef} placeholder="First Name"></input>
+          <input type= "text" ref ={lastNameRef} placeholder="Last Name"></input>
+          <input type= "text" ref ={artistNameRef} placeholder="Artist Name"></input>
+          <input type = "email" ref = { emailRef }placeholder="Email" required></input>
+          <input type = "password" ref= { passwordRef } placeholder="Password (8 Digits)" minLength="8" required></input>
+          <div className="uploadForm"> 
+        <input type="file" accept='image/*' onClick={handleChange} multiple/>
+        
         <button onClick={handleUpload}><h3>Upload to Firebase</h3></button>
-        <p>{percent} % done</p>
-        <h2>Uploading done {progress}%</h2>
-
-        </div>
+        <p>{/* {percent} */} % done</p>
+        <h2>Uploading done {/* {progress} */}%</h2>
         <textarea ref={textAreaTextRef} cols="80" rows="15" placeholder='About you and your work'></textarea>
-        <button disabled = {loading} onClick={handleSignupArtist}><h3>Register and upload images</h3></button>
-        </div>
-      </div>
+        <button disabled = {loading} ><h3>Register and upload images</h3></button>
 
+
+            </div>
+          </div>        
+        </div>
+    </div>
+    
       <Footer />
+    
     </div>
   )
 }
