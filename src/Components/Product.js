@@ -17,6 +17,7 @@ FIX WISHLIST, CHECK WITH DAVID
 export default function Product({prods}) {
   const currentUser = useAuth()
   const [user, setUser] = useState(null)
+  
     useEffect(() => {
       if (currentUser) {
         const userEmail = currentUser.email
@@ -31,19 +32,6 @@ export default function Product({prods}) {
         return unsub
       }
     }, [currentUser])
-
-    const [checkList, setCheckList] = useState(null)
-
-    const checkIfIsInWishList = (id) => {
-        const docRef = doc(db, 'users', user.id)
-        const unsub = onSnapshot(docRef, doc => {
-            setCheckList(doc.data().wishList)
-            
-            return unsub
-        })
-        //const isIncluded = checkList.includes(id)
-        //return isIncluded
-    }
 
   return (
     <div className='productsContainer'>
