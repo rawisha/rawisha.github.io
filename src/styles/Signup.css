@@ -50,3 +50,106 @@ margin-top: 40px;
   line-height: 35.16px;
  
 }
+
+textarea {
+  display: flex;
+  resize: none;
+  display: block;
+  font-size: 18px;
+
+}
+
+#checkbox {
+  display: flex;
+  width: 20px;
+  margin-right: 1rem;
+ 
+  
+}
+
+.checkboxDiv {
+  display:flex;
+  flex-direction: row;
+  font-size: 18px;
+  font-family: 'amiri', 'serif';
+  color: #8b8b8b;
+  margin-top: 26px;
+  font-weight: 400;
+  
+  
+}
+
+.applicationDiv{
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  
+}
+ 
+#uploadImage {
+  margin-top: 33px;
+  width: 200px;
+  
+}
+
+#uploadImage:hover {
+  cursor:grab;
+}
+
+.applicationDiv > p {
+  margin-top: 16px;
+  color:#8b8b8b;
+  font-size: 18px;
+
+}
+
+
+.applicationDiv > textarea {
+margin-top:33px ;
+width: 673px;
+height: 290px;
+margin-left: 50px;
+}
+
+.applicationDiv > button {
+  background: #272727;
+  width: 210px;
+  height: 45px;
+  margin-top: 20px;
+  background-color: #272727;
+}
+
+.applicationDiv > button > h2 {
+  background:none;
+  color: white;
+  text-align: center;
+  font-size: 28px;
+  font-weight: 400;
+  align-items: center;
+}
+
+.uploadForm {
+display: flex;
+justify-content: center;
+text-align: center;
+align-items: center;
+flex-direction: column;
+margin-top: 40px;
+}
+
+.uploadForm > button{
+  background: #272727;
+  width: 9rem;
+  height: 45px;
+  margin-top: 20px;
+  background-color: #272727;
+}
+
+.uploadForm > button > h3{
+  background:none;
+  color: white;
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: 400;
+  align-items: center;
+}
