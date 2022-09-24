@@ -9,7 +9,7 @@ import BrowsingBy from './BrowsingBy';
 export default function Category() {
 
   const categories = useCategories()
-  
+
   return (
     <div>
       <Navbar />

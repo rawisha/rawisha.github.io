@@ -32,6 +32,11 @@
     position: relative;
 }
 
+.imageContainer img{
+    border-radius: 4px;
+}
+
+
 .imagefavoriteIcon{
     position: absolute;
     color: rgba(131, 99, 40, 0.8);

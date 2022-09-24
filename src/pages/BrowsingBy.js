@@ -12,8 +12,6 @@ export default function BrowsingBy() {
 
   const products = useProductsBy(id)
 
-  console.log(products)
-
 
 
   return (

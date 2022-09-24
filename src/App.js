@@ -8,6 +8,7 @@ import Wishlist from './pages/Wishlist';
 import Category from './pages/Category';
 import Signup from './pages/Signup';
 import BrowsingBy from './pages/BrowsingBy'
+import Pagenotfound from './Components/Pagenotfound';
 function App() {
   return (
     <div className="App">
@@ -22,6 +23,7 @@ function App() {
           <Route path="/category" element={<Category />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/category/:id" element={<BrowsingBy />} />
+          <Route path="*" element={<Pagenotfound />} />
         </Routes>
       </Router>
 

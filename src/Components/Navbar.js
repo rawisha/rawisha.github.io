@@ -4,21 +4,10 @@ import Logo from "../assets/Logo.svg"
 import MenuIcon from "../assets/menu-Icon.svg"
 import { useEffect } from 'react';
 import { db, logout } from '../firebase-config'
-import { onSnapshot, collection } from 'firebase/firestore'
+import { onSnapshot, collection,startsWith } from 'firebase/firestore'
 import { Link } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 
-
-/* 
-TO DO:
--Fix css, icons
--Fix search field + code and inline icon
--Fix meny + links
--Add buttons
--Write JS code
--Fix line 37 add to search field 
-
-*/
 
 
 export default function Navbar() {
@@ -88,20 +77,19 @@ export default function Navbar() {
                 {results
             .filter((item) => {
               const searchTerm = value;
-              const fullName = item.artistname;
-
+              const fullName =  item.artistName ;
               return (
                 searchTerm &&
                 fullName.startsWith(searchTerm) &&
-                fullName !== searchTerm
+                fullName !== searchTerm 
               );
             })
             .slice(0, 10)
-            .map((item) => (
+            .map((item,index) => (
               <div
                 onClick={() => onSearch(item.artistname)}
                 className="dropdown-row"
-                key={item.artistname}
+                key={index}
               >
                 {item.artistname}
               </div>
