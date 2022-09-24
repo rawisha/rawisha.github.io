@@ -8,8 +8,8 @@ import "../styles/Product.css"
 export default function ProductItem({prods}) {
     const currentUser = useAuth()
     const [user, setUser] = useState(null)
-    const [isWishlist, setIsWishList] = useState(false)
-    
+    const [wish, setWish] = useState(false)
+  
     useEffect(() => {
         if (currentUser) {
           const userEmail = currentUser.email
@@ -24,35 +24,36 @@ export default function ProductItem({prods}) {
         }
       }, [currentUser])
       
-
-   
-
+      
+      
+      
       // add try/catch
       const addToWishList = async (product) => {
-        setIsWishList(!isWishlist)
-        
-        const docRef = doc(db, 'users', user.id)
+        setWish(true)
+        const docRef = doc(db, 'users', `${user?.id}`)
         await updateDoc(docRef, {
             wishList: arrayUnion(product)
         })
-        console.log(product + ' added')
       }
 
       // add try/catch
       const removeFromWishList = (product) => {
-        
-        setIsWishList(!isWishlist)
-        const docRef = doc(db, 'users', user.id)
+        setWish(false)
+        const docRef = doc(db, 'users', `${user?.id}`)
         updateDoc(docRef, {
             wishList: arrayRemove(product)
         })
-        console.log(product + ' removed')
       }
-
-     // useEffect(() => {
-        
-    //    if(user) user.wishList.find(prods => console.log(prods)) ? setIsWishList(!isWishlist) : setIsWishList(isWishlist)
-     // }, [user])
+      
+      useEffect(() => {
+        if(user){
+          const checkWish = () => {
+            const data = user.wishList.some(el => el.id === prods.id)
+             if(data) setWish(true)
+           }
+           checkWish()
+        }
+      },[user,prods.id])
 
   return (
     
@@ -61,7 +62,7 @@ export default function ProductItem({prods}) {
                         <h3 className='cardSubTitle'>by {prods.by}</h3>
                         
                     <div className='imageContainer'>
-                        {isWishlist ? <i  id="heart" onClick={() => removeFromWishList(prods)} className='fa-solid fa-heart imagefavoriteIcon' ></i> : <i onClick={() => addToWishList(prods)} id="heart" className='fa-regular fa-heart imagefavoriteIcon' ></i>}
+                        {wish ? <i  id="heart" onClick={() => removeFromWishList(prods)} className='fa-solid fa-heart imagefavoriteIcon' ></i> : <i onClick={() => addToWishList(prods)} id="heart" className='fa-regular fa-heart imagefavoriteIcon' ></i>}
                         
                         <img src={prods.imageUrl} alt="bild"></img>
                     </div>

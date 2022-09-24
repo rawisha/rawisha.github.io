@@ -17,7 +17,6 @@ FIX WISHLIST, CHECK WITH DAVID
 export default function Product({prods}) {
   const currentUser = useAuth()
   const [user, setUser] = useState(null)
-
     useEffect(() => {
       if (currentUser) {
         const userEmail = currentUser.email
@@ -45,8 +44,7 @@ export default function Product({prods}) {
         //const isIncluded = checkList.includes(id)
         //return isIncluded
     }
-    
-    
+
   return (
     <div className='productsContainer'>
         <div className='productCardContainer'>
