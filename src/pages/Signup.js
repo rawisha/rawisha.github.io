@@ -26,11 +26,12 @@ export default function Signup() {
   // State to store uploaded file
   const [images, setImages] = useState([]);
   const [progress, setProgress] = useState(0);
+
+  
   
 
   const handleChange = (e) => {
     e.preventDefault()
-    
     for (let i = 0; i < e.target.files.length; i++) {
       const newImage = e.target.files[i];
       newImage["id"] = Math.random();
@@ -39,7 +40,6 @@ export default function Signup() {
   };
 
   const handleUpload = async () => {
-    
     const promises = [];
     images.map((image) => {
       const mail = emailRef.current.value;
@@ -129,7 +129,7 @@ export default function Signup() {
         <input type= "text" ref ={userNameRef} placeholder="Username"></input>
         <input type = "email" ref = { emailRef }placeholder="Email" required></input>
         <input type = "password" ref= { passwordRef } placeholder="Password (8 Digits)" minLength="8" required></input>
-        <button disabled = {loading} /* onClick={handleSignupUser} */><h2>Create</h2></button>
+        <button disabled = {loading} onClick={handleSignupUser}><h2>Create</h2></button>
 
       <div className="checkboxDiv">
         <input type ="checkbox" id="checkbox" onClick={showApplicationArtist}></input>
@@ -139,21 +139,20 @@ export default function Signup() {
       <div style={{ display: checked ? "block" : "none" }} className="applicationDiv">
           <div className="signupForm">
           <h1>Artist Application</h1>
-          <p>Let us know more about you, please upload pictures of your work and tell us about yourself</p>
+          <p>Let us know more about you, please upload 3 pictures of your work and tell us about yourself</p>
           <input type= "text" ref ={firstNameRef} placeholder="First Name"></input>
           <input type= "text" ref ={lastNameRef} placeholder="Last Name"></input>
           <input type= "text" ref ={artistNameRef} placeholder="Artist Name"></input>
           <input type = "email" ref = { emailRef }placeholder="Email" required></input>
           <input type = "password" ref= { passwordRef } placeholder="Password (8 Digits)" minLength="8" required></input>
+          
           <div className="uploadForm"> 
-        <input type="file" accept='image/*' onClick={handleChange} multiple/>
-        
-        
-        <button onClick={handleUpload}><h3>Upload to Firebase</h3></button>
-        <p>{progress} % done</p>
-        <h2>Uploading done {progress}%</h2>
+          <span></span>
+          <input type="file" accept='image/*' multiple onChange={handleChange} />
+          <br></br>
         <textarea ref={textAreaTextRef} cols="80" rows="15" placeholder='About you and your work'></textarea>
-        <button disabled = {loading} onClick={ () => { handleSignupArtist(); handleUpload();} } ><h3>Register and upload images</h3></button>
+        <button disabled = {loading} onClick={ () => { handleSignupArtist(); handleUpload();} } ><h2>Register</h2></button>
+        <p>{progress} % done</p>
 
 
             </div>

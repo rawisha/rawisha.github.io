@@ -145,11 +145,11 @@ margin-top: 40px;
   background-color: #272727;
 }
 
-.uploadForm > button > h3{
+.uploadForm > button > h2{
   background:none;
   color: white;
   text-align: center;
-  font-size: 1.2em;
+  font-size: 28px;
   font-weight: 400;
   align-items: center;
 }
