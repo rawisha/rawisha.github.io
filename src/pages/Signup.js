@@ -3,16 +3,13 @@ import Navbar from '../Components/Navbar'
 import "../styles/Signup.css"
 import Footer from '../Components/Footer'
 
-import { signup, db, emailVerification, auth} from '../firebase-config'
+import { signup, db, emailVerification, storage} from '../firebase-config'
 import { useRef, useState } from 'react'
 import { doc , setDoc, serverTimestamp} from 'firebase/firestore'
-import { ref,uploadBytesResumable , getStorage,getDownloadURL} from "firebase/storage"
+import { ref, uploadBytesResumable, getDownloadURL} from "firebase/storage"
 
 
 export default function Signup() {
-
-  const storage = getStorage();
-
 
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -36,7 +33,7 @@ export default function Signup() {
     
     for (let i = 0; i < e.target.files.length; i++) {
       const newImage = e.target.files[i];
-      newImage["id"] = Math.random(1-9999);
+      newImage["id"] = Math.random();
       setImages((prevState) => [...prevState, newImage]);
     }
   };
@@ -60,21 +57,20 @@ export default function Signup() {
         (error) => {
           console.log(error);
         },
-        () => { 
-          getDownloadURL(uploadTask.snapshot.ref)
+        async () => { 
+          await getDownloadURL(uploadTask.snapshot.ref)
             .then((urls) => {
             setUrls((prevState) => [...prevState, urls]);
             });
         }
       );
     });
-  console.log("images: ", images);
-  console.log("urls: ", urls);
-
     Promise.all(promises)
       .then(() => console.log("Allt uppladdat!"))
       .catch((err) => console.log(err));
   };
+  console.log("images: ", images);
+  console.log("urls: ", urls);
 
   function showApplicationArtist(){
     setChecked((checked) => !checked);
