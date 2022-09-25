@@ -9,7 +9,6 @@ import { Link } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 
 
-
 export default function Navbar() {
 
     const currentUser = useAuth()
@@ -55,27 +54,20 @@ export default function Navbar() {
                     <img id="logoText--svg" src={Logo} alt="ARTZY Logo" />
                 </div></Link>
                 <div className='menuWrapper'>
-                    <h1 id='styleSettings'><a href='/category'>Category</a></h1>
+                    <Link to="/category"><h1 id='styleSettings'>Category</h1></Link>
                     <img src={MenuIcon} alt="Icon Menu" />
-                    <h1 id='styleSettings'><a href='/artist'>Artist</a></h1>
+                    <Link to="/artist"><h1 id='styleSettings'>Artist</h1></Link>
                 </div>
                 <div className='inputWrapper'>
-                    <input className='inputField' type="text" placeholder='Sök efter Product eller Artist' 
-                    onChange={onChange} value={value}
-                    />
+                    <input className='inputField' type="text" placeholder='Sök efter Product eller Artist' onChange={onChange} value={value}/>
                     <button className='button' onClick={() => onSearch(value)}><i className="fa-solid fa-magnifying-glass searchIcon"></i></button>
-                   {/**/}
-                    {/*<div><i className="fa-light fa-magnifying-glass"></i></div>*/}
-                    
                 </div>
-                
                 <div className='customerWrapper'>
-                    <h1 id='styleSettings'><a href='/wishlist'>Wishlist</a> <i className="fa-solid fa-heart"></i></h1>
-                    <h1 id='styleSettings'><a href='/cart'>Cart</a> <i className="fa-solid fa-cart-shopping"></i></h1>
-                    { !currentUser && <h1 id='styleSettings'><a href='/signin'>Sign In</a> <i className="fa-solid fa-user"></i></h1>}
-                    { currentUser && <h1 id='styleSettings' onClick={handleSignOut}><a href='/'>Sign out</a><i className="fa-solid fa-user"></i></h1>}
+                    <Link to="/wishlist"><h1 id='styleSettings'>Wishlist<i className="fa-solid fa-heart"></i></h1></Link>
+                    <Link to="/cart"><h1 id='styleSettings'>Cart<i className="fa-solid fa-cart-shopping"></i></h1></Link>
+                    { !currentUser && <Link to="/signin"><h1 className="signX" id='styleSettings'>Sign In<i className="fa-solid fa-user"></i></h1></Link>}
+                    { currentUser && <Link to="/"><h1 className="signX" id='styleSettings' onClick={handleSignOut}>Sign out<i className="fa-solid fa-user"></i></h1></Link>}
                 </div>
-                
             </div>
                 
             <div className='borderSolidLine'></div>
