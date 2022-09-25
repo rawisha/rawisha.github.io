@@ -3,13 +3,16 @@ import Navbar from '../Components/Navbar'
 import "../styles/Signup.css"
 import Footer from '../Components/Footer'
 
-import { signup, db, emailVerification,storage } from '../firebase-config'
+import { signup, db, emailVerification, auth} from '../firebase-config'
 import { useRef, useState } from 'react'
 import { doc , setDoc, serverTimestamp} from 'firebase/firestore'
-import { ref,uploadBytesResumable } from "firebase/storage"
+import { ref,uploadBytesResumable , getStorage,getDownloadURL} from "firebase/storage"
 
 
 export default function Signup() {
+
+  const storage = getStorage();
+
 
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -18,28 +21,33 @@ export default function Signup() {
   const userNameRef = useRef();
   const artistNameRef = useRef();
   const textAreaTextRef = useRef();
+  
 
   const [loading, setLoading] = useState(false);
   const [checked, setChecked] = useState(false);
-  const [urls, setUrls] = useState([])
+  const [urls, setUrls] = useState([]);
   // State to store uploaded file
   const [images, setImages] = useState([]);
   const [progress, setProgress] = useState(0);
   
 
   const handleChange = (e) => {
+    e.preventDefault()
     
     for (let i = 0; i < e.target.files.length; i++) {
       const newImage = e.target.files[i];
-      newImage["id"] = Math.random();
+      newImage["id"] = Math.random(1-9999);
       setImages((prevState) => [...prevState, newImage]);
     }
   };
 
-  const handleUpload = () => {
+  const handleUpload = async () => {
+    
     const promises = [];
     images.map((image) => {
-      const uploadTask = storage.ref(`testing/${image.name}`).put(image);
+      const mail = emailRef.current.value;
+      const storageRef = ref(storage,`testing/${mail}/${image.name}`);
+      const uploadTask = uploadBytesResumable(storageRef, image);
       promises.push(uploadTask);
       uploadTask.on(
         "state_changed",
@@ -52,25 +60,21 @@ export default function Signup() {
         (error) => {
           console.log(error);
         },
-        async () => {
-          await storage
-            .ref("testing")
-            .child(image.name)
-            .getDownloadURL()
+        () => { 
+          getDownloadURL(uploadTask.snapshot.ref)
             .then((urls) => {
-              setUrls((prevState) => [...prevState, urls]);
+            setUrls((prevState) => [...prevState, urls]);
             });
         }
       );
     });
+  console.log("images: ", images);
+  console.log("urls: ", urls);
 
     Promise.all(promises)
-      .then(() => alert("All images uploaded"))
+      .then(() => console.log("Allt uppladdat!"))
       .catch((err) => console.log(err));
   };
-
-  console.log("images: ", images);
-  console.log("urls", urls);
 
   function showApplicationArtist(){
     setChecked((checked) => !checked);
@@ -121,6 +125,7 @@ export default function Signup() {
   return (
     <div>
       <Navbar />
+      
       <div className="signupForm">
         <h1>Register</h1>
         <input type= "text" ref ={firstNameRef} placeholder="First Name"></input>
@@ -129,7 +134,7 @@ export default function Signup() {
         <input type = "email" ref = { emailRef }placeholder="Email" required></input>
         <input type = "password" ref= { passwordRef } placeholder="Password (8 Digits)" minLength="8" required></input>
         <button disabled = {loading} /* onClick={handleSignupUser} */><h2>Create</h2></button>
-        
+
       <div className="checkboxDiv">
         <input type ="checkbox" id="checkbox" onClick={showApplicationArtist}></input>
         <p id="checkboxParagraph">Artist application? Check this box to apply</p>
@@ -147,11 +152,12 @@ export default function Signup() {
           <div className="uploadForm"> 
         <input type="file" accept='image/*' onClick={handleChange} multiple/>
         
+        
         <button onClick={handleUpload}><h3>Upload to Firebase</h3></button>
-        <p>{/* {percent} */} % done</p>
-        <h2>Uploading done {/* {progress} */}%</h2>
+        <p>{progress} % done</p>
+        <h2>Uploading done {progress}%</h2>
         <textarea ref={textAreaTextRef} cols="80" rows="15" placeholder='About you and your work'></textarea>
-        <button disabled = {loading} ><h3>Register and upload images</h3></button>
+        <button disabled = {loading} onClick={ () => { handleSignupArtist(); handleUpload();} } ><h3>Register and upload images</h3></button>
 
 
             </div>
