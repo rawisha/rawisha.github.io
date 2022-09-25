@@ -43,7 +43,7 @@ export default function Signup() {
     const promises = [];
     images.map((image) => {
       const mail = emailRef.current.value;
-      const storageRef = ref(storage,`testing/${mail}/${image.name}`);
+      const storageRef = ref(storage,`artist application/${mail}/${image.name}`);
       const uploadTask = uploadBytesResumable(storageRef, image);
       promises.push(uploadTask);
       uploadTask.on(
