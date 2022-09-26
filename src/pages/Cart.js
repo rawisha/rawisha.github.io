@@ -13,14 +13,33 @@ export default function Cart() {
   const [checkOne, setCheckOne] = useState(true)
   const [checkTwo, setCheckTwo] = useState(false)
   const [checkThree, setCheckThree] = useState(false)
+  const [checkKiss, setCheckKiss] = useState(false)
   
-  const [name, setName] = useState()
+  const [name, setName] = useState('')
+  const [address, setAddress] = useState('')
+  const [addressTwo, setAddressTwo] = useState('')
+  const [city, setCity] = useState('')
+  const [zip, setZip] = useState('')
+  const [country, setCountry] = useState('')
+
+  const [cardOwner, setCardOwner] = useState('')
+
+  const [email, setEmail] = useState('')
+  const [orderID, setOrderID] = useState('')
 
 
+  const handleCheckoutZero = (e) => {
+    e.preventDefault()
+    setCheckOne(true)
+    setCheckTwo(false)
+    setCheckThree(false)
+  }
+  
   const handleCheckoutOne = (e) => {
     e.preventDefault()
     setCheckOne(false)
     setCheckTwo(true)
+    setCheckThree(false)
   }
   
   const handleCheckoutTwo = (e) => {
@@ -32,6 +51,7 @@ export default function Cart() {
   const handleCheckoutThree = (e) => {
     e.preventDefault()
     setCheckThree(false)
+    setCheckKiss(true)
   }
 
   return (
@@ -62,8 +82,8 @@ export default function Cart() {
           </div>
         </div>
 
-        {/* Checkout */}
         <div className="cart-checkout">
+        {/* Checkout 1 */}
           {checkOne && <div className="cart-checkout-1">
             <div className="side-menu-buttons">
               <span className='span-1'></span>
@@ -73,29 +93,30 @@ export default function Cart() {
             <form>
               <h2 className='form-title'>Shipping Details</h2>
               <label htmlFor='full-name'>Full Name</label>
-              <input type="text" name="full-name" onChange={(e) => setName(e.target.value)}/>
+              <input type="text" name="full-name" onChange={(e) => setName(e.target.value)} value={name}/>
               <label>Address Line 1</label>
-              <input type="text" />
+              <input type="text" onChange={(e) => setAddress(e.target.value)} value={address}/>
               <label>Address Line 2 (Optional)</label>
-              <input type="text" />
+              <input type="text" onChange={(e) => setAddressTwo(e.target.value)} value={addressTwo}/>
               <div className="city-details">
                 <div className="city">
                   <label>City</label>
-                  <input type="text" />
+                  <input type="text" onChange={(e) => setCity(e.target.value)} value={city}/>
                 </div>
                 <div className="zip">
                   <span className='city-divider'>/</span>
                   <label>Zip</label>
-                  <input type="number" />
+                  <input type="number" onChange={(e) => setZip(e.target.value)} value={zip}/>
                 </div>
               </div>
               <label htmlFor='country'>Country</label>
-              <select type="select" name="country" placeholder='select country'>
+              <select type="select" name="country" placeholder='select country' onChange={(e) => setCountry(e.target.value)} value={country}>
                 <option value="Sweden">Sweden</option>
               </select>
             </form>
             <button onClick={handleCheckoutOne}>Next step</button>
           </div>}
+          {/* Checkout 2 */}
           {checkTwo && <div className="cart-checkout-2">
             <div className="side-menu-buttons">
               <span className='span-1'></span>
@@ -103,27 +124,33 @@ export default function Cart() {
               <span className='span-3'></span>
             </div>
             <form>
+              <i onClick={handleCheckoutZero} className='fa-solid fa-long-arrow-alt-left arrow-back'></i>
               <h2 className='form-title'>Card Details</h2>
-              <label htmlFor='card-number'>Cardnumber</label>
-              <input type="text" name="card-number"/>
+              <label htmlFor='card-owner'>Card Owner</label>
+              <input type="text" name="card-owner" onChange={(e) => setCardOwner(e.target.value)} value={cardOwner}/>
+              <label htmlFor='card-number'>Card Number</label>
+              <input type="text" name="card-number" placeholder='xxxx - xxxx - xxxx - xxxx'/>
               <div className="card-type">
                 {/* <img src="" alt="" /> */}
               </div>
               <div className="card-details">
-                <div className="card-expiry">
+                <div className="card-expiry-container">
                   <label>Expiry Date</label>
-                  <input type="number" className='expiry-month'/>
-                  <input type="number" className='expiry-year' />
+                  <div className="card-expiry">
+                    <input type="number" className='expiry-month' placeholder='MM'/>
+                    <span className='card-expiry-divider'>/</span>
+                    <input type="number" className='expiry-year' placeholder='YY'/>
+                  </div>
                 </div>
                 <div className="card-cvv">
-                  <span className='card-expiry-divider'>/</span>
                   <label>CVV</label>
-                  <input type="number" />
+                  <input type="number" placeholder='***'/>
                 </div>
               </div>
             </form>
             <button onClick={handleCheckoutTwo}>Checkout</button>
           </div>}
+          {/* Checkout 3 */}
           {checkThree && <div className="cart-checkout-3">
             <div className="side-menu-buttons">
               <span className='span-1'></span>
@@ -131,31 +158,18 @@ export default function Cart() {
               <span className='span-3'></span>
             </div>
             <form>
+              <i onClick={handleCheckoutOne} className='fa-solid fa-long-arrow-alt-left arrow-back'></i>
               <h2 className='form-title'>Thank you {name}</h2>
-              <label htmlFor='card-number'>Cardnumber</label>
-              <input type="text" name="full-name" onChange={(e) => setName(e.target.value)}/>
-              <label>Address Line 1</label>
-              <input type="text" />
-              <label>Address Line 2 (Optional)</label>
-              <input type="text" />
-              <div className="city-details">
-                <div className="city">
-                  <label>City</label>
-                  <input type="text" />
-                </div>
-                <div className="zip">
-                  <span className='city-divider'>/</span>
-                  <label>Zip</label>
-                  <input type="number" />
-                </div>
-              </div>
-              <label htmlFor='country'>Country</label>
-              <select type="select" name="country" placeholder='select country'>
-                <option value="Sweden">Sweden</option>
-              </select>
+              <label>E-mail for reciept</label>
+              <input type="email" onChange={(e) => setEmail(e.target.value)} value={email}/>
+              <label>Order ID</label>
+              <input type="text" disabled="true" value={orderID}/>
+              <label>Anything we should know?</label>
+              <textarea  cols="30" rows="10"></textarea>
             </form>
-            <button onClick={handleCheckoutThree}>Checkout</button>
+            <button onClick={handleCheckoutThree}>Send reciept</button>
           </div>}
+          {checkKiss && <div className="kiss">&#128536;</div>}
         </div>
 
       </div>
