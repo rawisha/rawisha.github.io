@@ -1,31 +1,13 @@
 import React from 'react'
-import useAuth from '../hooks/useAuth';
+import useCurrentUser from '../hooks/useCurrentUser';
 import { useState, useEffect } from 'react';
-import { arrayUnion, arrayRemove, collection, doc, onSnapshot, query, updateDoc, where } from 'firebase/firestore';
+import { arrayUnion, arrayRemove, doc, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase-config';
 import "../styles/Product.css"
 
 export default function ProductItem({prods}) {
-    const currentUser = useAuth()
-    const [user, setUser] = useState(null)
+    const user = useCurrentUser()
     const [wish, setWish] = useState(false)
-  
-    useEffect(() => {
-        if (currentUser) {
-          const userEmail = currentUser.email
-          const colRef = collection(db, 'users')
-          const q = query(colRef, where('eMail', '==', userEmail))
-          const unsub = onSnapshot(q, (snapshot) => {
-            snapshot.docs.forEach(doc => {
-              setUser({...doc.data(), id: doc.id})
-            })
-          })
-          return unsub
-        }
-      }, [currentUser])
-      
-      
-      
       
       // add try/catch
       const addToWishList = async (product) => {

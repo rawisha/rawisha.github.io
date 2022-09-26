@@ -1,9 +1,15 @@
 import React from 'react'
+import Footer from '../Components/Footer'
+import Navbar from '../Components/Navbar'
 
 export default function Cart() {
   return (
-    <div>
-        <h1>This is cart page</h1>
-    </div>
+    <>
+      <Navbar />
+
+      <h1>Cart</h1>
+
+      <Footer />
+    </>
   )
 }
