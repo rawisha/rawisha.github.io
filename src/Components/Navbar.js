@@ -7,12 +7,18 @@ import { db, logout } from '../firebase-config'
 import { onSnapshot, collection } from 'firebase/firestore'
 import { Link } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
+import useCurrentUser from '../hooks/useCurrentUser';
 
 
 export default function Navbar() {
 
     const currentUser = useAuth()
+    const user = useCurrentUser()
 
+    let wishListCount = user?.wishList.length;
+    let cartCount = user?.cart?.length;
+
+    // LOGOUT
     const handleSignOut = () => {
         logout();
     }
@@ -24,13 +30,11 @@ export default function Navbar() {
 
         const onChange = (event) => {
             setValue(event.target.value)
-            
         };
 
         const onSearch = (searchTerm) => {
             setValue(searchTerm);
             /* console.log("search", searchTerm); */
-            
         };
        
         useEffect(() => {
@@ -63,8 +67,8 @@ export default function Navbar() {
                     <button className='button' onClick={() => onSearch(value)}><i className="fa-solid fa-magnifying-glass searchIcon"></i></button>
                 </div>
                 <div className='customerWrapper'>
-                    <Link to="/wishlist"><h1 id='styleSettings'>Wishlist<i className="fa-solid fa-heart"></i></h1></Link>
-                    <Link to="/cart"><h1 id='styleSettings'>Cart<i className="fa-solid fa-cart-shopping"></i></h1></Link>
+                    <Link to="/wishlist"><h1 id='styleSettings'>Wishlist<i className="fa-solid fa-heart"></i></h1><p>({wishListCount ? wishListCount : 0})</p></Link>
+                    <Link to="/cart"><h1 id='styleSettings'>Cart<i className="fa-solid fa-cart-shopping"></i></h1><p>({cartCount ? cartCount : 0})</p></Link>
                     { !currentUser && <Link to="/signin"><h1 className="signX" id='styleSettings'>Sign In<i className="fa-solid fa-user"></i></h1></Link>}
                     { currentUser && <Link to="/"><h1 className="signX" id='styleSettings' onClick={handleSignOut}>Sign out<i className="fa-solid fa-user"></i></h1></Link>}
                 </div>

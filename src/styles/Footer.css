@@ -9,6 +9,7 @@ font-family: "Amiri", serif;
   align-items: center;
   text-align: center;
   justify-content: center;
+  width: 100%;
 }
 
 .newsLetterWrapper {
