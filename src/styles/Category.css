@@ -48,3 +48,8 @@
 .FOOTER {
     margin-top: 150px;
 }
+
+.arrow-back {
+    font-size: 28px;
+    margin-right: 1rem;
+}

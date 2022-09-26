@@ -23,8 +23,6 @@ export default function Artist() {
                 const filteredArtists = data.filter( result => result.artistname.charAt(0) === searchHandle.toLowerCase() || result.artistname.charAt(0) === searchHandle.toUpperCase())
                 setArtists(filteredArtists)
             })
-            console.log("data snapshot", data)
-            console.log(snapshot)
         })
     }
 
@@ -117,7 +115,6 @@ export default function Artist() {
 
                 </div>
             </div>
-            <div className='borderSolidLine'></div>
             <Footer />
         </div>
 
