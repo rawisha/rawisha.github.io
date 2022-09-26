@@ -178,6 +178,46 @@
     height: calc(100% - .6rem);
 }
 
+.side-menu-buttons {
+    position: absolute;
+    height: 120px;
+    width: 40px;
+    z-index: 1;
+    left: -18px;
+    top: 100px;
+    border-radius: 18px;
+}
+
+.side-menu-buttons .span-1  {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    background: var(--checkout-accent) !important;
+    position: absolute;
+    left: 8px;
+    top: 20px;
+}
+
+.side-menu-buttons .span-2  {
+    background: var(--checkout-txt);
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    position: absolute;
+    left: 8px;
+    top: 54px;
+}
+
+.side-menu-buttons .span-3  {
+    background: var(--checkout-txt);
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    position: absolute;
+    left: 8px;
+    top: 88px;
+}
+
 .cart-checkout-1 {
     height: 100%;
 }
@@ -235,6 +275,7 @@
     height: 2rem;
     width: 100%;
     padding: .2rem;
+    margin-top: .2rem;
 }
 
 .cart-checkout > div > form > .form-title {

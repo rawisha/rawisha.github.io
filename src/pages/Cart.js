@@ -37,6 +37,11 @@ export default function Cart() {
 
         <div className="cart-checkout">
           <div className="cart-checkout-1">
+            <div className="side-menu-buttons">
+              <span className='span-1'></span>
+              <span className='span-2'></span>
+              <span className='span-3'></span>
+            </div>
             <form>
               <h2 className='form-title'>Shipping Details</h2>
               <label htmlFor='full-name'>Full Name</label>
