@@ -1,6 +1,7 @@
 :root {
     --checkout-bg: #454545;
     --checkout-accent: #f2c421;
+    --checkout-txt: #ccc;
     --cart-bg: #ddd;
     --page-bg: #eee;
 }
@@ -173,11 +174,78 @@
 .cart-checkout {
     margin-left: 3rem;
     min-height: 500px;
+    position: relative;
+    height: calc(100% - .6rem);
+}
+
+.cart-checkout-1 {
+    height: 100%;
 }
 
 .cart-checkout * {
     background: var(--checkout-bg);
-    height: calc(100% - .6rem);
+}
+
+.cart-checkout > div > form {
+    padding: 1rem 2rem;
+    width: 100%;
+    border: none;
+}
+
+.cart-checkout * label {
+    height: 1rem;
+    margin-top: 1.2rem;
+    color: var(--checkout-txt);
+}
+
+.cart-checkout * input {
+    height: 2rem;
+    width: 100%;
+    padding: .2rem;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid var(--checkout-txt);
+    color: var(--checkout-txt);
+}
+
+.cart-checkout-1 form .city-details {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.2rem;
+}
+
+.cart-checkout-1 .city {
+    width: 50%;
+}
+
+.cart-checkout-1 .zip {
+    width: 30%;
+    position: relative;
+}
+
+.zip .city-divider {
+    position: absolute;
+    left: -2rem;
+    top: 50%;
+    font-size: 2rem;
+    color: var(--checkout-txt);
+}
+
+.cart-checkout > div > form > select {
+    height: 2rem;
+    width: 100%;
+    padding: .2rem;
+}
+
+.cart-checkout > div > form > .form-title {
+    color: var(--checkout-accent);
+}
+
+.cart-checkout-1 form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
 }
 
 .cart-checkout button {
@@ -185,4 +253,6 @@
     height: 3rem;
     background: var(--checkout-accent);
     cursor: pointer;
+    position: absolute;
+    bottom: 0;
 }

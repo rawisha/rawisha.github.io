@@ -37,7 +37,30 @@ export default function Cart() {
 
         <div className="cart-checkout">
           <div className="cart-checkout-1">
-            <h1>checkout</h1>
+            <form>
+              <h2 className='form-title'>Shipping Details</h2>
+              <label htmlFor='full-name'>Full Name</label>
+              <input type="text" name="full-name"/>
+              <label>Address Line 1</label>
+              <input type="text" />
+              <label>Address Line 2 (Optional)</label>
+              <input type="text" />
+              <div className="city-details">
+                <div className="city">
+                  <label>City</label>
+                  <input type="text" />
+                </div>
+                <div className="zip">
+                  <span className='city-divider'>/</span>
+                  <label>Zip</label>
+                  <input type="number" />
+                </div>
+              </div>
+              <label htmlFor='country'>Country</label>
+              <select type="select" name="country" placeholder='select country'>
+                <option value="Sweden">Sweden</option>
+              </select>
+            </form>
             <button>Next step</button>
           </div>
         </div>
