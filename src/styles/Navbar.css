@@ -116,3 +116,17 @@ a {
   position: absolute;
   cursor: pointer;
 }
+
+.fa-heart, .fa-cart-shopping{
+  position: relative;
+}
+
+.counter {
+  position: absolute;
+  top: 100%;
+  left: 10%;
+  margin-top: 5px;
+  bottom: 100%;
+  font-size: 14px;
+  font-weight: 400;
+}

@@ -70,8 +70,8 @@ export default function Navbar() {
                 </div>
                 
                 <div className='customerWrapper'>
-                    <h1 id='styleSettings'><a href='/wishlist'>Wishlist</a> <i className="fa-solid fa-heart"></i></h1>
-                    <h1 id='styleSettings'><a href='/cart'>Cart</a> <i className="fa-solid fa-cart-shopping"></i></h1>
+                    <h1 id='styleSettings'><a href='/wishlist'>Wishlist</a> <i className="fa-solid fa-heart"><span className='counter'>(2)</span></i></h1>
+                    <h1 id='styleSettings'><a href='/cart'>Cart</a> <i className="fa-solid fa-cart-shopping"><span className='counter'>(2)</span></i></h1>
                     { !currentUser && <h1 id='styleSettings'><a href='/signin'>Sign In</a> <i className="fa-solid fa-user"></i></h1>}
                     { currentUser && <h1 id='styleSettings' onClick={handleSignOut}><a href='/'>Sign out</a><i className="fa-solid fa-user"></i></h1>}
                 </div>
