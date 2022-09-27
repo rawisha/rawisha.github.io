@@ -65,7 +65,13 @@ font-family: "Amiri", serif;
   display: inline-block;
 }
 
-.footerContainer a {
+.socialsContainer  a{
+  display: inline-block;
+  margin-right: 25px;
+  text-align: center;
+}
+
+.linkContainer a {
   text-decoration: none;
   padding: 0px 60px 0px 0px;
   margin: 0px 30px 0px 0px;

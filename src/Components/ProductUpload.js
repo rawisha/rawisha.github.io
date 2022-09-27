@@ -18,7 +18,7 @@ export default function ProductUpload() {
                 </div>
                 <div className="formImage">
                 <h2>Upload Images</h2>
-                <div class="uploadedImages">
+                <div className="uploadedImages">
                 <img src={bild} alt="uploaded-bild"></img>
                 <img src={bild} alt="uploaded-bild"></img>
                 <img src={bild} alt="uploaded-bild"></img>
