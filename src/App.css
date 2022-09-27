@@ -12,6 +12,12 @@ h1,h2,h3,h4,p {
 :root {
   --danger: red;
   --success: green;
+
+  --checkout-bg: #454545;
+  --checkout-accent: #f2c421;
+  --checkout-txt: #ccc;
+  --cart-bg: #ddd;
+  --page-bg: #eee;
 }
 
 .pageError {
