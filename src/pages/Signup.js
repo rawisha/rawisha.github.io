@@ -1,3 +1,4 @@
+
 import React from 'react'
 import Navbar from '../Components/Navbar'
 import "../styles/Signup.css"
@@ -5,11 +6,25 @@ import Footer from '../Components/Footer'
 
 import { signup, db, emailVerification, storage} from '../firebase-config'
 import { useRef, useState } from 'react'
-import { doc , setDoc, serverTimestamp} from 'firebase/firestore'
+import { doc , setDoc, serverTimestamp,collection,addDoc} from 'firebase/firestore'
 import { ref, uploadBytesResumable, getDownloadURL} from "firebase/storage"
+import { useNavigate } from 'react-router-dom'
 
 
 export default function Signup() {
+
+  const navigate = useNavigate();
+
+  
+
+  const [loading, setLoading] = useState(false);
+  const [checked, setChecked] = useState(false);
+  const [urls, setUrls] = useState([]);
+  const [images, setImages] = useState([]);
+  const [progress, setProgress] = useState(0);
+  const [hideElements, setHideElements] = useState(true)
+  /* const [title, setTitle] = useState(''); */
+  /* const [error, setError] = useState(null) */
 
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -18,23 +33,46 @@ export default function Signup() {
   const userNameRef = useRef();
   const artistNameRef = useRef();
   const textAreaTextRef = useRef();
+  const descriptionRef = useRef();
+  const titleRef = useRef();
+  const priceRef = useRef();
   
+  function generateUUIDUsingMathRandom() { 
+    var d = new Date().getTime();//Timestamp
+    var d2 = (performance && performance.now && (performance.now()*1000)) || 0;//Time in microseconds since page-load or 0 if unsupported
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random() * 16;//random number between 0 and 16
+        if(d > 0){//Use timestamp until depleted
+            r = (d + r)%16 | 0;
+            d = Math.floor(d/16);
+        } else {//Use microseconds since page-load if supported
+            r = (d2 + r)%16 | 0;
+            d2 = Math.floor(d2/16);
+        }
+        return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+    });
+}
 
-  const [loading, setLoading] = useState(false);
-  const [checked, setChecked] = useState(false);
-  const [urls, setUrls] = useState([]);
-  // State to store uploaded file
-  const [images, setImages] = useState([]);
-  const [progress, setProgress] = useState(0);
-
-  
+const saveProducts = (urls) => {
+  const colRef = collection(db, 'test-products')
+  addDoc(colRef, {
+    title: titleRef.current.value, 
+    description: descriptionRef.current.value,
+    imageUrl: urls,
+    price: priceRef.current.value,
+    by: artistNameRef.current.value,
+    createdAt: serverTimestamp(),
+  }).then(res => {
+    console.log(res.id)
+  }).catch(err => console.log(err.code))
+} 
   
 
   const handleChange = (e) => {
     e.preventDefault()
     for (let i = 0; i < e.target.files.length; i++) {
       const newImage = e.target.files[i];
-      newImage["id"] = Math.random();
+      newImage["id"] = generateUUIDUsingMathRandom();
       setImages((prevState) => [...prevState, newImage]);
     }
   };
@@ -42,8 +80,7 @@ export default function Signup() {
   const handleUpload = async () => {
     const promises = [];
     images.map((image) => {
-      const mail = emailRef.current.value;
-      const storageRef = ref(storage,`artist application/${mail}/${image.name}`);
+      const storageRef = ref(storage,`artist application/${ generateUUIDUsingMathRandom() +'__' +image.name}`);
       const uploadTask = uploadBytesResumable(storageRef, image);
       promises.push(uploadTask);
       uploadTask.on(
@@ -61,21 +98,25 @@ export default function Signup() {
           await getDownloadURL(uploadTask.snapshot.ref)
             .then((urls) => {
             setUrls((prevState) => [...prevState, urls]);
+            saveProducts(urls);
             });
         }
       );
     });
     Promise.all(promises)
       .then(() => console.log("Allt uppladdat!"))
+      .then(() => alert("Tack för din registrering!"))
+      .then(() => navigate("/"))
       .catch((err) => console.log(err));
   };
   console.log("images: ", images);
   console.log("urls: ", urls);
+  
 
   function showApplicationArtist(){
     setChecked((checked) => !checked);
+    setHideElements((hideElements) => !hideElements);
   }
-  
 
   async function handleSignupUser(){
     setLoading(true);
@@ -111,6 +152,7 @@ export default function Signup() {
           timestamp : serverTimestamp() 
         })
         emailVerification();
+        saveProducts(urls);
       })
     } catch (error){
       console.error(error);
@@ -121,44 +163,63 @@ export default function Signup() {
   return (
     <div>
       <Navbar />
-      
+     
       <div className="signupForm">
-        <h1>Register</h1>
-        <input type= "text" ref ={firstNameRef} placeholder="First Name"></input>
-        <input type= "text" ref ={lastNameRef} placeholder="Last Name"></input>
-        <input type= "text" ref ={userNameRef} placeholder="Username"></input>
-        <input type = "email" ref = { emailRef }placeholder="Email" required></input>
-        <input type = "password" ref= { passwordRef } placeholder="Password (8 Digits)" minLength="8" required></input>
-        <button disabled = {loading} onClick={handleSignupUser}><h2>Create</h2></button>
-
-      <div className="checkboxDiv">
-        <input type ="checkbox" id="checkbox" onClick={showApplicationArtist}></input>
-        <p id="checkboxParagraph">Artist application? Check this box to apply</p>
+        <h1 style={{ display: hideElements ? "block" : "none" }}>Register</h1>
+        <h1 style={{ display: checked ? "block" : "none" }} >Artist Application</h1>
+        <p style={{ display: checked ? "block" : "none" }}>Let us know more about you, please upload 3 pictures of your work and tell us about yourself</p>
+         <div className="checkboxDiv">
+        <input type ="checkbox" id="checkbox" style={{ display: hideElements ? "block" : "none" }} onClick={showApplicationArtist}></input>
+        <p style={{ display: hideElements ? "block" : "none" }} id="checkboxParagraph">Artist application? Check this box to apply</p>
       </div>
       
+        <input type= "text" ref ={firstNameRef} placeholder="First Name" required></input>
+        <input type= "text" ref ={lastNameRef} placeholder="Last Name" required></input>
+        <input type= "text" ref ={artistNameRef} style={{ display: checked ? "block" : "none" }} placeholder="Artist Name" required></input>
+        <input type= "text" ref ={userNameRef} style={{ display: hideElements ? "block" : "none" }}placeholder="Username" required></input>
+        <input type = "email" ref = { emailRef }placeholder="Email" required ></input>
+        <input type = "password" ref= { passwordRef } placeholder="Password (8 Digits)" minLength="8" required></input>
+        <button disabled = {loading} style={{ display: hideElements ? "block" : "none" }}onClick={handleSignupUser}><h2>Create</h2></button>
+        <p style={{ display: hideElements ? "block" : "none" }}>{progress} % done</p>
+
+      
+      
       <div style={{ display: checked ? "block" : "none" }} className="applicationDiv">
-          <div className="signupForm">
-          <h1>Artist Application</h1>
-          <p>Let us know more about you, please upload 3 pictures of your work and tell us about yourself</p>
-          <input type= "text" ref ={firstNameRef} placeholder="First Name"></input>
-          <input type= "text" ref ={lastNameRef} placeholder="Last Name"></input>
-          <input type= "text" ref ={artistNameRef} placeholder="Artist Name"></input>
-          <input type = "email" ref = { emailRef }placeholder="Email" required></input>
-          <input type = "password" ref= { passwordRef } placeholder="Password (8 Digits)" minLength="8" required></input>
-          
+        <br></br>
+        <br></br>
+        <br></br>
+        <div className='fileUploads'>
+        <section>
+          <input type="text" ref = {titleRef} id="title" name="title" placeholder=" Title" required></input>
+          <input type="text" ref = {descriptionRef} id="description" name="description" placeholder="Description " required></input>
+          <input type="number" ref = {priceRef} id="price" name="price" placeholder="Price " required></input>
+          <input type="file" accept='image/*'  onChange={handleChange} />
+      </section><section>
+          <input type="text" ref = {titleRef} id="title" name="title" placeholder=" Title" required></input>
+          <input type="text" ref = {descriptionRef} id="description" name="description" placeholder="Description " required></input>
+          <input type="number" id="price" name="price" placeholder="Price " required></input>
+          <input type="file" accept='image/*' onChange={handleChange} />
+      </section><section>
+          <input type="text" ref = {titleRef} id="title" name="title" placeholder=" Title" required></input>
+          <input type="text" ref = {descriptionRef} id="description" name="description" placeholder="Description " required></input>
+          <input type="number" ref = {priceRef} id="price" name="price" placeholder="Price " required></input>
+          <input type="file" accept='image/*' onChange={handleChange} />
+      </section>
+      </div>
+      
+
+
+
           <div className="uploadForm"> 
-          <span></span>
-          <input type="file" accept='image/*' multiple onChange={handleChange} />
-          <br></br>
-        <textarea ref={textAreaTextRef} cols="80" rows="15" placeholder='About you and your work'></textarea>
-        <button disabled = {loading} onClick={ () => { handleSignupArtist(); handleUpload();} } ><h2>Register</h2></button>
-        <p>{progress} % done</p>
 
-
+           <textarea ref={textAreaTextRef} cols="80" rows="15" placeholder='About you and your work'></textarea>
+          <button disabled = {loading} onClick={ () => { handleSignupArtist(); handleUpload();} } ><h2>Register</h2></button>
+          <p>{progress} % done</p>
             </div>
-          </div>        
-        </div>
-    </div>
+          </div>   
+          </div>     
+        
+    
     
       <Footer />
     
