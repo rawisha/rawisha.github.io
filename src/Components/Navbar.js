@@ -8,7 +8,8 @@ import { Link } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import useCurrentUser from '../hooks/useCurrentUser';
 import useCategories from '../hooks/useCategories';
-import useCategoryBy from '../hooks/useCategoryBy';
+import useProductsBy from '../hooks/useProductsBy';
+import MenuProductItem from './MenuProductItem';
 
 
 export default function Navbar() {
@@ -72,6 +73,7 @@ export default function Navbar() {
                                         <p className='category-menu-item-title'>{category.name}</p>
                                         <i className='fa-solid fa-angle-right'></i>
                                     </Link>
+                                    <MenuProductItem handle={category.handle}/>
                                 </div>
                             ))}
                         </div>

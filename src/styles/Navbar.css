@@ -85,6 +85,10 @@ a {
   border-bottom: 1px solid var(--menu-border-clr);
 }
 
+.category-menu-item {
+  position: relative;
+}
+
 .category-menu-item a {
   display: flex;
   justify-content: space-between;
@@ -96,6 +100,10 @@ a {
   padding-left: .8rem;
 }
 
+.category-menu-item:hover * {
+  background: white;
+}
+
 .category-menu-item i {
   font-size: .8rem;
   padding-right: 1rem;
@@ -103,9 +111,34 @@ a {
 
 .category-menu-item-title {
   width: 100%;
-  font-size: 1.2rem;
-  
+  font-size: 1.2rem; 
 }
+
+/* ----- Products in category-list ----- */
+.menu-item-products {
+  display: none;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 100%;
+  top: -1px;
+  border-top: 1px solid var(--menu-border-clr);
+  font-size: 1.2rem;
+}
+
+.menu-item-products div {
+  border-right: 1px solid var(--menu-border-clr);
+  border-bottom: 1px solid var(--menu-border-clr);
+}
+
+.menu-item-products .no-products {
+  color: var(--menu-border-clr);
+}
+
+.category-menu-item:hover .menu-item-products {
+  display: block;
+}
+/* --X-- Products in category-list --X-- */
 
 .inputWrapper {
   width: 60%;
