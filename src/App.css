@@ -18,6 +18,8 @@ h1,h2,h3,h4,p {
   --checkout-txt: #ccc;
   --cart-bg: #ddd;
   --page-bg: #eee;
+
+  --menu-border-clr: #aaa;
 }
 
 .pageError {

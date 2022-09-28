@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import '../styles/Navbar.css'
 import Logo from "../assets/Logo.svg"
-import MenuIcon from "../assets/menu-Icon.svg"
 import { useEffect } from 'react';
 import { db, logout } from '../firebase-config'
 import { onSnapshot, collection } from 'firebase/firestore'
 import { Link } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import useCurrentUser from '../hooks/useCurrentUser';
+import useCategories from '../hooks/useCategories';
+import useCategoryBy from '../hooks/useCategoryBy';
 
 
 export default function Navbar() {
@@ -22,6 +23,10 @@ export default function Navbar() {
     const handleSignOut = () => {
         logout();
     }
+
+    // Category menu
+    const categories = useCategories()
+
     /*backend search*/
 
         const [value, setValue] = useState("");
@@ -58,19 +63,31 @@ export default function Navbar() {
                     <img id="logoText--svg" src={Logo} alt="ARTZY Logo" />
                 </div></Link>
                 <div className='menuWrapper'>
-                    <Link to="/category"><h1 id='styleSettings'>Category</h1></Link>
-                    <img src={MenuIcon} alt="Icon Menu" />
-                    <Link to="/artist"><h1 id='styleSettings'>Artist</h1></Link>
+                    <h1 id='styleSettings' className='category-link'><Link to="/category">Category</Link>
+                        <div className="category-menu">
+                            <p className='category-menu-title'>Browse Category</p>
+                            {categories.map((category) => (
+                                <div key={category.id} className="category-menu-item">
+                                    <Link to={'/category/' + category.handle}>
+                                        <p className='category-menu-item-title'>{category.name}</p>
+                                        <i className='fa-solid fa-angle-right'></i>
+                                    </Link>
+                                </div>
+                            ))}
+                        </div>
+                    </h1>
+                    
+                    <Link to="/artist"><h1 id='styleSettings' className='artist-link'>Artist</h1></Link>
                 </div>
                 <div className='inputWrapper'>
                     <input className='inputField' type="text" placeholder='Sök efter Product eller Artist' onChange={onChange} value={value}/>
                     <button className='button' onClick={() => onSearch(value)}><i className="fa-solid fa-magnifying-glass searchIcon"></i></button>
                 </div>
                 <div className='customerWrapper'>
-                    <Link to="/wishlist"><h1 id='styleSettings'>Wishlist<i className="fa-solid fa-heart"></i></h1><p>({wishListCount ? wishListCount : 0})</p></Link>
-                    <Link to="/cart"><h1 id='styleSettings'>Cart<i className="fa-solid fa-cart-shopping"></i></h1><p>({cartCount ? cartCount : 0})</p></Link>
-                    { !currentUser && <Link to="/signin"><h1 className="signX" id='styleSettings'>Sign In<i className="fa-solid fa-user"></i></h1></Link>}
-                    { currentUser && <Link to="/"><h1 className="signX" id='styleSettings' onClick={handleSignOut}>Sign out<i className="fa-solid fa-user"></i></h1></Link>}
+                    <Link to="/wishlist"><div className="menu-icon-container"><h1 id='styleSettings'>Wishlist</h1><i className="fa-solid fa-heart"></i><p>({wishListCount ? wishListCount : 0})</p></div></Link>
+                    <Link to="/cart"><div className="menu-icon-container"><h1 id='styleSettings'>Cart</h1><i className="fa-solid fa-cart-shopping"></i><p>({cartCount ? cartCount : 0})</p></div></Link>
+                    { !currentUser && <Link to="/signin"><div className="menu-icon-container"><h1 className="signX" id='styleSettings'>Sign In</h1><i className="fa-solid fa-user"></i></div></Link>}
+                    { currentUser && <Link to="/"><div className="menu-icon-container"><h1 className="signX" id='styleSettings' onClick={handleSignOut}>Sign out</h1><i className="fa-solid fa-user"></i><p>{user?.eMail}</p></div></Link>}
                 </div>
             </div>
                 
