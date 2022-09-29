@@ -60,7 +60,7 @@ export default function Navbar() {
         <div className='Navbar'>
             <div className='logoContainer'>
                 <Link to="/"> <div className='logoWrapperNav'>
-                    <h1 id="logoText">ART<span id="logoText--span">ZY</span></h1>
+                    <h1 id="logoText">ART<span id="logoText2">ZY</span></h1>
                     <img id="logoText--svg" src={Logo} alt="ARTZY Logo" />
                 </div></Link>
                 <div className='menuWrapper'>

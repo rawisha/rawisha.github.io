@@ -1,0 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Roboto:wght@100;400;700&display=swap");
+
+
+.underConstructionh1 {
+    font-family: 'amiri', 'serif';
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.underConstructionAnchor {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-bottom: 40px;
+    margin-top:40px;
+    flex-direction: column;
+    font-family: 'amiri', 'serif';
+    text-align: center;
+}
+
+.underConstructionAnchor > a {
+    font-size: 3rem;
+}

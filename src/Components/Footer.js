@@ -22,12 +22,12 @@ export default function Footer() {
 
             <div className='linkContainer'>
                 <ul>
-                    <li><a href="https://google.com"><h3>Home</h3></a></li>
-                    <li><a href="https://google.com"><h3>Experience</h3></a></li>
-                    <li><a href="https://google.com"><h3>News</h3></a></li>
-                    <li><a href="https://google.com"><h3>About Us</h3></a></li>
-                    <li><a href="https://google.com"><h3>Jobs</h3></a></li>
-                    <li><a href="https://google.com"><h3>Contact</h3></a></li>
+                    <li><a href="/underconstruction"><h3>Home</h3></a></li>
+                    <li><a href="/underconstruction"><h3>Experience</h3></a></li>
+                    <li><a href="/underconstruction"><h3>News</h3></a></li>
+                    <li><a href="/underconstruction"><h3>About Us</h3></a></li>
+                    <li><a href="/underconstruction"><h3>Jobs</h3></a></li>
+                    <li><a href="/underconstruction"><h3>Contact</h3></a></li>
                 </ul>
             </div>
             <div className='socialsContainer'>

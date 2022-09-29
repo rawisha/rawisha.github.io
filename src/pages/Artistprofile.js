@@ -1,11 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "../styles/Artistprofile.css"
 import bannerImg from '../assets/banner.png'
 import bild from '../assets/bild.jpg'
 import Navbar from '../Components/Navbar'
 import Footer from '../Components/Footer'
+import UploadAndDisplayImage from '../Components/UploadProfilePic'
+
+
+
+
 export default function Artistprofile() {
+
+ 
+ 
+
   return (
+
     <div className='artistProfileContainer'>
       <Navbar />
         <div className="bannerContainer">
@@ -13,7 +23,8 @@ export default function Artistprofile() {
         </div>
         
         <div className="profileContainer">
-          <img src={bild} alt="profile-bild"></img>
+          
+          <UploadAndDisplayImage />
           <div className="profileDetails">
             <h1>Artist Name</h1>
             <ul>
@@ -27,9 +38,11 @@ export default function Artistprofile() {
         <div className="profileInfoWrapper">
         <div className="profileInfo">
             <h1>Artist name</h1>
+           
 
             <div className="profileInfoBio">
               <img src={bild} alt="profile-bild2"></img>
+              
               <div className="artistInfo">
               <h1>Pipilotti Rist Takes Risks for Art</h1>
               <p>Pipilotti Rist is famous for merging world cultures and self-discovery through her thought-provoking work, 

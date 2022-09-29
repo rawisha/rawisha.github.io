@@ -11,6 +11,7 @@ import BrowsingBy from './pages/BrowsingBy'
 import Pagenotfound from './Components/Pagenotfound';
 import Artistprofile from './pages/Artistprofile';
 import Artistprofile2 from './pages/Artistprofile2';
+import UnderConstruction from './pages/UnderConstruction'
 function App() {
   return (
     <div className="App">
@@ -27,6 +28,7 @@ function App() {
           <Route path="/category" element={<Category />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/category/:id" element={<BrowsingBy />} />
+          <Route path="/underconstruction" element={<UnderConstruction />} />
           <Route path="*" element={<Pagenotfound />} />
         </Routes>
       </Router>
