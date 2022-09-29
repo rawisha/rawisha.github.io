@@ -2,7 +2,8 @@ import React from 'react';
 import '../styles/Row.css';
 import bild from '../assets/bild.jpg';
 import News from './News';
-
+import ArtistsingleItem from './ArtistsingleItem';
+import CategorysingleItem from './CategorysingleItem';
 /* 
 TO DO:
 Dynamic code
@@ -23,20 +24,16 @@ export default function Row() {
 
             <div className='contentWrapper'>
                 <div className='pictureContainer'>
-                    <img src={bild} alt="Bild alt" />
-                    <h2>Clothing</h2>
+                    <CategorysingleItem categoryName={'Claothing2'} imgUrl={bild} />
                 </div>
                 <div className='pictureContainer'>
-                    <img src={bild} alt="Bild alt" />
-                    <h2>Ceramic</h2>
+                <CategorysingleItem categoryName={'Ceramic2'} imgUrl={bild} />
                 </div>
                 <div className='pictureContainer'>
-                    <img src={bild} alt="Bild alt" />
-                    <h2>Glass</h2>
+                <CategorysingleItem categoryName={'Glass2'} imgUrl={bild} />
                 </div>
                 <div className='pictureContainer'>
-                    <img src={bild} alt="Bild alt" />
-                    <h2>Painting</h2>
+                <CategorysingleItem categoryName={'Painting2'} imgUrl={bild} />
                 </div>
             </div>
             <div className='borderSolidLine'></div>
@@ -46,24 +43,17 @@ export default function Row() {
 
             <div className='contentWrapper'>
                 <div className='pictureContainer2'>
-                    <h2>Clothing</h2>
-                    <img src={bild} alt="Bild alt" />
-
+                <ArtistsingleItem artistname={'Kasumasa Nagaiii'} imgUrl={bild} />
                 </div>
                 <div className='pictureContainer2'>
-                    <h2>Ceramic</h2>
-                    <img src={bild} alt="Bild alt" />
-
+                <ArtistsingleItem artistname={'Kasumasa Nagaiii'} imgUrl={bild} />
+                </div>
+                
+                <div className='pictureContainer22'>
+                <ArtistsingleItem artistname={'awfawf'} imgUrl={bild} />
                 </div>
                 <div className='pictureContainer2'>
-                    <h2>Glass</h2>
-                    <img src={bild} alt="Bild alt" />
-
-                </div>
-                <div className='pictureContainer2'>
-                    <h2>Painting</h2>
-                    <img src={bild} alt="Bild alt" />
-
+                <ArtistsingleItem artistname={'awfawf'} imgUrl={bild} />
                 </div>
             </div>
             

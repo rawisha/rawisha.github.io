@@ -1,0 +1,24 @@
+.categorysingle--Container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.categorysingle--Wrapper {
+    display: flex;
+    flex-direction:column;
+    text-align: center;
+    justify-content: center;
+    align-items:center;
+    margin-right: 50px;
+}
+
+.categorysingle--Wrapper img {
+    width:200px;
+    height:200px;
+    object-fit:fill;
+    border-radius: 50%;
+}
+.categorysingle--Wrapper h2 {
+    font-size:24px
+}
