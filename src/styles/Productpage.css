@@ -1,0 +1,116 @@
+.productPage--Container {
+    display: grid;
+    grid-template-columns: 100%;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 70px;
+    margin-bottom: 70px;
+}
+
+.productPage--Container h1{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.backlinkContainer, a{
+   display:flex;
+   flex-direction: row;
+   justify-content: flex-start;
+   align-items: center;
+}
+
+.backlinkContainer a{
+    gap: 1rem;
+    margin-bottom: 25px;
+    font-size: 24px;
+ }
+
+ .fa-long-arrow-left {
+    font-size:2.2rem;
+ }
+
+.middleContainer {
+    display:grid;
+    grid-template-columns: 50% 50%;
+}
+
+.imgContainer img {
+    width: 600px;
+    height: 600px;
+}
+
+.princenTitle{
+    margin-bottom: 15px;
+}
+
+
+.princenTitle h1{
+    font-size: 2.5rem;
+    font-weight: bolder;
+}
+
+.princenTitle p{
+    font-size: 1.5rem;
+    font-weight: bolder;
+}
+
+.qantityWish {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 15px;
+}
+
+.qantityWish button{
+    width: 70px;
+    height:40px;
+    font-size: 25px;
+    border:solid 1px grey;
+    color: #222222;
+}
+
+.qantityWish input{
+    width: 70px;
+    height:40px;
+    font-size: 25px;
+    border:solid 1px grey;
+    text-align: center;
+    font-family: 'Roboto, sans-serif';
+    font-weight: 400;
+}
+
+.qantityWish input::placeholder{
+    padding:28px;
+}
+
+.favHeart {
+    display:flex;
+    margin-left: 20px;
+    font-size: 30px;
+    align-items: center;
+}
+
+.addToCart--prodPage {
+    border: solid 1px #353535;
+    background:#353535;
+    color: white;
+    font-size:48px;
+    width: 350px;
+    height:80px;
+    font-family: 'Amiri';
+    font-weight: 400;
+    margin-bottom: 15px;
+}
+
+.descInfo h4 {
+    font-size: 20px;
+    font-weight: 600;
+    font-family: 'Amiri';
+}
+
+.descInfo p {
+   font-size: 18px;
+   font-family: 'Amiri';
+   margin-bottom: 8px;
+}

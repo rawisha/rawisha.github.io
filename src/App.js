@@ -15,7 +15,7 @@ import UnderConstruction from './pages/UnderConstruction'
 import ArtistproductPage from './pages/ArtistproductPage';
 import Searchresult from './pages/Searchresult';
 import ArtistsingleItem from './Components/ArtistsingleItem';
-import Productpage from './Components/Productpage';
+import Productpage from './pages/Productpage';
 
 function App() {
   return (
