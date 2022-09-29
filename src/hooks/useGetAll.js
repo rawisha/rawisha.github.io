@@ -7,9 +7,10 @@ const useGetAll = (collectionRef) => {
     const [data, setData] = useState([])
 
     useEffect(() => {
-        onSnapshot(collection(db, collectionRef), snapshot => {
+        const unsub = onSnapshot(collection(db, collectionRef), snapshot => {
             setData(snapshot.docs.map(doc => ({...doc.data(), id: doc.id})))
-        } )
+        })
+        return unsub
     }, [collectionRef])
     
     return data

@@ -8,6 +8,9 @@ import Wishlist from './pages/Wishlist';
 import Category from './pages/Category';
 import Signup from './pages/Signup';
 import BrowsingBy from './pages/BrowsingBy'
+import Pagenotfound from './Components/Pagenotfound';
+import Artistprofile from './pages/Artistprofile';
+import Artistprofile2 from './pages/Artistprofile2';
 function App() {
   return (
     <div className="App">
@@ -16,12 +19,15 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/artist" element={<Artist />} />
+          <Route path="/artist2" element={<Artistprofile/>} />
+          <Route path="/artist3" element={<Artistprofile2/>} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/signin" element={<Login />} />
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/category" element={<Category />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/category/browsingby" element={<BrowsingBy />} />
+          <Route path="/category/:id" element={<BrowsingBy />} />
+          <Route path="*" element={<Pagenotfound />} />
         </Routes>
       </Router>
 

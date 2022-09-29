@@ -11,6 +11,7 @@ Fix newsletter design (form, field icon) + js
 export default function Footer() {
     return (
         <div className='footerContainer'>
+            <div className='borderSolidLine'></div>
             <div className='newsLetterWrapper'>
                 <h2 className='newsletterText'>Newsletter</h2>
                 <input className='inputField' type="text" placeholder='Your email' />
@@ -22,7 +23,7 @@ export default function Footer() {
             <div className='linkContainer'>
                 <ul>
                     <li><a href="https://google.com"><h3>Home</h3></a></li>
-                    <li><a href="https://google.com"><h3>Experince</h3></a></li>
+                    <li><a href="https://google.com"><h3>Experience</h3></a></li>
                     <li><a href="https://google.com"><h3>News</h3></a></li>
                     <li><a href="https://google.com"><h3>About Us</h3></a></li>
                     <li><a href="https://google.com"><h3>Jobs</h3></a></li>
@@ -31,15 +32,17 @@ export default function Footer() {
             </div>
             <div className='socialsContainer'>
                 <ul>
-                    <li><i className="fa-brands fa-facebook-f"></i></li>
-                    <li><i className="fa-brands fa-twitter"></i></li>
-                    <li><i className="fa-brands fa-instagram"></i></li>
+                    <li><a href='https://facebook.com'><i className="fa-brands fa-facebook-f"></i></a></li>
+                    <li><a href='https://twitter.com'><i className="fa-brands fa-twitter"></i></a></li>
+                    <li><a href='https://instagram.com'><i className="fa-brands fa-instagram"></i></a></li>
+                    <li><a href='https://pinterest.com'><i className="fa-brands fa-pinterest"></i></a></li>
                 </ul>
 
             </div>
             <div className='copyright'>
                 <h4><i className="fa-regular fa-copyright"></i> Copyright 2022 - Artzy</h4>
             </div>
+
         </div>
     )
 }

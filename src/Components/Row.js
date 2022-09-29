@@ -66,7 +66,7 @@ export default function Row() {
 
                 </div>
             </div>
-            <div className='borderSolidLine'></div>
+            
             <div className="newsDiv">
             <News />
             </div>

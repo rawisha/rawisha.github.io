@@ -1,33 +1,33 @@
 import React, { useState } from 'react'
 import '../styles/Navbar.css'
 import Logo from "../assets/Logo.svg"
-import MenuIcon from "../assets/menu-Icon.svg"
 import { useEffect } from 'react';
 import { db, logout } from '../firebase-config'
 import { onSnapshot, collection } from 'firebase/firestore'
 import { Link } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
-
-
-/* 
-TO DO:
--Fix css, icons
--Fix search field + code and inline icon
--Fix meny + links
--Add buttons
--Write JS code
--Fix line 37 add to search field 
-
-*/
+import useCurrentUser from '../hooks/useCurrentUser';
+import useCategories from '../hooks/useCategories';
+import useProductsBy from '../hooks/useProductsBy';
+import MenuProductItem from './MenuProductItem';
 
 
 export default function Navbar() {
 
     const currentUser = useAuth()
+    const user = useCurrentUser()
 
+    let wishListCount = user?.wishList.length;
+    let cartCount = user?.cart?.length;
+
+    // LOGOUT
     const handleSignOut = () => {
         logout();
     }
+
+    // Category menu
+    const categories = useCategories()
+
     /*backend search*/
 
         const [value, setValue] = useState("");
@@ -36,13 +36,11 @@ export default function Navbar() {
 
         const onChange = (event) => {
             setValue(event.target.value)
-            
         };
 
         const onSearch = (searchTerm) => {
             setValue(searchTerm);
             /* console.log("search", searchTerm); */
-            
         };
        
         useEffect(() => {
@@ -66,27 +64,33 @@ export default function Navbar() {
                     <img id="logoText--svg" src={Logo} alt="ARTZY Logo" />
                 </div></Link>
                 <div className='menuWrapper'>
-                    <h1 id='styleSettings'><a href='/category'>Category</a></h1>
-                    <img src={MenuIcon} alt="Icon Menu" />
-                    <h1 id='styleSettings'><a href='/artist'>Artist</a></h1>
+                    <h1 id='styleSettings' className='category-link'><Link to="/category">Category</Link>
+                        <div className="category-menu">
+                            <p className='category-menu-title'>Browse Category</p>
+                            {categories.map((category) => (
+                                <div key={category.id} className="category-menu-item">
+                                    <Link to={'/category/' + category.handle}>
+                                        <p className='category-menu-item-title'>{category.name}</p>
+                                        <i className='fa-solid fa-angle-right'></i>
+                                    </Link>
+                                    <MenuProductItem handle={category.handle}/>
+                                </div>
+                            ))}
+                        </div>
+                    </h1>
+                    
+                    <Link to="/artist"><h1 id='styleSettings' className='artist-link'>Artist</h1></Link>
                 </div>
                 <div className='inputWrapper'>
-                    <input className='inputField' type="text" placeholder='Sök efter Product eller Artist' 
-                    onChange={onChange} value={value}
-                    />
+                    <input className='inputField' type="text" placeholder='Sök efter Product eller Artist' onChange={onChange} value={value}/>
                     <button className='button' onClick={() => onSearch(value)}><i className="fa-solid fa-magnifying-glass searchIcon"></i></button>
-                   {/**/}
-                    {/*<div><i className="fa-light fa-magnifying-glass"></i></div>*/}
-                    
                 </div>
-                
                 <div className='customerWrapper'>
-                    <h1 id='styleSettings'><a href='/wishlist'>Wishlist</a> <i className="fa-solid fa-heart"></i></h1>
-                    <h1 id='styleSettings'><a href='/cart'>Cart</a> <i className="fa-solid fa-cart-shopping"></i></h1>
-                    { !currentUser && <h1 id='styleSettings'><a href='/signin'>Sign In</a> <i className="fa-solid fa-user"></i></h1>}
-                    { currentUser && <h1 id='styleSettings' onClick={handleSignOut}><a href='/'>Sign out</a><i className="fa-solid fa-user"></i></h1>}
+                    <Link to="/wishlist"><div className="menu-icon-container"><h1 id='styleSettings'>Wishlist</h1><i className="fa-solid fa-heart"></i><p>({wishListCount ? wishListCount : 0})</p></div></Link>
+                    <Link to="/cart"><div className="menu-icon-container"><h1 id='styleSettings'>Cart</h1><i className="fa-solid fa-cart-shopping"></i><p>({cartCount ? cartCount : 0})</p></div></Link>
+                    { !currentUser && <Link to="/signin"><div className="menu-icon-container"><h1 className="signX" id='styleSettings'>Sign In</h1><i className="fa-solid fa-user"></i></div></Link>}
+                    { currentUser && <Link to="/"><div className="menu-icon-container"><h1 className="signX" id='styleSettings' onClick={handleSignOut}>Sign out</h1><i className="fa-solid fa-user"></i><p>{user?.eMail}</p></div></Link>}
                 </div>
-                
             </div>
                 
             <div className='borderSolidLine'></div>
@@ -94,16 +98,19 @@ export default function Navbar() {
                 {results
             .filter((item) => {
               const searchTerm = value;
-              const fullName = item.artistName;
+
+              const fullName =  item.artistName ;
 
               return (
                 searchTerm &&
                 fullName.startsWith(searchTerm) &&
-                fullName !== searchTerm
+                fullName !== searchTerm 
               );
             })
             .slice(0, 10)
-            .map((item, index) => (
+
+            .map((item,index) => (
+
               <div
                 onClick={() => onSearch(item.artistName)}
                 className="dropdown-row"

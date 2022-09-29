@@ -1,0 +1,186 @@
+.uploadContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top:20px;
+}
+
+.uploadContainer > h1{
+    text-align: center;
+    font-size:48px;
+}
+.formContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    border: none;
+}
+
+.formImage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top:20px;
+    
+}
+
+.formImage h2 {
+    font-size: 24px;
+    margin-bottom:5px;
+}
+
+.formImage img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
+
+.uploadedImages {
+    display: flex;
+    flex-direction:row;
+    gap: 25px;
+}
+
+.uploadedImages button {
+    width: 80px;
+    border: solid 1px grey;
+    font-size: 25px;
+    color:green;
+    background-color:rgba(red, green, blue, alpha);
+    cursor:pointer;
+}
+
+
+.formData {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.formTitle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+.formTitle > input{
+    width:320px;
+    border:none;
+    border-bottom: 1px solid grey;
+    padding: 8px;
+    font-size: 20px;
+}
+
+.formTitle > input::placeholder{
+    text-align:center;
+}
+
+.formTitle > input:focus{
+    outline:none;
+}
+
+.formDescription {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 12px;
+}
+
+
+.formDescription > textarea{
+    width:672px;
+    height:290px;
+    font-size: 16px;
+    padding:5px
+}
+
+.formDescription > textarea:focus{
+    outline:none;
+}
+
+.formDescription > input::placeholder{
+    display: flex;
+    align-items:flex-start;
+
+}
+
+
+.formCatandPriceContainer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 35px;
+    text-align:center;
+}
+
+.formCPDetails {
+    display: flex;
+    flex-direction: row;
+    gap:20px
+}
+
+.formCat {
+    font-size: 20px;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    font-family: "Amiri", serif;
+}
+
+.formCat select{
+    width: 120px;
+    border: none;
+    padding: 8px;
+    font-size: 18px;
+    font-weight: 400;
+    font-family: "Amiri", serif;
+}
+
+.formCat select:focus{
+    outline:none
+}
+
+.formPrice {
+    font-size: 20px;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    text-align:left;
+    font-family: "Amiri", serif;
+}
+
+.formPrice input{
+    width: 120px;
+    border: none;
+    padding: 8px;
+    font-size: 18px;
+    font-family: "Amiri", serif;
+}
+
+.formPrice input:focus{
+    outline: none;
+}
+
+#uploadButton {
+    display:flex;
+    align-items: center;
+    justify-content:center;
+    font-size:28px;
+    font-weight: 400;
+    font-family: 'Amiri';
+    width: 150px;
+    height:50px;
+    background-color: #3E3E3E;
+    color: #DEDEDE;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}

@@ -5,11 +5,15 @@ import useAuth from '../hooks/useAuth';
 import { collection, onSnapshot, query, where } from 'firebase/firestore';
 import { db } from '../firebase-config';
 import { useState, useEffect } from 'react';
-import bild from "../assets/bild.jpg"
+import WishlistItem from '../Components/WishlistItem'
+
+
 export default function Wishlist() {
 
   const currentUser = useAuth()
   const [user, setUser] = useState(null)
+  const [prods, setProds] = useState([])
+  
 
   useEffect(() => {
     if (currentUser) {
@@ -20,10 +24,17 @@ export default function Wishlist() {
         snapshot.docs.forEach(doc => {
           setUser({...doc.data(), id: doc.id})
         })
+        //setUser(currentUser)
       })
       return unsub
     }
   }, [currentUser])
+
+    useEffect(() => {
+      if(user !==  null){
+        setProds(user.wishList)
+      }
+    },[user])
 
   return (
     <>
@@ -31,269 +42,15 @@ export default function Wishlist() {
       <div className="wishlistHeader">
         <h1>Wishlist</h1>
       <div/>
-      
         <div className='wishlistWrapper'>
           <div className="wishlistContainer">
-
-            <div className='product'>
-            <div className='productImage'>
-            <img src={bild} alt="bild"></img>
-            
-            <div className='productInfo'>
-              <h2>Product: Wait Here
-              <p id="prodNr">Prod nr: 428539</p>
-              
-              <h2 id="artistInfo">Arist: Stefan Marxx</h2>
-              </h2>
-              
-            </div>
-            <h2 className='productColor'>Color: Black</h2>
-          
-            <div className='productPrice'>
-              <h2>129.00 USD</h2>
-            </div>
-            <div className='adddelButton'>
-            <button id="addButton">Add</button>
-            <button id="delButton">Delete</button>
-            </div>
-            </div>
-            </div>
-            <div className='product'>
-            <div className='productImage'>
-            <img src={bild} alt="bild"></img>
-            
-            <div className='productInfo'>
-              <h2>Product: Wait Here
-              <p id="prodNr">Prod nr: 428539</p>
-              
-              <h2 id="artistInfo">Arist: Stefan Marxx</h2>
-              </h2>
-              
-            </div>
-            <h2 className='productColor'>Color: Black</h2>
-          
-            <div className='productPrice'>
-              <h2>129.00 USD</h2>
-            </div>
-            <div className='adddelButton'>
-            <button id="addButton">Add</button>
-            <button id="delButton">Delete</button>
-            </div>
-            </div>
-            </div>
-            <div className='product'>
-            <div className='productImage'>
-            <img src={bild} alt="bild"></img>
-            
-            <div className='productInfo'>
-              <h2>Product: Wait Here
-              <p id="prodNr">Prod nr: 428539</p>
-              
-              <h2 id="artistInfo">Arist: Stefan Marxx</h2>
-              </h2>
-              
-            </div>
-            <h2 className='productColor'>Color: Black</h2>
-          
-            <div className='productPrice'>
-              <h2>129.00 USD</h2>
-            </div>
-            <div className='adddelButton'>
-            <button id="addButton">Add</button>
-            <button id="delButton">Delete</button>
-            </div>
-            </div>
-            </div>
-            <div className='product'>
-            <div className='productImage'>
-            <img src={bild} alt="bild"></img>
-            
-            <div className='productInfo'>
-              <h2>Product: Wait Here
-              <p id="prodNr">Prod nr: 428539</p>
-              
-              <h2 id="artistInfo">Arist: Stefan Marxx</h2>
-              </h2>
-              
-            </div>
-            <h2 className='productColor'>Color: Black</h2>
-          
-            <div className='productPrice'>
-              <h2>129.00 USD</h2>
-            </div>
-            <div className='adddelButton'>
-            <button id="addButton">Add</button>
-            <button id="delButton">Delete</button>
-            </div>
-            </div>
-            </div>
-            <div className='product'>
-            <div className='productImage'>
-            <img src={bild} alt="bild"></img>
-            
-            <div className='productInfo'>
-              <h2>Product: Wait Here
-              <p id="prodNr">Prod nr: 428539</p>
-              
-              <h2 id="artistInfo">Arist: Stefan Marxx</h2>
-              </h2>
-              
-            </div>
-            <h2 className='productColor'>Color: Black</h2>
-          
-            <div className='productPrice'>
-              <h2>129.00 USD</h2>
-            </div>
-            <div className='adddelButton'>
-            <button id="addButton">Add</button>
-            <button id="delButton">Delete</button>
-            </div>
-            </div>
-            </div>
-            <div className='product'>
-            <div className='productImage'>
-            <img src={bild} alt="bild"></img>
-            
-            <div className='productInfo'>
-              <h2>Product: Wait Here
-              <p id="prodNr">Prod nr: 428539</p>
-              
-              <h2 id="artistInfo">Arist: Stefan Marxx</h2>
-              </h2>
-              
-            </div>
-            <h2 className='productColor'>Color: Black</h2>
-          
-            <div className='productPrice'>
-              <h2>129.00 USD</h2>
-            </div>
-            <div className='adddelButton'>
-            <button id="addButton">Add</button>
-            <button id="delButton">Delete</button>
-            </div>
-            </div>
-            </div>
-            <div className='product'>
-            <div className='productImage'>
-            <img src={bild} alt="bild"></img>
-            
-            <div className='productInfo'>
-              <h2>Product: Wait Here
-              <p id="prodNr">Prod nr: 428539</p>
-              
-              <h2 id="artistInfo">Arist: Stefan Marxx</h2>
-              </h2>
-              
-            </div>
-            <h2 className='productColor'>Color: Black</h2>
-          
-            <div className='productPrice'>
-              <h2>129.00 USD</h2>
-            </div>
-            <div className='adddelButton'>
-            <button id="addButton">Add</button>
-            <button id="delButton">Delete</button>
-            </div>
-            </div>
-            </div>
-            <div className='product'>
-            <div className='productImage'>
-            <img src={bild} alt="bild"></img>
-            
-            <div className='productInfo'>
-              <h2>Product: Wait Here
-              <p id="prodNr">Prod nr: 428539</p>
-              
-              <h2 id="artistInfo">Arist: Stefan Marxx</h2>
-              </h2>
-              
-            </div>
-            <h2 className='productColor'>Color: Black</h2>
-          
-            <div className='productPrice'>
-              <h2>129.00 USD</h2>
-            </div>
-            <div className='adddelButton'>
-            <button id="addButton">Add</button>
-            <button id="delButton">Delete</button>
-            </div>
-            </div>
-            </div>
-            <div className='product'>
-            <div className='productImage'>
-            <img src={bild} alt="bild"></img>
-            
-            <div className='productInfo'>
-              <h2>Product: Wait Here
-              <p id="prodNr">Prod nr: 428539</p>
-              
-              <h2 id="artistInfo">Arist: Stefan Marxx</h2>
-              </h2>
-              
-            </div>
-            <h2 className='productColor'>Color: Black</h2>
-          
-            <div className='productPrice'>
-              <h2>129.00 USD</h2>
-            </div>
-            <div className='adddelButton'>
-            <button id="addButton">Add</button>
-            <button id="delButton">Delete</button>
-            </div>
-            </div>
-            </div>
-            <div className='product'>
-            <div className='productImage'>
-            <img src={bild} alt="bild"></img>
-            
-            <div className='productInfo'>
-              <h2>Product: Wait Here
-              <p id="prodNr">Prod nr: 428539</p>
-              
-              <h2 id="artistInfo">Arist: Stefan Marxx</h2>
-              </h2>
-              
-            </div>
-            <h2 className='productColor'>Color: Black</h2>
-          
-            <div className='productPrice'>
-              <h2>129.00 USD</h2>
-            </div>
-            <div className='adddelButton'>
-            <button id="addButton">Add</button>
-            <button id="delButton">Delete</button>
-            </div>
-            </div>
-            </div>
-            <div className='product'>
-            <div className='productImage'>
-            <img src={bild} alt="bild"></img>
-            
-            <div className='productInfo'>
-              <h2>Product: Wait Here
-              <p id="prodNr">Prod nr: 428539</p>
-              
-              <h2 id="artistInfo">Arist: Stefan Marxx</h2>
-              </h2>
-              
-            </div>
-            <h2 className='productColor'>Color: Black</h2>
-          
-            <div className='productPrice'>
-              <h2>129.00 USD</h2>
-            </div>
-            <div className='adddelButton'>
-            <button id="addButton">Add</button>
-            <button id="delButton">Delete</button>
-            </div>
-            </div>
-            </div>
+          {prods.length > 0 ? prods.map(product => (
+                <WishlistItem prod={product} key={product.id} />
+            )): <h2>Ohh no... nothing here </h2>}
           </div>
         </div>
- 
-      <Footer />
-
       </div>
+      <Footer />
     </>
 
 
