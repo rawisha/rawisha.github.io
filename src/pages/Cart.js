@@ -18,7 +18,7 @@ export default function Cart() {
   const [checkThree, setCheckThree] = useState(false)
   const [checkKiss, setCheckKiss] = useState(false)
   
-  const [name, setName] = useState( user ? user?.name : '')
+  const [name, setName] = useState( user ? user?.firstName + ' ' + user?.lastName : '')
   const [address, setAddress] = useState('')
   const [addressTwo, setAddressTwo] = useState('')
   const [city, setCity] = useState('')

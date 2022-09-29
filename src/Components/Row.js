@@ -1,6 +1,5 @@
 import React from 'react';
 import '../styles/Row.css';
-import bild from '../assets/bild.jpg';
 import News from './News';
 import ArtistsingleItem from './ArtistsingleItem';
 import CategorysingleItem from './CategorysingleItem';
@@ -12,6 +11,19 @@ export default function Row() {
     const artists = useGetAll('artists')
     const categories = useCategories()
 
+    const shuffle = (array) => {
+        let currentIndex = array.length, randomIndex;
+        while (currentIndex != 0) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+            [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+        }
+        return array;
+    }
+    
+    const showCategories = shuffle(categories).slice(0, 4)
+    const showArtists = shuffle(artists).slice(0, 4)
+    
     return (
         <div className='rowContainer'>
             <div className='titleWrapper'>
@@ -19,18 +31,11 @@ export default function Row() {
             </div>
 
             <div className='contentWrapper'>
-                <div className='pictureContainer'>
-                    <CategorysingleItem categoryName={'Claothing2'} imgUrl={bild} />
-                </div>
-                <div className='pictureContainer'>
-                <CategorysingleItem categoryName={'Ceramic2'} imgUrl={bild} />
-                </div>
-                <div className='pictureContainer'>
-                <CategorysingleItem categoryName={'Glass2'} imgUrl={bild} />
-                </div>
-                <div className='pictureContainer'>
-                <CategorysingleItem categoryName={'Painting2'} imgUrl={bild} />
-                </div>
+                {showCategories.map(category => (
+                    <div key={category.id} className='pictureContainer'>
+                        <CategorysingleItem categoryName={category.name} imgUrl={category.imageUrl} />
+                    </div>
+                ))}
             </div>
             <div className='borderSolidLine'></div>
             <div className='titleWrapper'>
@@ -38,27 +43,16 @@ export default function Row() {
             </div>
 
             <div className='contentWrapper'>
-                <div className='pictureContainer2'>
-                <ArtistsingleItem artistname={'Kasumasa Nagaiii'} imgUrl={bild} />
-                </div>
-                <div className='pictureContainer2'>
-                <ArtistsingleItem artistname={'Kasumasa Nagaiii'} imgUrl={bild} />
-                </div>
-                
-                <div className='pictureContainer22'>
-                <ArtistsingleItem artistname={'awfawf'} imgUrl={bild} />
-                </div>
-                <div className='pictureContainer2'>
-                <ArtistsingleItem artistname={'awfawf'} imgUrl={bild} />
-                </div>
+                {showArtists.map(artist => (
+                    <div key={artist.id} className='pictureContainer2'>
+                        <ArtistsingleItem artistname={artist.artistName} imgUrl={artist.profilePic} />
+                    </div>
+                ))}
             </div>
             
             <div className="newsDiv">
             <News />
             </div>
-
-            
         </div>
-
     )
 }
