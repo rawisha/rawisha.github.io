@@ -18,7 +18,7 @@ export default function BrowsingBy() {
       <div className='categoryContainer'>
         <div className='Title container'>
         
-        <h1 className='categoryTitle'><Link to="/category"><i className="fa-solid fa-arrow-left arrow-back"></i></Link>Categories</h1>
+        <Link to="/category"><h1 className='categoryTitle'><i className="fa-solid fa-arrow-left arrow-back"></i>Categories</h1></Link>
         <h2>Browsing by {category[0]?.name}</h2>
         </div>
         <div className='categoryView'>

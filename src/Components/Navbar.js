@@ -8,14 +8,15 @@ import { Link } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import useCurrentUser from '../hooks/useCurrentUser';
 import useCategories from '../hooks/useCategories';
-import useProductsBy from '../hooks/useProductsBy';
 import MenuProductItem from './MenuProductItem';
+import useCurrentArtist from '../hooks/useCurrentArtist'
 
 
 export default function Navbar() {
 
     const currentUser = useAuth()
     const user = useCurrentUser()
+    const artist = useCurrentArtist()
 
     let wishListCount = user?.wishList.length;
     let cartCount = user?.cart?.length;
@@ -89,7 +90,7 @@ export default function Navbar() {
                     <Link to="/wishlist"><div className="menu-icon-container"><h1 id='styleSettings'>Wishlist</h1><i className="fa-solid fa-heart"></i><p>({wishListCount ? wishListCount : 0})</p></div></Link>
                     <Link to="/cart"><div className="menu-icon-container"><h1 id='styleSettings'>Cart</h1><i className="fa-solid fa-cart-shopping"></i><p>({cartCount ? cartCount : 0})</p></div></Link>
                     { !currentUser && <Link to="/signin"><div className="menu-icon-container"><h1 className="signX" id='styleSettings'>Sign In</h1><i className="fa-solid fa-user"></i></div></Link>}
-                    { currentUser && <Link to="/"><div className="menu-icon-container"><h1 className="signX" id='styleSettings' onClick={handleSignOut}>Sign out</h1><i className="fa-solid fa-user"></i><p>{user?.eMail}</p></div></Link>}
+                    { currentUser && <Link to="/"><div className="menu-icon-container"><h1 className="signX" id='styleSettings' onClick={handleSignOut}>Sign out</h1><i className="fa-solid fa-user"></i><p>{user?.eMail || artist?.eMail}</p></div></Link>}
                 </div>
             </div>
                 
