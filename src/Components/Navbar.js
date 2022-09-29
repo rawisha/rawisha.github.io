@@ -94,7 +94,7 @@ export default function Navbar() {
                 {results
             .filter((item) => {
               const searchTerm = value;
-              const fullName = item.artistname;
+              const fullName = item.artistName;
 
               return (
                 searchTerm &&
@@ -103,13 +103,13 @@ export default function Navbar() {
               );
             })
             .slice(0, 10)
-            .map((item) => (
+            .map((item, index) => (
               <div
-                onClick={() => onSearch(item.artistname)}
+                onClick={() => onSearch(item.artistName)}
                 className="dropdown-row"
-                key={item.artistname}
+                key={index}
               >
-                {item.artistname}
+                {item.artistName}
               </div>
             ))}
             
@@ -123,15 +123,15 @@ export default function Navbar() {
                         return (
                             searchTerm && 
                             prodName.startsWith(searchTerm) &&
-                            prodName != searchTerm
+                            prodName !== searchTerm
                         );
                     })
                     .slice(0, 10)
-                    .map((item) => (
+                    .map((item, index) => (
                         <div
                             onClick={() => onSearch(item.title)}
                             className="dropdown-row"
-                            key={item.title}
+                            key={index}
                         >
                             {item.title}
                         </div>
