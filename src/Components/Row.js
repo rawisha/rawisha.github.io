@@ -5,6 +5,7 @@ import ArtistsingleItem from './ArtistsingleItem';
 import CategorysingleItem from './CategorysingleItem';
 import useGetAll from '../hooks/useGetAll'
 import useCategories from '../hooks/useCategories'
+import { Link } from 'react-router-dom';
 
 export default function Row() {
 
@@ -33,7 +34,7 @@ export default function Row() {
             <div className='contentWrapper'>
                 {showCategories.map(category => (
                     <div key={category.id} className='pictureContainer'>
-                        <CategorysingleItem categoryName={category.name} imgUrl={category.imageUrl} />
+                        <Link to={'/category/' + category.handle} ><CategorysingleItem categoryName={category.name} imgUrl={category.imageUrl} /></Link>
                     </div>
                 ))}
             </div>

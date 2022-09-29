@@ -8,15 +8,12 @@
     margin-top: 40px;
 }
 
-
-
-
 .borderSolidLine {
     margin-top: 33px;
     border-bottom: solid grey;
     opacity: 0.6;
     width: 100%;
-  }
+}
   
 .categoryView {
     margin-right: 100px;
@@ -43,7 +40,6 @@
 .categoryItem > h2{
     font-size: 24px;
 }
-
 
 .FOOTER {
     margin-top: 150px;

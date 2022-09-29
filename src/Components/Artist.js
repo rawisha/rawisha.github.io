@@ -3,27 +3,27 @@ import '../styles/Artist.css'
 import Navbar from '../Components/Navbar'
 import Footer from '../Components/Footer'
 import bild from '../assets/bild.jpg'
-import { collection, onSnapshot, query, where } from 'firebase/firestore'
+import { collection, onSnapshot } from 'firebase/firestore'
 import { db } from '../firebase-config'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export default function Artist({artist}) {
+
     const [artists, setArtists] = useState(null)
-
-    const handleClick = (e) => {
-        console.log(e.target.innerText);
-        const searchHandle = String(e.target.innerText)
-        const colRef = collection(db, 'artists')
-        const q = query(colRef, where('artistname', '>=', searchHandle))
-
-        onSnapshot(q, (snapshot) => {
-            let data = []
-            snapshot.docs.forEach(doc => {
-                data.push({ ...doc.data(), id: doc.id})
-                const filteredArtists = data.filter( result => result.artistname.charAt(0) === searchHandle.toLowerCase() || result.artistname.charAt(0) === searchHandle.toUpperCase())
-                setArtists(filteredArtists)
-            })
+    const [results, setResults] = useState(null)
+    const [searchTerm, setSearchTerm] = useState('')
+    
+    useEffect(() => {
+        const unsub = onSnapshot(collection(db, 'artists'), snapshot => {
+            setArtists(snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id})))
         })
+        return unsub
+    }, [])
+    
+    const handleClick = (e) => {
+        const searchHandle = String(e.target.innerText)
+        setSearchTerm(searchHandle)
+        setResults(artists.filter(artist => artist.artistName.startsWith(searchHandle.toLowerCase()) || artist.artistName.startsWith(searchHandle.toUpperCase())))
     }
 
     const convertString = (str) => {
@@ -32,26 +32,19 @@ export default function Artist({artist}) {
     }
 
     const handleSearch = (e) => {
-        if (!e.target.value) return setArtists(null)
-        console.log(e.target.value)
+        if (!e.target.value) {
+            setResults(null)
+            setSearchTerm(null)
+            return 
+        }
         const searchHandle = String(e.target.value)
         const searchHandleUppercase = convertString(searchHandle)
-        const colRef = collection(db, 'artists')
-        const q = query(colRef, where('artistname', '>=', searchHandleUppercase))
-        
-        onSnapshot(q, (snapshot) => {
-            let data = []
-            snapshot.docs.forEach(doc => {
-                data.push({ ...doc.data(), id: doc.id})
-                const filteredArtists = data.filter(result => result.artistname.startsWith(searchHandle) || result.artistname.startsWith(searchHandleUppercase))
-                setArtists(filteredArtists)
-            })
-            
-        })
+        setResults(artists.filter(artist => String(artist.artistName).startsWith(searchHandle) || String(artist.artistName).startsWith(searchHandleUppercase) || String(artist.artistName).startsWith(searchHandle.toLowerCase())))
+        setSearchTerm(searchHandle)
     }
-    console.log(artists);
-  return (
-    <div>
+
+    return (
+    <>
         <Navbar />
         <div className='artistContainer'>
             <h1>Featured artist of the week</h1>
@@ -67,7 +60,6 @@ export default function Artist({artist}) {
                     <button type="submit">Search</button>
                     <input onChange={handleSearch} type="search" placeholder='Search by artist...'></input>
                 </form>
-                
                 
                 <h2>Find artist by name</h2>
                 <div className='alphabeticButtonContainer'>
@@ -101,15 +93,14 @@ export default function Artist({artist}) {
                 
             </div>
             <div className='resultContainer'>
-                <h3 className='resultTile'> Search found X hits on "Rawand"</h3>
+                {results && <h3 className='resultTile'> Search found {results?.length} hits on "{searchTerm}"</h3>}
                 
                 <div className='articleCardResultContainer'>
 
-                    {artists && artist && artists.map(artist => (
-                        
+                    {results && results.map(artist => (
                         <div key={artist.id} className='articleCardResult'>
-                            <h2>{artist.artistname}</h2>
-                            <img src={artist.imageUrl} alt="profile_picture" />
+                            <h2>{artist.artistName}</h2>
+                            <img src={artist.profilePic} alt="profile_picture" />
                         </div>
                     ))}
 
@@ -117,9 +108,6 @@ export default function Artist({artist}) {
             </div>
             <Footer />
         </div>
-
-
-        
-    </div>
+    </>
   )
 }
