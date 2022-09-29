@@ -12,7 +12,6 @@ export default function BrowsingBy() {
   let {id} = useParams();
   const products = useProductsBy(id)
   const category = useCategoryBy(id)
-
   return (
     <div>
         <Navbar />

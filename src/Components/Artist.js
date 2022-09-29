@@ -7,11 +7,11 @@ import { collection, onSnapshot, query, where } from 'firebase/firestore'
 import { db } from '../firebase-config'
 import { useState } from 'react'
 
-export default function Artist() {
+export default function Artist({artist}) {
     const [artists, setArtists] = useState(null)
 
     const handleClick = (e) => {
-
+        console.log(e.target.innerText);
         const searchHandle = String(e.target.innerText)
         const colRef = collection(db, 'artists')
         const q = query(colRef, where('artistname', '>=', searchHandle))
@@ -33,7 +33,7 @@ export default function Artist() {
 
     const handleSearch = (e) => {
         if (!e.target.value) return setArtists(null)
-
+        console.log(e.target.value)
         const searchHandle = String(e.target.value)
         const searchHandleUppercase = convertString(searchHandle)
         const colRef = collection(db, 'artists')
@@ -49,7 +49,7 @@ export default function Artist() {
             
         })
     }
-
+    console.log(artists);
   return (
     <div>
         <Navbar />
@@ -105,7 +105,7 @@ export default function Artist() {
                 
                 <div className='articleCardResultContainer'>
 
-                    {artists && artists.map(artist => (
+                    {artists && artist && artists.map(artist => (
                         
                         <div key={artist.id} className='articleCardResult'>
                             <h2>{artist.artistname}</h2>
