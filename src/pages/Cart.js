@@ -12,6 +12,7 @@ import useCurrentUser from '../hooks/useCurrentUser'
 export default function Cart() {
 
   const user = useCurrentUser()
+  
   const [checkOne, setCheckOne] = useState(true)
   const [checkTwo, setCheckTwo] = useState(false)
   const [checkThree, setCheckThree] = useState(false)

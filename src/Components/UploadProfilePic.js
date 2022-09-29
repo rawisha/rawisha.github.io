@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { v4 as uuid } from 'uuid'
 import useCurrentArtist from '../hooks/useCurrentArtist'
-import { collection, doc, updateDoc } from 'firebase/firestore'
+import { doc, updateDoc } from 'firebase/firestore'
 import { ref } from 'firebase/storage'
 import { db, storage } from '../firebase-config'
 import { getDownloadURL, uploadBytes } from 'firebase/storage'
