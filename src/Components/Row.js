@@ -4,18 +4,14 @@ import bild from '../assets/bild.jpg';
 import News from './News';
 import ArtistsingleItem from './ArtistsingleItem';
 import CategorysingleItem from './CategorysingleItem';
-/* 
-TO DO:
-Dynamic code
-css ?
-remove 1 ROW and make it dynamic
-more buttons .. design ?
-
-Write js code
-
-*/
+import useGetAll from '../hooks/useGetAll'
+import useCategories from '../hooks/useCategories'
 
 export default function Row() {
+
+    const artists = useGetAll('artists')
+    const categories = useCategories()
+
     return (
         <div className='rowContainer'>
             <div className='titleWrapper'>

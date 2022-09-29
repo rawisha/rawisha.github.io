@@ -16,6 +16,7 @@ import ArtistproductPage from './pages/ArtistproductPage';
 import Searchresult from './pages/Searchresult';
 import ArtistsingleItem from './Components/ArtistsingleItem';
 import Productpage from './Components/Productpage';
+
 function App() {
   return (
     <div className="App">
@@ -26,7 +27,7 @@ function App() {
           <Route path="/product" element={<ArtistproductPage />} />
           <Route path="/product2" element={<Productpage />} />
           <Route path="/artist" element={<Artist />} />
-          <Route path="/artist2" element={<Artistprofile/>} />
+          <Route path="/artist2" element={<Artistprofile />} />
           <Route path="/artist3" element={<Artistprofile2/>} />
           <Route path="/artist4" element={<ArtistsingleItem/>} />
           <Route path="/cart" element={<Cart />} />

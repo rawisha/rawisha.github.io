@@ -4,18 +4,11 @@ import bannerImg from '../assets/banner.png'
 import bild from '../assets/bild.jpg'
 import Navbar from '../Components/Navbar'
 import Footer from '../Components/Footer'
-import UploadAndDisplayImage from '../Components/UploadProfilePic'
-
-
-
+import UploadProfilePic from '../Components/UploadProfilePic'
 
 export default function Artistprofile() {
 
- 
- 
-
   return (
-
     <div className='artistProfileContainer'>
       <Navbar />
         <div className="bannerContainer">
@@ -24,7 +17,7 @@ export default function Artistprofile() {
         
         <div className="profileContainer">
           
-          <UploadAndDisplayImage />
+          <UploadProfilePic />
           <div className="profileDetails">
             <h1>Artist Name</h1>
             <ul>

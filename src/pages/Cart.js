@@ -6,16 +6,19 @@ import Logo from "../assets/Logo.svg"
 import { Link } from 'react-router-dom'
 import CartListItem from '../Components/CartListItem'
 import { useState } from 'react'
+import useCurrentUser from '../hooks/useCurrentUser'
 
 
 export default function Cart() {
+
+  const user = useCurrentUser()
 
   const [checkOne, setCheckOne] = useState(true)
   const [checkTwo, setCheckTwo] = useState(false)
   const [checkThree, setCheckThree] = useState(false)
   const [checkKiss, setCheckKiss] = useState(false)
   
-  const [name, setName] = useState('')
+  const [name, setName] = useState( user ? user?.name : '')
   const [address, setAddress] = useState('')
   const [addressTwo, setAddressTwo] = useState('')
   const [city, setCity] = useState('')
@@ -26,7 +29,6 @@ export default function Cart() {
 
   const [email, setEmail] = useState('')
   const [orderID, setOrderID] = useState('')
-
 
   const handleCheckoutZero = (e) => {
     e.preventDefault()
