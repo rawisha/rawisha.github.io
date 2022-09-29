@@ -8,7 +8,7 @@ import "../styles/Product.css"
 export default function ProductItem({prods}) {
     const user = useCurrentUser()
     const [wish, setWish] = useState(false)
-      
+      console.log(prods);
       // add try/catch
       const addToWishList = async (product) => {
         setWish(true)

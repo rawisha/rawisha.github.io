@@ -11,6 +11,8 @@ import BrowsingBy from './pages/BrowsingBy'
 import Pagenotfound from './Components/Pagenotfound';
 import Artistprofile from './pages/Artistprofile';
 import Artistprofile2 from './pages/Artistprofile2';
+import ArtistproductPage from './pages/ArtistproductPage';
+import Searchresult from './pages/Searchresult';
 function App() {
   return (
     <div className="App">
@@ -18,6 +20,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/product" element={<ArtistproductPage />} />
           <Route path="/artist" element={<Artist />} />
           <Route path="/artist2" element={<Artistprofile/>} />
           <Route path="/artist3" element={<Artistprofile2/>} />
@@ -28,6 +31,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/category/:id" element={<BrowsingBy />} />
           <Route path="*" element={<Pagenotfound />} />
+          <Route path="/query:id" element={<Searchresult />} />
         </Routes>
       </Router>
 
