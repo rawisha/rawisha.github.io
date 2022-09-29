@@ -149,6 +149,7 @@ const saveProducts = (urls) => {
           artistName : artistNameRef.current.value,
           eMail : emailRef.current.value,
           bio: textAreaTextRef.current.value,
+          profilePic: 'https://firebasestorage.googleapis.com/v0/b/artzy-f21d3.appspot.com/o/profiles%2Fprofile_unknown.jpg?alt=media&token=ca8d2384-4d57-46f9-97b2-a915b9658577',
           timestamp : serverTimestamp() 
         })
         emailVerification();
