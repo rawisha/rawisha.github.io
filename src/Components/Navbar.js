@@ -75,6 +75,7 @@ export default function Navbar() {
 
     return (
         <div className='Navbar'>
+            {artist && <i className='fa-solid fa-gear profile-setting-icon'></i>}
             <div className='logoContainer'>
                 <Link to="/"> <div className='logoWrapperNav'>
                     <h1 id="logoText">ART<span id="logoText2">ZY</span></h1>
@@ -124,6 +125,7 @@ export default function Navbar() {
                     { !currentUser && <Link to="/signin"><div className="menu-icon-container"><h1 className="signX" id='styleSettings'>Sign In</h1><i className="fa-solid fa-user"></i><p>&nbsp;</p></div></Link>}
                     { currentUser && <Link to="/"><div className="menu-icon-container"><h1 className="signX" id='styleSettings' onClick={handleSignOut}>Sign out</h1><i className="fa-solid fa-user"></i><p>{user?.eMail || artist?.eMail}</p></div></Link>}
                 </div>
+                
             </div>
             <div className='borderSolidLine'></div>
         </div>

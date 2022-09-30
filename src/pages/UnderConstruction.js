@@ -9,12 +9,10 @@ export default function UnderConstruction() {
     <div>
         <Navbar />
         <div className="underConstructionAnchor">
-        <h1 className="underConstructionh1">This page is under construction. Coming soon...</h1>
-        <Link to="/">Return Home</Link>
+          <h1 className="underConstructionh1">This page is under construction. Coming soon...</h1>
+          <Link to="/">Return Home</Link>
         </div>
-        <div>
-            <Footer />
-        </div>
+        <Footer />
     </div>
   )
 }

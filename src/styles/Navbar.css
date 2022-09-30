@@ -246,3 +246,14 @@ a {
   background: white;
   z-index: 100;
 }
+
+.profile-setting-icon {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.6rem;
+}
+
+.profile-setting-icon:hover {
+  opacity: 1;
+}

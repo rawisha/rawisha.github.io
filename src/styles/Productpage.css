@@ -14,22 +14,19 @@
     align-items: center;
 }
 
-.backlinkContainer, a{
+.backlinkContainer a {
    display:flex;
    flex-direction: row;
    justify-content: flex-start;
    align-items: center;
+   gap: 1rem;
+   margin-bottom: 25px;
+   font-size: 24px;
 }
 
-.backlinkContainer a{
-    gap: 1rem;
-    margin-bottom: 25px;
-    font-size: 24px;
- }
-
- .fa-long-arrow-left {
-    font-size:2.2rem;
- }
+.fa-long-arrow-left {
+   font-size:2.2rem;
+}
 
 .middleContainer {
     display:grid;
@@ -44,7 +41,6 @@
 .princenTitle{
     margin-bottom: 15px;
 }
-
 
 .princenTitle h1{
     font-size: 2.5rem;

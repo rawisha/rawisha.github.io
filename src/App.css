@@ -2,6 +2,7 @@
 
 * {
   margin: 0;
+  padding: 0;
   box-sizing: border-box;
   background-color: #eeeded;
 }
@@ -44,4 +45,8 @@ input {
   font-family: 'Roboto', sans-serif;
   font-size: 18px;
   outline: none;
+}
+
+body {
+  overflow-x: hidden;
 }
