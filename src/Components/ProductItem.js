@@ -1,5 +1,6 @@
 import React from 'react'
 import useCurrentUser from '../hooks/useCurrentUser';
+import useCurrentArtist from '../hooks/useCurrentArtist';
 import { useState, useEffect } from 'react';
 import { arrayUnion, arrayRemove, doc, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase-config';
@@ -7,35 +8,58 @@ import "../styles/Product.css"
 
 export default function ProductItem({prods}) {
     const user = useCurrentUser()
+    const artist = useCurrentArtist()
+
     const [wish, setWish] = useState(false)
-      console.log(prods);
-      // add try/catch
-      const addToWishList = async (product) => {
-        setWish(true)
+
+    const addToWishList = async (product) => {
+      setWish(true)
+      if(user) {
         const docRef = doc(db, 'users', `${user?.id}`)
         await updateDoc(docRef, {
             wishList: arrayUnion(product)
         })
       }
+      if(artist) {
+        const docRef = doc(db, 'artists', `${artist?.id}`)
+        await updateDoc(docRef, {
+            wishList: arrayUnion(product)
+        })
+      }
+    }
 
-      // add try/catch
-      const removeFromWishList = (product) => {
-        setWish(false)
+    const removeFromWishList = async (product) => {
+      setWish(false)
+      if(user) {
         const docRef = doc(db, 'users', `${user?.id}`)
-        updateDoc(docRef, {
+        await updateDoc(docRef, {
             wishList: arrayRemove(product)
         })
       }
+      if(artist) {
+        const docRef = doc(db, 'artists', `${artist?.id}`)
+        await updateDoc(docRef, {
+            wishList: arrayRemove(product)
+        })
+      }
+    }
       
-      useEffect(() => {
-        if(user){
-          const checkWish = () => {
-            const data = user.wishList.some(el => el.id === prods.id)
-             if(data) setWish(true)
-           }
-           checkWish()
-        }
-      },[user,prods.id])
+    useEffect(() => {
+      if(user){
+        const checkWish = () => {
+          const data = user.wishList.some(el => el.id === prods.id)
+            if(data) setWish(true)
+          }
+          checkWish()
+      }
+      if(artist) {
+        const checkWish = () => {
+          const data = artist.wishList.some(el => el.id === prods.id)
+            if(data) setWish(true)
+          }
+          checkWish()
+      }
+    },[user, prods.id, artist])
 
   return (
     

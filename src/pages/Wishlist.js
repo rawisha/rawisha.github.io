@@ -1,44 +1,45 @@
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer'
 import "../styles/Wishlist.css"
-import useAuth from '../hooks/useAuth';
-import { collection, onSnapshot, query, where } from 'firebase/firestore';
-import { db } from '../firebase-config';
 import { useState, useEffect } from 'react';
 import WishlistItem from '../Components/WishlistItem'
+import useCurrentUser from '../hooks/useCurrentUser';
+import useCurrentArtist from '../hooks/useCurrentArtist';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function Wishlist() {
+  const navigate = useNavigate()
+  const currentUser = useCurrentUser()
+  const currentArtist = useCurrentArtist()
 
-  const currentUser = useAuth()
   const [user, setUser] = useState(null)
   const [prods, setProds] = useState([])
+  const [delay, setDelay] = useState(false)
+  
+  useEffect(() => {
+    if(currentArtist) return setUser(currentArtist)
+    if(currentUser) return setUser(currentUser)
+    setTimeout(() => {
+      setDelay(true)
+    }, 2000)
+    if(!currentArtist && !currentUser && delay)
+    setTimeout(() => {
+      navigate('/signin')
+    }, 1000)
+  }, [currentUser, currentArtist, delay])
   
 
   useEffect(() => {
-    if (currentUser) {
-      const userEmail = currentUser.email
-      const colRef = collection(db, 'users')
-      const q = query(colRef, where('eMail', '==', userEmail))
-      const unsub = onSnapshot(q, (snapshot) => {
-        snapshot.docs.forEach(doc => {
-          setUser({...doc.data(), id: doc.id})
-        })
-        //setUser(currentUser)
-      })
-      return unsub
+    if(user !==  null){
+      setProds(user.wishList)
     }
-  }, [currentUser])
-
-    useEffect(() => {
-      if(user !==  null){
-        setProds(user.wishList)
-      }
-    },[user])
+  },[user])
 
   return (
     <>
       <Navbar />
+      {currentArtist || currentUser ? 
       <div className="wishlistHeader">
         <h1>Wishlist</h1>
       <div/>
@@ -46,10 +47,14 @@ export default function Wishlist() {
           <div className="wishlistContainer">
           {prods.length > 0 ? prods.map(product => (
                 <WishlistItem prod={product} key={product.id} />
-            )): <h2>Ohh no... nothing here </h2>}
+            )): <h2>Wishlist is empty...</h2>}
           </div>
         </div>
-      </div>
+      </div> :
+      <div className='wishlist-no-user'>
+      <h1>Please sign in to use Wishlist!</h1>
+      <h2>You are being redirected</h2>
+    </div> }
       <Footer />
     </>
 

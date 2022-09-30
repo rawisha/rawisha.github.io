@@ -92,6 +92,7 @@
 .artistInfo p{
     text-align: left;
     font-size:20px;
+    height: 100%;
 }
 
 /* ----- Profilepic ----- */
@@ -122,4 +123,12 @@
     background: #aaa;
     transform: scale(2);
     border-radius: 50%;
+}
+
+.profile-pic-error {
+    position: absolute;
+    color: var(--danger);
+    text-align: center;
+    left: 50%;
+    transform: translate(-50%);
 }

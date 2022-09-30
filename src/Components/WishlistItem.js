@@ -1,17 +1,27 @@
 import React from 'react'
 import useCurrentUser from '../hooks/useCurrentUser';
+import useCurrentArtist from '../hooks/useCurrentArtist';
 import { arrayRemove, doc, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase-config';
 
 export default function WishlistItem({prod}) {
     const user = useCurrentUser()
+    const artist = useCurrentArtist()
   
-      const removeFromWishList = (product) => {
+      const removeFromWishList = async (product) => {
+      if(user) {
         const docRef = doc(db, 'users', `${user?.id}`)
-        updateDoc(docRef, {
+        await updateDoc(docRef, {
             wishList: arrayRemove(product)
         })
       }
+      if(artist) {
+        const docRef = doc(db, 'artists', `${artist?.id}`)
+        await updateDoc(docRef, {
+            wishList: arrayRemove(product)
+        })
+      }
+    }
 
   return (
     <div>

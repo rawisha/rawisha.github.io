@@ -18,8 +18,8 @@ export default function Navbar() {
     const user = useCurrentUser()
     const artist = useCurrentArtist()
 
-    let wishListCount = user?.wishList.length;
-    let cartCount = user?.cart?.length;
+    let wishListCount = user?.wishList.length || artist?.wishList?.length;
+    let cartCount = user?.cart?.length || artist?.cart?.length;
 
     // LOGOUT
     const handleSignOut = () => {
@@ -89,7 +89,7 @@ export default function Navbar() {
                 <div className='customerWrapper'>
                     <Link to="/wishlist"><div className="menu-icon-container"><h1 id='styleSettings'>Wishlist</h1><i className="fa-solid fa-heart"></i><p>({wishListCount ? wishListCount : 0})</p></div></Link>
                     <Link to="/cart"><div className="menu-icon-container"><h1 id='styleSettings'>Cart</h1><i className="fa-solid fa-cart-shopping"></i><p>({cartCount ? cartCount : 0})</p></div></Link>
-                    { !currentUser && <Link to="/signin"><div className="menu-icon-container"><h1 className="signX" id='styleSettings'>Sign In</h1><i className="fa-solid fa-user"></i></div></Link>}
+                    { !currentUser && <Link to="/signin"><div className="menu-icon-container"><h1 className="signX" id='styleSettings'>Sign In</h1><i className="fa-solid fa-user"></i><p>&nbsp;</p></div></Link>}
                     { currentUser && <Link to="/"><div className="menu-icon-container"><h1 className="signX" id='styleSettings' onClick={handleSignOut}>Sign out</h1><i className="fa-solid fa-user"></i><p>{user?.eMail || artist?.eMail}</p></div></Link>}
                 </div>
             </div>

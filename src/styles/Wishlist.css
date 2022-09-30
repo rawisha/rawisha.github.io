@@ -150,3 +150,11 @@
     font-size: 18px;
 
 }
+
+.wishlist-no-user {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 8rem;
+}

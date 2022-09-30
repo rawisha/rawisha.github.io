@@ -48,7 +48,8 @@ export default function Login() {
               {success && <div className='success'>{success}</div>}
             </div>
             <button disabled={loading} onClick={handleLogin}><h2>Login</h2></button>
-            <p>Not a Member? </p><a href="/signup">Sign Up!</a>
+            <p>Not a Member? </p>
+            <a href="/signup">Sign Up!</a>
           </form>
         </div>
         <Footer />

@@ -5,9 +5,11 @@ import Footer from '../Components/Footer'
 import bild from '../assets/bild.jpg'
 import { collection, onSnapshot } from 'firebase/firestore'
 import { db } from '../firebase-config'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import { Link } from 'react-router-dom'
+import useCategories from '../hooks/useCategories'
 
-export default function Artist({artist}) {
+export default function Artist() {
 
     const [artists, setArtists] = useState(null)
     const [results, setResults] = useState(null)
@@ -48,7 +50,6 @@ export default function Artist({artist}) {
         <Navbar />
         <div className='artistContainer'>
             <h1>Featured artist of the week</h1>
-            
             <div className='artistCardContainer'>
                 <h2 id="artistTitle">Pipilotti Rist</h2>
                 <img src={bild} alt="profile_picture"></img>

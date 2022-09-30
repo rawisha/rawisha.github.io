@@ -17,13 +17,9 @@ margin-top: 40px;
 .signupForm > input {
   border: none;
   border-bottom: 1px solid grey;
-  width: 250px;
+  width: 350px;
   height: 30px;
   margin-top: 28px;
-  font-family: 'Amiri', 'Serif';
-
-  font-size: 1.3em;
-  
 }
 
 .signupForm > button {
@@ -56,15 +52,13 @@ textarea {
   resize: none;
   display: block;
   font-size: 18px;
-
+  padding: .4rem;
 }
 
 #checkbox {
   display: flex;
   width: 20px;
   margin-right: 1rem;
- 
-  
 }
 
 .checkboxDiv {
@@ -152,4 +146,35 @@ margin-top: 40px;
   font-size: 28px;
   font-weight: 400;
   align-items: center;
+}
+
+.fileUploads {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.applicationDiv .tell-us-more {
+  margin-top: 2rem;
+}
+
+.success-welcome-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4rem;
+  margin-bottom: 10rem;
+}
+
+.success-welcome-container img {
+  height: 100px;
+  aspect-ratio: 1;
+  margin: 2rem;
+}
+
+.success-welcome-container a {
+  margin: 2rem;
+  font-size: 2rem;
 }
