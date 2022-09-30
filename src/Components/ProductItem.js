@@ -47,14 +47,14 @@ export default function ProductItem({prods}) {
     useEffect(() => {
       if(user){
         const checkWish = () => {
-          const data = user.wishList.some(el => el.id === prods.id)
+          const data = user?.wishList?.some(el => el.id === prods.id)
             if(data) setWish(true)
           }
           checkWish()
       }
       if(artist) {
         const checkWish = () => {
-          const data = artist.wishList.some(el => el.id === prods.id)
+          const data = artist?.wishList?.some(el => el.id === prods.id)
             if(data) setWish(true)
           }
           checkWish()

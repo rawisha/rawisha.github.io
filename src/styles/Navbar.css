@@ -238,3 +238,11 @@ a {
   font-size: 14px;
   font-weight: 400;
 }
+
+.search-results {
+  position: absolute;
+  width: 100%;
+  border: 1px solid var(--menu-border-clr);
+  background: white;
+  z-index: 100;
+}
