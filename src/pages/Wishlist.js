@@ -27,12 +27,12 @@ export default function Wishlist() {
     setTimeout(() => {
       navigate('/signin')
     }, 1000)
-  }, [currentUser, currentArtist, delay])
+  }, [currentUser, currentArtist, delay, navigate])
   
 
   useEffect(() => {
     if(user !==  null){
-      setProds(user.wishList)
+      setProds(user?.wishList)
     }
   },[user])
 
@@ -45,16 +45,16 @@ export default function Wishlist() {
       <div/>
         <div className='wishlistWrapper'>
           <div className="wishlistContainer">
-          {prods.length > 0 ? prods.map(product => (
+          {prods?.length > 0 ? prods.map(product => (
                 <WishlistItem prod={product} key={product.id} />
             )): <h2>Wishlist is empty...</h2>}
           </div>
         </div>
       </div> :
       <div className='wishlist-no-user'>
-      <h1>Please sign in to use Wishlist!</h1>
-      <h2>You are being redirected</h2>
-    </div> }
+        <h1>Please sign in to use Wishlist!</h1>
+        <h2>You are being redirected</h2>
+      </div> }
       <Footer />
     </>
 

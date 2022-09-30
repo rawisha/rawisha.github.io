@@ -1,5 +1,4 @@
 import React from 'react'
-import Artist from '../Components/Artist'
 import Footer from '../Components/Footer'
 import Navbar from '../Components/Navbar'
 import ProductItem from '../Components/ProductItem'

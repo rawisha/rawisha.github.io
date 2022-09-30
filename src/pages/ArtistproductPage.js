@@ -3,7 +3,7 @@ import Footer from '../Components/Footer'
 import Navbar from '../Components/Navbar'
 import "../styles/AristproductPage.css"
 import bild from '../assets/bild.jpg'
-import ProductItem from '../Components/ProductItem'
+
 export default function ArtistproductPage() {
   return (
     <div>

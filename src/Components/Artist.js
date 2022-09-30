@@ -5,9 +5,8 @@ import Footer from '../Components/Footer'
 import bild from '../assets/bild.jpg'
 import { collection, onSnapshot } from 'firebase/firestore'
 import { db } from '../firebase-config'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import useCategories from '../hooks/useCategories'
 
 export default function Artist() {
 

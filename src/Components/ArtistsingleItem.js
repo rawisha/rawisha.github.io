@@ -1,5 +1,4 @@
 import React from 'react'
-import bild from '../assets/bild.jpg';
 import '../styles/Artistsingleitem.css'
 
 export default function ({artistname,imgUrl}) {

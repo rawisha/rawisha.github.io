@@ -53,7 +53,7 @@ const UploadProductForm = ({ upload, artist, setUploadReady }) => {
         if(file && title && description && price && category) {
             setUploadReady(true)
         }
-    }, [file, title, description, price, category])
+    }, [file, title, description, price, category, setUploadReady])
 
     const handleSubmit = () => {
       setError(null)
@@ -72,10 +72,9 @@ const UploadProductForm = ({ upload, artist, setUploadReady }) => {
     }
 
     useEffect(() => {
-        if(upload) {
-            handleSubmit()
-        }
-    }, [upload])
+        if(upload) 
+        return () =>  handleSubmit()
+    }, [upload, handleSubmit])
 
     return ( 
         <>

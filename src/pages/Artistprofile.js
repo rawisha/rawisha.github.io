@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import "../styles/Artistprofile.css"
 import bannerImg from '../assets/banner.png'
 import bild from '../assets/bild.jpg'
