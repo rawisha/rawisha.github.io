@@ -92,7 +92,9 @@ export default function Signup() {
       setError(error)
     }
     setLoading(false);
-    setSuccess(true)
+    setTimeout(() => {
+      setSuccess(true)
+    }, 2000)
   }
   
 
@@ -125,9 +127,9 @@ export default function Signup() {
         <div style={{ display: checked ? "block" : "none" }} className="applicationDiv">
         <p className="tell-us-more" style={{ display: checked ? "block" : "none" }}>Let us know more about you, please upload 3 pictures of your work and tell us about yourself</p>
           <div className='fileUploads'>
-            <UploadProductForm upload={upload} artist={artist} setUploadReady={setUploadReady}/>
-            <UploadProductForm upload={upload} artist={artist} setUploadReady={setUploadReady}/>
-            <UploadProductForm upload={upload} artist={artist} setUploadReady={setUploadReady}/>
+            <UploadProductForm upload={upload} artist={artist} setUploadReady={setUploadReady} />
+            <UploadProductForm upload={upload} artist={artist} setUploadReady={setUploadReady} />
+            <UploadProductForm upload={upload} artist={artist} setUploadReady={setUploadReady} />
           </div>
           <div className="uploadForm"> 
             <textarea ref={textAreaTextRef} cols="80" rows="15" placeholder='About you and your work'></textarea>

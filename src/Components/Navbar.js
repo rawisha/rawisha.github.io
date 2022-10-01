@@ -75,7 +75,12 @@ export default function Navbar() {
 
     return (
         <div className='Navbar'>
-            {artist && <i className='fa-solid fa-gear profile-setting-icon'></i>}
+            {artist && <>
+                <div className="profile-settings-icon-container">
+                <Link to="/profile"><i className='fa-solid fa-gear profile-settings-icon'></i></Link>
+                    <div className='profile-link-text'>My Profile</div>
+                </div>
+            </>}
             <div className='logoContainer'>
                 <Link to="/"> <div className='logoWrapperNav'>
                     <h1 id="logoText">ART<span id="logoText2">ZY</span></h1>

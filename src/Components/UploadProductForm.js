@@ -35,18 +35,18 @@ const UploadProductForm = ({ upload, artist, setUploadReady }) => {
 
     const saveProduct = (url) => {
       const colRef = collection(db, 'products')
-      addDoc(colRef, {
-        title: title, 
-        description: description,
-        imageUrl: url,
-        price: price,
-        by: artist,
-        categoryHandle: category,
-        status: 'pending',
-        createdAt: serverTimestamp()
-      }).then(res => {
-        setSuccess(true)
-    }).catch(err => console.log(err.code))
+        addDoc(colRef, {
+          title: title, 
+          description: description,
+          imageUrl: url,
+          price: price,
+          by: artist,
+          categoryHandle: category,
+          status: 'pending',
+          createdAt: serverTimestamp()
+        }).then(res => {
+          setSuccess(true)
+        }).catch(err => console.log(err.code))
     }
 
     useEffect(() => {
@@ -70,11 +70,12 @@ const UploadProductForm = ({ upload, artist, setUploadReady }) => {
         })
       })
     }
-
+    
     useEffect(() => {
-        if(upload) 
-        return () =>  handleSubmit()
-    }, [upload, handleSubmit])
+      if (upload) {
+        handleSubmit()
+      }
+    }, [upload])
 
     return ( 
         <>

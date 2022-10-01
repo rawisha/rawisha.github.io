@@ -247,13 +247,35 @@ a {
   z-index: 100;
 }
 
-.profile-setting-icon {
+/* ----- Profile settings link ----- */
+
+.profile-settings-icon-container {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
-  font-size: 1.6rem;
+  top: .5rem;
+  right: .5rem;
 }
 
-.profile-setting-icon:hover {
+.profile-settings-icon {
+  font-size: 1.8rem;
+  opacity: .7;
+  cursor: pointer;
+}
+
+.profile-settings-icon:hover {
   opacity: 1;
 }
+
+.profile-link-text {
+  position: absolute;
+  right: 2.2rem;
+  top: .3rem;
+  visibility: hidden;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+.profile-settings-icon-container:hover .profile-link-text {
+  visibility: visible;
+}
+
+/* --x-- Profile settings link --x-- */
