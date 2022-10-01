@@ -65,13 +65,14 @@ export default function ProductItem({prods}) {
   return (
     
         <div key={prods.id} className='productSingleItemContainer'>
-                        <Link to={'/product/' + prods.id} ><h2 className='cardTitle'>{prods.title}</h2>
+                        <Link className="linkId" to={'/product/' + prods.id} ><h2 className='cardTitle'>{prods.title}</h2>
                         <h3 className='cardSubTitle'>by {prods.by}</h3>
                     <div className='imageContainer'>
-                        {wish ? <i  id="heart" onClick={() => removeFromWishList(prods)} className='fa-solid fa-heart imagefavoriteIcon' ></i> : <i onClick={() => addToWishList(prods)} id="heart" className='fa-regular fa-heart imagefavoriteIcon' ></i>}
+                        
                         <img src={prods.imageUrl} alt="bild"></img>
                     </div></Link>
                     <div className='priceContainer'>
+                    {wish ? <i  id="heart" onClick={() => removeFromWishList(prods)} className='fa-solid fa-heart imagefavoriteIcon' ></i> : <i onClick={() => addToWishList(prods)} id="heart" className='fa-regular fa-heart imagefavoriteIcon' ></i>}
                         <h2 className='priceText'>{prods.price}$</h2>
                         <i className="fa-solid fa-cart-shopping  addCartIcon"></i>
                         <button className="addToCart" >Add</button>

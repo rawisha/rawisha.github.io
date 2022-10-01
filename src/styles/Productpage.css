@@ -39,10 +39,15 @@
 }
 
 .princenTitle{
+    width: 250px;
+    text-align:left;
+    display: flex;
+    flex-direction: column;
     margin-bottom: 15px;
 }
 
 .princenTitle h1{
+    text-align: left;
     font-size: 2.5rem;
     font-weight: bolder;
 }

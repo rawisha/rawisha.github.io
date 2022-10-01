@@ -45,10 +45,11 @@
 .imagefavoriteIcon{
     position: absolute;
     color: rgba(131, 99, 40, 0.8);
-    top: 16px;
+    top: -186px;
     right: 9px;
     font-size: 24px;
     background-color: transparent;
+    cursor: pointer;
 }
 
 .imageContainer > img {
