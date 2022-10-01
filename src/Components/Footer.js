@@ -1,20 +1,46 @@
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
+import { db } from '../firebase-config'
 import React from 'react'
+import { useState, useRef } from 'react'
 import '../styles/Footer.css'
 
-/*
-TO DO: 
-Write js code for newsletter
-Fix ahref links and tags (Errors thrown out in terminal .. just add Real value to href)
-Fix newsletter design (form, field icon) + js
-*/
-
 export default function Footer() {
+
+    const emailRef = useRef()
+    const [success, setSuccess] = useState('')
+    const [error, setError] = useState('')
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        setError('')
+        setSuccess('')
+        if(emailRef.current.value === '') return setError('Enter email to subscribe!')
+        try {
+            const colRef = collection(db, 'newsletter')
+            addDoc(colRef, {
+                email: emailRef.current.value,
+                createdAt: serverTimestamp()
+            }).then(() => {
+                setSuccess('Success! Thank you for your subscription!')
+            })
+        }
+        catch (err) {
+            setError(err)
+        }
+        emailRef.current.value = ''
+    }
+
     return (
         <div className='footerContainer'>
             <div className='borderSolidLine'></div>
             <div className='newsLetterWrapper'>
-                <h2 className='newsletterText'>Newsletter</h2>
-                <input className='inputField' type="text" placeholder='Your email' />
+                {success && <div className='output success'>{success}</div>}
+                {error && <div className='output error'>{error}</div>}
+                <form onSubmit={handleSubmit}>
+                    <h2 className='newsletterText'>Newsletter</h2>
+                    <input className='inputField' ref={emailRef} type="email" placeholder='Your email' />
+                    <button className='newsletter-btn'><i className='fa-solid fa-angle-right newsletter-btn-icon'></i></button>
+                </form>
             </div>
             <div className='logoWrapper'>
                 <h1 id="logoTextFooter">ART<span id="logoText--span">ZY</span></h1>

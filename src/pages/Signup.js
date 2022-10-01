@@ -78,11 +78,13 @@ export default function Signup() {
         setDoc(doc(db, "artists", cred.user.uid), {
           firstName : firstNameRef.current.value,
           lastName : lastNameRef.current.value,
-          artistName : artistNameRef.current.value,
+          artistName : artistNameRef.current.value.trim(),
           eMail : emailRef.current.value,
           bio: textAreaTextRef.current.value,
           profilePic: 'https://firebasestorage.googleapis.com/v0/b/artzy-f21d3.appspot.com/o/profiles%2Fprofile_unknown.jpg?alt=media&token=ca8d2384-4d57-46f9-97b2-a915b9658577',
           status: 'pending',
+          wishList: [],
+          cart: [],
           timestamp : serverTimestamp() 
         })
         emailVerification();

@@ -61,15 +61,16 @@ export default function ProductItem({prods}) {
           checkWish()
       }
     },[user, prods.id, artist])
-
   return (
     
         <div key={prods.id} className='productSingleItemContainer'>
-                        <Link className="linkId" to={'/product/' + prods.id} ><h2 className='cardTitle'>{prods.title}</h2>
+                       <h2 className='cardTitle'>{prods.title}</h2>
                         <h3 className='cardSubTitle'>by {prods.by}</h3>
-                    <div className='imageContainer'>
+                        <h3 className='cardSubTitle'><Link to={`/category/`+ prods.categoryHandle}>{prods.categoryHandle[0].toUpperCase() + prods.categoryHandle.substring(1)}</Link></h3>
                         
-                        <img src={prods.imageUrl} alt="bild"></img>
+                        <Link className="linkId" to={'/product/' + prods.id} >
+                        <div className='imageContainer'>
+                          <img src={prods.imageUrl} alt="bild"></img>
                     </div></Link>
                     <div className='priceContainer'>
                     {wish ? <i  id="heart" onClick={() => removeFromWishList(prods)} className='fa-solid fa-heart imagefavoriteIcon' ></i> : <i onClick={() => addToWishList(prods)} id="heart" className='fa-regular fa-heart imagefavoriteIcon' ></i>}

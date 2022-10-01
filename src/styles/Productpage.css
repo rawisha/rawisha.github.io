@@ -31,11 +31,12 @@
 .middleContainer {
     display:grid;
     grid-template-columns: 50% 50%;
+    gap: 1rem;
 }
 
 .imgContainer img {
-    width: 600px;
-    height: 600px;
+    max-width: 600px;
+    height: 100%;
 }
 
 .princenTitle{

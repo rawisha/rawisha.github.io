@@ -4,10 +4,16 @@ import bild from '../assets/bild.jpg'
 import Navbar from '../Components/Navbar'
 import Footer from '../Components/Footer'
 import UploadProfilePic from '../Components/UploadProfilePic'
+import useCurrentArtist from "../hooks/useCurrentArtist"
 
 export default function Artistprofile() {
 
+  const artist = useCurrentArtist()
+  
+  console.log(artist)
+
   return (
+
     <div className='artistProfileContainer'>
       <Navbar />
         <div className="bannerContainer">
@@ -18,7 +24,7 @@ export default function Artistprofile() {
           
           <UploadProfilePic />
           <div className="profileDetails">
-            <h1>Artist Name</h1>
+            <h1>{artist?.artistName} ({artist?.firstName} {artist?.lastName})</h1>
             <ul>
               <li>Your Bio</li>
               <li>Your Products</li>

@@ -111,14 +111,14 @@ export default function Navbar() {
                         <div className="product-results" >
                             <p>Top results for products: ({productResults?.length})</p>
                             {productResults && productResults.slice(0,10).map(product => (
-                                <div key={product.id}><Link to={'/category/' + product.categoryHandle}>{product.title}</Link></div>
+                                <Link key={product.id} to={'/product/' + product.id}><div>{product.title}</div></Link>
                             ))}
                             {productResults?.length > 0 ? null : <p>No results...</p>}
                         </div>
                         <div className="artist-results">
                             <p>Top results for artists: ({artistResults?.length})</p>
                             {artistResults && artistResults.slice(0,10).map(artist => (
-                                <div key={artist.id}>{artist.artistName}</div>
+                                <Link key={artist.id} to={'/artist/' + artist.artistName}><div>{artist.artistName}</div></Link>
                             ))}
                             {artistResults?.length > 0 ? null : <p>No results...</p>}
                         </div>

@@ -16,6 +16,7 @@ import ArtistproductPage from './pages/ArtistproductPage';
 import Searchresult from './pages/Searchresult';
 import ArtistsingleItem from './Components/ArtistsingleItem';
 import Productpage from './pages/Productpage';
+import Admin from './pages/Admin';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/admin" element={<Admin />} />
           <Route path="/product/:id" element={<Productpage />} />
           <Route path="/artist" element={<Artist />} />
           <Route path="/artist/:id" element={<ArtistproductPage />} />
@@ -37,8 +39,8 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/category/:id" element={<BrowsingBy />} />
           <Route path="/underconstruction" element={<UnderConstruction />} />
+          <Route path="/query/:id" element={<Searchresult />} />
           <Route path="*" element={<Pagenotfound />} />
-          <Route path="/query:id" element={<Searchresult />} />
         </Routes>
       </Router>
 

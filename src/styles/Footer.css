@@ -9,7 +9,7 @@
   width: 100%;
 }
 
-.newsLetterWrapper {
+.newsLetterWrapper form {
   display: flex;
   flex-direction: row;
   margin-top: 2rem;
@@ -22,9 +22,21 @@
   margin-right: 38px;
 }
 
+.newsletter-btn {
+  height: 24px;
+  width: 40px;
+  outline: none;
+  border: 1px solid var(--menu-border-clr);
+  margin-left: 1rem;
+}
+
+.newsletter-btn i {
+  padding: 0 .2rem;
+}
+
 .inputField {
   font-family: inherit;
-  width: 100%;
+  min-width: 250px;
   height: 25px;
   border: 0;
   border-bottom: 2px solid grey;
@@ -103,3 +115,4 @@
   text-align: center;
   align-items: center;
 }
+

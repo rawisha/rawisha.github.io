@@ -257,14 +257,25 @@ a {
   font-weight: 400;
 }
 
+/* ----- Searchresults ----- */
 .search-results {
   position: absolute;
   width: 100%;
   border: 1px solid var(--menu-border-clr);
   background: white;
   z-index: 100;
+  opacity: .9;
 }
 
+.search-results > div {
+  padding: 5px 0;
+}
+
+.search-results > div > a:hover div {
+  background: var(--menu-highlight-clr);
+}
+
+/* --X-- Searchresults --X-- */
 /* ----- Profile settings link ----- */
 
 .profile-settings-icon-container {
