@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import '../styles/Navbar.css'
 import Logo from "../assets/Logo.svg"
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { db, logout } from '../firebase-config'
 import { onSnapshot, collection } from 'firebase/firestore'
 import { Link } from 'react-router-dom';
@@ -14,16 +15,19 @@ import useCurrentArtist from '../hooks/useCurrentArtist'
 
 export default function Navbar() {
 
+    const navigate = useNavigate()
+
     const currentUser = useAuth()
     const user = useCurrentUser()
     const artist = useCurrentArtist()
 
-    let wishListCount = user?.wishList.length;
-    let cartCount = user?.cart?.length;
+    let wishListCount = user?.wishList.length || artist?.wishList?.length;
+    let cartCount = user?.cart?.length || artist?.cart?.length;
 
     // LOGOUT
     const handleSignOut = () => {
         logout();
+        navigate('/')
     }
 
     // Category menu
@@ -31,34 +35,52 @@ export default function Navbar() {
 
     /*backend search*/
 
-        const [value, setValue] = useState("");
-        const [results, setResults] = useState([]);
-        const [prodResulsts, setProdResolts] = useState([]);
+    const [value, setValue] = useState("");
+    const [products, setProducts] = useState([]);
+    const [productResults, setProductResults] = useState([]);
+    const [artists, setArtists] = useState(null);
+    const [artistResults, setArtistResults] = useState(null);
+   
+    useEffect(() => {
+        const unsub = onSnapshot(collection(db, 'products'), snapshot => {
+            setProducts(snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id})))
+        })
+        return unsub
+    }, [])
+    useEffect(() => {
+        const unsub = onSnapshot(collection(db, 'artists'), snapshot => {
+            setArtists(snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id})))
+        })
+        return unsub
+    }, [])
 
-        const onChange = (event) => {
-            setValue(event.target.value)
-        };
+    const convertToUppercase = (str) => {
+        const newString = str.charAt(0).toUpperCase() + str.slice(1)
+        return newString
+    }
 
-        const onSearch = (searchTerm) => {
-            setValue(searchTerm);
-            /* console.log("search", searchTerm); */
-        };
-       
-        useEffect(() => {
-            onSnapshot(collection(db, 'artists'), snapshot => {
-                setResults(snapshot.docs.map(doc => doc.data()
-                ))
-            })
-        }, [])
-        useEffect(() => {
-            onSnapshot(collection(db, 'products'), snapshot => {
-                setProdResolts(snapshot.docs.map(doc => doc.data()
-                ))
-            })
-        }, [])
+    useEffect(() => {
+        if (value) {
+            const newValue = convertToUppercase(value)
+            const productResults = products.filter(prod => String(prod.title).startsWith(value) || String(prod.title).startsWith(value.toLowerCase()) || String(prod.title).startsWith(newValue))
+            setProductResults(productResults)
+            const artistResults = artists.filter(artist => String(artist.artistName).startsWith(value) || String(artist.artistName).startsWith(value.toLowerCase()) || String(artist.artistName).startsWith(newValue))
+            setArtistResults(artistResults)
+        }
+    }, [value, products, artists])
+
+    window.onclick = () => { setValue('') }
+    window.onkeydown = (e) => { if(e.key === 'Escape') setValue('') }
+
 
     return (
         <div className='Navbar'>
+            {artist && <>
+                <div className="profile-settings-icon-container">
+                <Link to="/profile"><i className='fa-solid fa-gear profile-settings-icon'></i></Link>
+                    <div className='profile-link-text'>My Profile</div>
+                </div>
+            </>}
             <div className='logoContainer'>
                 <Link to="/"> <div className='logoWrapperNav'>
                     <h1 id="logoText">ART<span id="logoText2">ZY</span></h1>
@@ -83,70 +105,34 @@ export default function Navbar() {
                     <Link to="/artist"><h1 id='styleSettings' className='artist-link'>Artist</h1></Link>
                 </div>
                 <div className='inputWrapper'>
-                    <input className='inputField' type="text" placeholder='Sök efter Product eller Artist' onChange={onChange} value={value}/>
-                    <button className='button' onClick={() => onSearch(value)}><i className="fa-solid fa-magnifying-glass searchIcon"></i></button>
+                    <input className='inputField' type="text" placeholder='Search for Product or Artist' onChange={(e) => setValue(e.target.value)} value={value}/>
+                    <i className="fa-solid fa-magnifying-glass searchIcon"></i>
+                    {value && <div className="search-results">
+                        <div className="product-results" >
+                            <p>Top results for products: ({productResults?.length})</p>
+                            {productResults && productResults.slice(0,10).map(product => (
+                                <div key={product.id}><Link to={'/category/' + product.categoryHandle}>{product.title}</Link></div>
+                            ))}
+                            {productResults?.length > 0 ? null : <p>No results...</p>}
+                        </div>
+                        <div className="artist-results">
+                            <p>Top results for artists: ({artistResults?.length})</p>
+                            {artistResults && artistResults.slice(0,10).map(artist => (
+                                <div key={artist.id}>{artist.artistName}</div>
+                            ))}
+                            {artistResults?.length > 0 ? null : <p>No results...</p>}
+                        </div>
+                    </div>}
                 </div>
                 <div className='customerWrapper'>
                     <Link to="/wishlist"><div className="menu-icon-container"><h1 id='styleSettings'>Wishlist</h1><i className="fa-solid fa-heart"></i><p>({wishListCount ? wishListCount : 0})</p></div></Link>
                     <Link to="/cart"><div className="menu-icon-container"><h1 id='styleSettings'>Cart</h1><i className="fa-solid fa-cart-shopping"></i><p>({cartCount ? cartCount : 0})</p></div></Link>
-                    { !currentUser && <Link to="/signin"><div className="menu-icon-container"><h1 className="signX" id='styleSettings'>Sign In</h1><i className="fa-solid fa-user"></i></div></Link>}
+                    { !currentUser && <Link to="/signin"><div className="menu-icon-container"><h1 className="signX" id='styleSettings'>Sign In</h1><i className="fa-solid fa-user"></i><p>&nbsp;</p></div></Link>}
                     { currentUser && <Link to="/"><div className="menu-icon-container"><h1 className="signX" id='styleSettings' onClick={handleSignOut}>Sign out</h1><i className="fa-solid fa-user"></i><p>{user?.eMail || artist?.eMail}</p></div></Link>}
                 </div>
+                
             </div>
-                
             <div className='borderSolidLine'></div>
-            <div className='dataResult'>
-                {results
-            .filter((item) => {
-              const searchTerm = value;
-
-              const fullName =  item.artistName ;
-
-              return (
-                searchTerm &&
-                fullName.startsWith(searchTerm) &&
-                fullName !== searchTerm 
-              );
-            })
-            .slice(0, 10)
-
-            .map((item,index) => (
-
-              <div
-                onClick={() => onSearch(item.artistName)}
-                className="dropdown-row"
-                key={index}
-              >
-                {item.artistName}
-              </div>
-            ))}
-            
-                </div>
-                <div className='dataResult'>
-                    {prodResulsts
-                    .filter((item) => {
-                        const searchTerm = value;
-                        const prodName = item.title;
-                        
-                        return (
-                            searchTerm && 
-                            prodName.startsWith(searchTerm) &&
-                            prodName !== searchTerm
-                        );
-                    })
-                    .slice(0, 10)
-                    .map((item, index) => (
-                        <div
-                            onClick={() => onSearch(item.title)}
-                            className="dropdown-row"
-                            key={index}
-                        >
-                            {item.title}
-                        </div>
-                    ))
-                    }
-                </div>
-                
         </div>
     )
 }

@@ -40,7 +40,7 @@ a {
 .menu-icon-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 }
 
@@ -238,3 +238,44 @@ a {
   font-size: 14px;
   font-weight: 400;
 }
+
+.search-results {
+  position: absolute;
+  width: 100%;
+  border: 1px solid var(--menu-border-clr);
+  background: white;
+  z-index: 100;
+}
+
+/* ----- Profile settings link ----- */
+
+.profile-settings-icon-container {
+  position: absolute;
+  top: .5rem;
+  right: .5rem;
+}
+
+.profile-settings-icon {
+  font-size: 1.8rem;
+  opacity: .7;
+  cursor: pointer;
+}
+
+.profile-settings-icon:hover {
+  opacity: 1;
+}
+
+.profile-link-text {
+  position: absolute;
+  right: 2.2rem;
+  top: .3rem;
+  visibility: hidden;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+.profile-settings-icon-container:hover .profile-link-text {
+  visibility: visible;
+}
+
+/* --x-- Profile settings link --x-- */

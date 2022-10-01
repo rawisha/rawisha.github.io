@@ -54,6 +54,7 @@ export default function Cart() {
     e.preventDefault()
     setCheckTwo(false)
     setCheckThree(true)
+    setOrderID(123456789)
   }
   
   const handleCheckoutThree = (e) => {

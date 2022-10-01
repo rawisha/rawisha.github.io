@@ -19,6 +19,7 @@
     margin-right: 100px;
     margin-left: 100px;
     margin-top: 96px;
+    margin-bottom: 8rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -40,6 +41,8 @@
 .categoryItem a {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .categoryItem > h2{

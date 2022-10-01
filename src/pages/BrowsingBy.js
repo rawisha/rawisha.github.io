@@ -25,13 +25,9 @@ export default function BrowsingBy() {
         <Product prods = {products}/>
         </div>
 
-        <div className='FOOTER'>
-        <div className='borderSolidLine'>
         <Footer />
-        </div>
         
       </div>  
-    </div>
     </div>
   )
 }

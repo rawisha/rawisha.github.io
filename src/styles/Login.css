@@ -1,10 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Roboto:wght@100;400;700&display=swap");
 
-* {
-  margin: 0;
-  padding: 0;
-}
-
 .loginFormContainer {
   width: 100%;
   display: flex;
@@ -23,11 +18,9 @@
 .loginForm > input {
   border: none;
   border-bottom: 1px solid grey;
-  width: 250px;
+  width: 350px;
   height: 30px;
   margin-top: 28px;
-  font-family: 'Amiri', 'Serif';
-  
 }
 
 .loginForm > button {
@@ -47,12 +40,16 @@
   align-items: center;
 }
 
-
 .loginForm > input::placeholder {
   font-size: 20px;
   font-weight: 400;
   line-height: 35.16px;
- 
+}
+
+.loginForm a {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
 }
 
 .output {
