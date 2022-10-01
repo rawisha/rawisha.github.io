@@ -4,7 +4,7 @@ import Navbar from '../Components/Navbar'
 import "../styles/AristproductPage.css"
 import { useParams } from 'react-router-dom'
 import useProductsByArtist from '../hooks/useProductsByArtist'
-import useGetArtistById from '../hooks/useGetArtistById'
+import useGetArtistById from '../hooks/useArtistById'
 import ProductItem from '../Components/ProductItem'
 
 export default function ArtistproductPage() {

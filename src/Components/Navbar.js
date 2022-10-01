@@ -92,7 +92,7 @@ export default function Navbar() {
                             <p className='category-menu-title'>Browse Category</p>
                             {categories.map((category) => (
                                 <div key={category.id} className="category-menu-item">
-                                    <Link to={'/category/' + category.handle}>
+                                    <Link className="category-menu-item-link" to={'/category/' + category.handle}>
                                         <p className='category-menu-item-title'>{category.name}</p>
                                         <i className='fa-solid fa-angle-right'></i>
                                     </Link>

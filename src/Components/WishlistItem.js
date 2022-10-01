@@ -33,7 +33,7 @@ export default function WishlistItem({prod}) {
               <h2>Product: {prod.title}</h2>
               <p id="prodNr">Prod nr: 428539</p>
               
-              <h2 id="artistInfo">Arist: {prod.by}</h2>
+              <h2 id="artistInfo">Artist: {prod.by}</h2>
               
             </div>
             <h2 className='productColor'>Color: Black</h2>

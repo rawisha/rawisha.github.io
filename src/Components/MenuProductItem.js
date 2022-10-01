@@ -1,5 +1,6 @@
 import React from 'react'
-import useProductsBy from '../hooks/useProductsBy'
+import { Link } from 'react-router-dom'
+import useProductsBy from '../hooks/useProductsByCategory'
 
 export default function MenuProductItem({ handle }) {
 
@@ -7,21 +8,15 @@ export default function MenuProductItem({ handle }) {
 
   return (
     <div className='menu-item-products'>
-        {products.length > 0 ? <>
-            {products[0] ? <div>{products[0]?.title}</div> : null}    
-            {products[1] ? <div>{products[1]?.title}</div> : null}    
-            {products[2] ? <div>{products[2]?.title}</div> : null}    
-            {products[3] ? <div>{products[3]?.title}</div> : null}    
-            {products[4] ? <div>{products[4]?.title}</div> : null}    
-            {products[5] ? <div>{products[5]?.title}</div> : null}    
-            {products[6] ? <div>More...</div> : null}
-        </> : <div className='no-products'>Empty...</div>}
-        
-        {/* { products?.map(product => {
-            <div key={product?.id} className="menu-product-list-item">
+        { products.length > 0 ? <>
+        { products?.slice(0, 10).map(product => (
+            <Link to={'/product/' + product?.id} key={product?.id} ><div className="menu-product-list-item">
                 <p>{product?.title}</p>
-            </div>
-        })} */}
+                <i className='fa-solid fa-angle-right menu-product-list-item-arrow'></i>
+            </div></Link>
+        ))} 
+        { products.length > 10 ? <div className='menu-product-list-item'><Link to={'/category/' + handle}>More...</Link></div>: null}
+        </> : <Link to={'/category/' + handle} ><div className="menu-product-list-item empty"><p>Empty...</p></div></Link>}
     </div>
   )
 }
