@@ -99,8 +99,8 @@ export default function Artist() {
 
                     {results && results.map(artist => (
                         <div key={artist.id} className='articleCardResult'>
-                            <h2>{artist.artistName}</h2>
-                            <img src={artist.profilePic} alt="profile_picture" />
+                            <Link to={'/artist/' + artist.artistName}><h2>{artist.artistName}</h2>
+                            <img src={artist.profilePic} alt="profile_picture" /></Link>
                         </div>
                     ))}
 

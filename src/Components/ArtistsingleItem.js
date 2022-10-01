@@ -1,14 +1,15 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import '../styles/Artistsingleitem.css'
 
-export default function ({artistname,imgUrl}) {
+export default function Artistsingleitem ({artistname,imgUrl}) {
 
   return (
     <div className="artistsingle--Container">
-        <div className='aristsingle--Wrapper'>
+        <Link to={'/artist/' + artistname} ><div className='aristsingle--Wrapper'>
             <h2>{artistname}</h2>
             <img src={imgUrl} alt="Bild alt" />
-        </div>
+        </div></Link>
     </div>
   )
 }

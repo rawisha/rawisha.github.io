@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { arrayUnion, arrayRemove, doc, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase-config';
 import "../styles/Product.css"
+import { Link } from 'react-router-dom';
 
 export default function ProductItem({prods}) {
     const user = useCurrentUser()
@@ -64,14 +65,12 @@ export default function ProductItem({prods}) {
   return (
     
         <div key={prods.id} className='productSingleItemContainer'>
-                        <h2 className='cardTitle'>{prods.title}</h2>
+                        <Link to={'/product/' + prods.id} ><h2 className='cardTitle'>{prods.title}</h2>
                         <h3 className='cardSubTitle'>by {prods.by}</h3>
-                        
                     <div className='imageContainer'>
                         {wish ? <i  id="heart" onClick={() => removeFromWishList(prods)} className='fa-solid fa-heart imagefavoriteIcon' ></i> : <i onClick={() => addToWishList(prods)} id="heart" className='fa-regular fa-heart imagefavoriteIcon' ></i>}
-                        
                         <img src={prods.imageUrl} alt="bild"></img>
-                    </div>
+                    </div></Link>
                     <div className='priceContainer'>
                         <h2 className='priceText'>{prods.price}$</h2>
                         <i className="fa-solid fa-cart-shopping  addCartIcon"></i>
