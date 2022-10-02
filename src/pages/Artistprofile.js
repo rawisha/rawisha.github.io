@@ -10,8 +10,6 @@ export default function Artistprofile() {
 
   const artist = useCurrentArtist()
   
-  console.log(artist)
-
   return (
 
     <div className='artistProfileContainer'>

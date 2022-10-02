@@ -34,6 +34,23 @@ export default function Signup() {
   const [upload, setUpload] = useState(false)
   const [uploadReady, setUploadReady] = useState(false)
 
+  const getCreatedAtString = () => {
+    const addZero = (number) => {
+        if(String(number).length < 2) {
+            number = '0' + number
+        }
+        return number
+    }
+    const date = new Date()
+    const Y = date.getFullYear()
+    const M = date.getMonth()
+    const D = date.getDate()
+    const time = Y + '-' + addZero(M) + '-' + addZero(D)
+    return time
+  }
+
+  const time = getCreatedAtString()
+
   function showApplicationArtist(){
     setChecked((checked) => !checked);
     setHideElements((hideElements) => !hideElements);
@@ -53,6 +70,7 @@ export default function Signup() {
           eMail : emailRef.current.value,
           wishList: [],
           cart: [],
+          createdAt: time, 
           timestamp : serverTimestamp()
         })
         emailVerification();
@@ -85,6 +103,7 @@ export default function Signup() {
           status: 'pending',
           wishList: [],
           cart: [],
+          createdAt: time,
           timestamp : serverTimestamp() 
         })
         emailVerification();
@@ -98,6 +117,7 @@ export default function Signup() {
       setSuccess(true)
     }, 2000)
   }
+  
   
 
   return (

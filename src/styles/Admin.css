@@ -6,3 +6,23 @@
     align-items: center;
 }
 
+.artists-table-pending {
+    margin-bottom: 2rem;
+}
+
+table th {
+    padding: .4rem 1rem;
+    border: 1px solid #aaa;
+}
+
+table td {
+    text-align: left;
+    padding: .2rem 1rem;
+    border: 1px solid #ddd;
+}
+
+.action-cell {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
