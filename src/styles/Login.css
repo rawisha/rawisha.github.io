@@ -24,16 +24,20 @@
 }
 
 .loginForm > button {
-  background: #272727;
+  background: #b82020;
   width: 210px;
   height: 45px;
   margin: 10px 0;
-  background-color: #272727;
+  background-color: #eee;
+}
+
+.loginForm > button::hover {
+  background-color: #35374f;
+
 }
 
 .loginForm > button > h2 {
-  background:none;
-  color: white;
+  background: none;
   text-align: center;
   font-size: 28px;
   font-weight: 400;
@@ -49,7 +53,8 @@
 .loginForm a {
   font-size: 1.6rem;
   margin-bottom: 1rem;
-  font-weight: 700;
+  font-weight: 500;
+  border-bottom: 0.5px solid #20202080;
 }
 
 .output {

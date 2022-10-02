@@ -22,7 +22,7 @@ export default function ProductItem({prods}) {
             wishList: arrayUnion(product)
         })
         setWish(true)
-      }else if(!user)
+      }else if(!user && !artist)
       {
         alert("please login to use Wishlist Function")
       }

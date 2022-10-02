@@ -1,4 +1,4 @@
-import {React, useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 
 const CartListItem = ({items,initCart}) => {
     const [cart,setCart] = useState(initCart)
@@ -7,12 +7,10 @@ const CartListItem = ({items,initCart}) => {
         e.preventDefault()
         const newCart = cart.filter(f => item.id !== f.id)
         setCart([...newCart])
-        console.log('deleted' + item.id)
     }
 
     useEffect(() => {
         localStorage.setItem('cart', JSON.stringify(cart))
-        
     },[cart])
     
     return ( 
