@@ -8,13 +8,12 @@ import CartListItem from '../Components/CartListItem'
 import { useState,useEffect } from 'react'
 import useCurrentUser from '../hooks/useCurrentUser'
 
-
 export default function Cart() {
-
   const user = useCurrentUser()
   const initCart = JSON.parse(localStorage.getItem('cart')) || []
   const [newAmount,setNewAmount] = useState()
   const [cart,setCart] = useState(initCart)
+  const [count,setCount] = useState(0)
   const [checkOne, setCheckOne] = useState(true)
   const [checkTwo, setCheckTwo] = useState(false)
   const [checkThree, setCheckThree] = useState(false)
@@ -40,7 +39,7 @@ export default function Cart() {
 
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart))
-    
+    setCount(cart.length)
 },[cart,newAmount])
 
   const handleIncrease = (e,item) => {
@@ -66,7 +65,6 @@ export default function Cart() {
       if(newData[index].cartAmount === 0) return
       localStorage.setItem('cart', JSON.stringify(newData));
       setCart(newData)
-      
     }
     
   }
@@ -102,9 +100,7 @@ export default function Cart() {
     e.preventDefault()
     const newCart = cart.filter(f => item.id !== f.id)
     setCart([...newCart])
-    console.log('deleted' + item.id)
 }
-
 
 
 

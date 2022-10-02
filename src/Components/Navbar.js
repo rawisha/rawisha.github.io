@@ -14,16 +14,15 @@ import useCurrentArtist from '../hooks/useCurrentArtist'
 
 
 export default function Navbar() {
-
     const navigate = useNavigate()
-
+    const initCart = JSON.parse(localStorage.getItem('cart'))
     const currentUser = useAuth()
     const user = useCurrentUser()
     const artist = useCurrentArtist()
-
     let wishListCount = user?.wishList.length || artist?.wishList?.length;
-    let cartCount = user?.cart?.length || artist?.cart?.length;
+    let cartCount = user?.cart?.length || artist?.cart?.length || initCart?.length;
 
+    
     // LOGOUT
     const handleSignOut = () => {
         logout();

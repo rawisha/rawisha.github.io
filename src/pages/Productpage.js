@@ -4,7 +4,9 @@ import Navbar from '../Components/Navbar'
 import { Link, useParams, } from 'react-router-dom'
 import Footer from '../Components/Footer'
 import useProductById from '../hooks/useProductById'
+
 export default function Productpage() {
+
   const { id } = useParams()
   const initCart = JSON.parse(localStorage.getItem('cart')) || []
   const product = useProductById(id)
@@ -12,7 +14,9 @@ export default function Productpage() {
   const [localItem,setLocalitem] = useState(initCart)
   const [catHandle,setCategoryHandle] = useState('')
   const [btn, setBtn] = useState(true)
-  
+  const [count,setCount] = useState(0)
+
+
   useEffect(() => {
     if(product.categoryHandle) {
       setCategoryHandle(product.categoryHandle[0].toUpperCase() + product.categoryHandle.substring(1))
@@ -35,14 +39,17 @@ export default function Productpage() {
     e.preventDefault()
     setLocalitem([...localItem,{prod: product, id:product?.id, cartAmount:item}])
     setBtn(false)
+
   }
  /* Handle quantity -- ENDS HERE*/
 
   useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(localItem))
-    
+     localStorage.setItem('cart', JSON.stringify(localItem))
   },[localItem])
-  
+
+  useEffect(() => {
+   setCount(localItem.length)
+ },[localItem,count])
  
 
   return (

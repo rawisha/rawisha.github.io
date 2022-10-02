@@ -17,13 +17,17 @@ import Searchresult from './pages/Searchresult';
 import ArtistsingleItem from './Components/ArtistsingleItem';
 import Productpage from './pages/Productpage';
 import Admin from './pages/Admin';
-import {React, useEffect} from 'react';
+import {React, useEffect, useState, } from 'react';
+
 function App() {
+
   useEffect(() => {
     if(localStorage.getItem('cart') == null) {
       localStorage.setItem('cart', JSON.stringify([]))
     }
   },[])
+
+ 
  
   return (
     <div className="App">
@@ -47,6 +51,7 @@ function App() {
           <Route path="/underconstruction" element={<UnderConstruction />} />
           <Route path="/query/:id" element={<Searchresult />} />
           <Route path="*" element={<Pagenotfound />} />
+          
         </Routes>
       </Router>
 
