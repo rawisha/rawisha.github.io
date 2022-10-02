@@ -145,17 +145,6 @@ a {
   display: block;
 }
 
-.menu-product-list-item-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translate(0,-50%);
-  right: .1rem;
-  visibility: hidden;
-}
-
-.menu-product-list-item:hover .menu-product-list-item-arrow {
-  visibility: visible;
-}
 /* --X-- Products in category-list --X-- */
 
 .inputWrapper {

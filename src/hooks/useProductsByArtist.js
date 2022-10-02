@@ -15,7 +15,7 @@ const useProductsByArtist = (artistRef) => {
         return unsub
     }, [artistRef])
     
-    return data
+    return data.filter(prod => prod.status === 'approved')
 }
 
 export default useProductsByArtist;

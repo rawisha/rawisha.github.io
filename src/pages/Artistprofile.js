@@ -22,7 +22,7 @@ export default function Artistprofile() {
           
           <UploadProfilePic />
           <div className="profileDetails">
-            <h1>{artist?.artistName} ({artist?.firstName} {artist?.lastName})</h1>
+            <h1>{artist?.artistName} (status: {artist?.status})</h1>
             <ul>
               <li>Your Bio</li>
               <li>Your Products</li>
