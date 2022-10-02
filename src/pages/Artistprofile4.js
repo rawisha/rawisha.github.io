@@ -1,5 +1,4 @@
 import "../styles/Artistprofile.css"
-import bild from '../assets/bild.jpg'
 import Navbar from '../Components/Navbar'
 import Footer from '../Components/Footer'
 import useCurrentArtist from "../hooks/useCurrentArtist"
