@@ -12,7 +12,7 @@ export default function Artistprofile() {
   const artist = useCurrentArtist()
   
   const [edit, setEdit] = useState(false)
-  const [bio, setBio] = useState(false)
+  const [bio, setBio] = useState()
 
   const handleSave = async () => {
     const docRef = doc(db, 'artists', artist?.id)
