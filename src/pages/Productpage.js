@@ -6,40 +6,41 @@ import Footer from '../Components/Footer'
 import useProductById from '../hooks/useProductById'
 export default function Productpage() {
   const { id } = useParams()
-  const initCart = useState(JSON.parse(localStorage.getItem('cart'))) || []
+  const initCart = JSON.parse(localStorage.getItem('cart')) || []
   const product = useProductById(id)
   const [item, setItem] = useState(1);
-  const [localItem,setLocalitem] = useState([]) || initCart
-  const [categoryHandle,setCategoryHandle] = useState('')
+  const [localItem,setLocalitem] = useState(initCart)
+  const [catHandle,setCategoryHandle] = useState('')
+  const [btn, setBtn] = useState(true)
+  
+  useEffect(() => {
+    if(product.categoryHandle) {
+      setCategoryHandle(product.categoryHandle[0].toUpperCase() + product.categoryHandle.substring(1))
+    }
+  },[product])
 
-  setCategoryHandle(product?.categoryHandle[0]?.toUpperCase() + product?.categoryHandle.substring(1))
-   /* Handle quantity*/
+   /* Handle quantity -- Starts HERE*/
   const handleQuantityMinus = (e,item) => {
     e.preventDefault()
     if(item === 1) return
     setItem(item - 1)
    }
-  
+
   const handleQuantityPlus = (e,item) => {
     e.preventDefault()
     setItem(item + 1)
    }
 
-  const handleAddcart = (e) => {
+  const handleAddcart = (e,data) => {
     e.preventDefault()
-    setLocalitem([{prod: product, id:product?.id, cartAmount:item}])
+    setLocalitem([...localItem,{prod: product, id:product?.id, cartAmount:item}])
+    setBtn(false)
   }
-
- /* Handle quantity*/
-  
-  useEffect(() => {
-  if (initCart) {
-    setLocalitem(initCart);
-  }
-  },[item])
+ /* Handle quantity -- ENDS HERE*/
 
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(localItem))
+    
   },[localItem])
   
  
@@ -74,13 +75,13 @@ export default function Productpage() {
         <i className="fa-regular fa-heart favHeart"></i>
         </div>
       
-        <button onClick={(e) => handleAddcart(e,localItem)} className="addToCart--prodPage">Add to Cart</button>
+        <button onClick={(e) => handleAddcart(e,product?.id)} className="addToCart--prodPage">{btn ? 'Add to Cart' : 'Added to Cart'}</button>
 
         <div className="descInfo">
           <h4>Description:</h4>
           <p>{product?.description}</p>
           <h4 className='designBy'>Category:</h4>
-          <p><Link to={'/category/' + product?.categoryHandle}>{categoryHandle}</Link></p>
+          <p><Link to={'/category/' + product?.categoryHandle}>{catHandle}</Link></p>
           <h4 className='designBy'>Designed By:</h4>
           <p>{product?.by}</p>
         </div>

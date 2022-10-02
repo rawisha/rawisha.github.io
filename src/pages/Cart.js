@@ -12,7 +12,9 @@ import useCurrentUser from '../hooks/useCurrentUser'
 export default function Cart() {
 
   const user = useCurrentUser()
-  
+  const initCart = JSON.parse(localStorage.getItem('cart')) || []
+  const [newAmount,setNewAmount] = useState()
+  const [cart,setCart] = useState(initCart)
   const [checkOne, setCheckOne] = useState(true)
   const [checkTwo, setCheckTwo] = useState(false)
   const [checkThree, setCheckThree] = useState(false)
@@ -35,6 +37,39 @@ export default function Cart() {
       setName( user ? user?.firstName + ' ' + user?.lastName : '')
     }
   },[user])
+
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart))
+    
+},[cart,newAmount])
+
+  const handleIncrease = (e,item) => {
+    e.preventDefault()
+    const index = cart.findIndex(f => f.id === item.id)
+    const data = localStorage.getItem('cart')
+    if(data !=null){
+      let newData = JSON.parse(data)
+      newData[index].cartAmount = cart[index].cartAmount + 1
+      localStorage.setItem('cart', JSON.stringify(newData));
+      setCart(newData)
+    }
+  }
+
+
+  const handleDecrease = (e,item) => {
+    e.preventDefault()
+    const index = cart.findIndex(f => f.id === item.id)
+    const data = localStorage.getItem('cart')
+    if(data !=null){
+      let newData = JSON.parse(data)
+      newData[index].cartAmount = newData[index].cartAmount - 1
+      if(newData[index].cartAmount === 0) return
+      localStorage.setItem('cart', JSON.stringify(newData));
+      setCart(newData)
+      
+    }
+    
+  }
 
   const handleCheckoutZero = (e) => {
     e.preventDefault()
@@ -63,6 +98,16 @@ export default function Cart() {
     setCheckKiss(true)
   }
 
+  const handleDelete = (e,item) => {
+    e.preventDefault()
+    const newCart = cart.filter(f => item.id !== f.id)
+    setCart([...newCart])
+    console.log('deleted' + item.id)
+}
+
+
+
+
   return (
     <>
       <Navbar />
@@ -73,11 +118,35 @@ export default function Cart() {
             <h1>Your Shopping Cart</h1>
           </div>
           <div className="cart-main">
-            <ul className="cart-main-list">
-              <CartListItem />
-              <CartListItem />
-              <CartListItem />
-              <CartListItem />
+           <ul className="cart-main-list"> 
+            {cart?.map(item => (
+                <li className="cart-main-list-item" key={item?.id}>
+                <div className="list-item-img">
+                    <img src={item?.prod.imageUrl} alt="cart-list-item" />
+                </div>
+                <div className="list-item-details">
+                    <p className='list-item-title'>Product: {item?.prod.title}</p>
+                    <span className='list-item-product-number'>Prod nr: 70332</span>
+                    <p className='list-item-artist'>Made by: {item?.prod.by}</p>
+                </div>
+                <div className="list-item-color">
+                    <p>Color: Black</p>
+                </div>
+                <div className="list-item-amount-container">
+                    <div className="list-item-amount"><p>{item?.cartAmount}</p></div>
+                    <div className="list-item-change-amount">
+                    <div className="add"><button onClick={(e) => handleIncrease(e,item)}>+</button></div>
+                    <div className="sub"><button onClick={(e) => handleDecrease(e,item)}>-</button></div>
+                    </div>
+                </div>
+                <div className="list-item-price">
+                    <p>Price: {item?.prod.price} $</p>
+                </div>
+                <div className="list-item-remove">
+                    <i className='fa-solid fa-plus' onClick={(e) => handleDelete(e,item)}></i>
+                </div>
+            </li>
+              ))}
             </ul>
             <div className="cart-main-bottom">
               <div className="cart-main-back">
@@ -85,7 +154,7 @@ export default function Cart() {
                 <p>Back to shop</p></Link>
               </div>
               <div className="cart-main-total-price">
-                <p className='total-price'>Subtotal: 236 $</p>
+                <p className='total-price'>Subtotal: {cart.reduce((total, item)=>total+(item.prod.price*item.cartAmount),0)} $</p>
               </div>
             </div>
           </div>
