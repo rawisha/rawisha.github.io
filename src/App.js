@@ -18,14 +18,24 @@ import ArtistproductPage from './pages/ArtistproductPage';
 import Searchresult from './pages/Searchresult';
 import Productpage from './pages/Productpage';
 import Admin from './pages/Admin';
-import {React, useEffect } from 'react';
-
+import {React, useEffect,useContext, useState } from 'react';
+import {UserContext} from './hooks/UserContext'
 function App() {
+  const [cartState,setCartState] = useState() 
+
+
+  
 
   useEffect(() => {
-    if(localStorage.getItem('cart') == null) {
+    const initCart = JSON.parse(localStorage.getItem('cart')) 
+    if ( initCart ) {
+       setCartState(initCart)
+
+
+    }else {
       localStorage.setItem('cart', JSON.stringify([]))
     }
+
   },[])
 
  
@@ -34,6 +44,7 @@ function App() {
     <div className="App">
       
       <Router>
+        <UserContext.Provider value={{cartState,setCartState}}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/admin" element={<Admin />} />
@@ -53,8 +64,8 @@ function App() {
           <Route path="/underconstruction" element={<UnderConstruction />} />
           <Route path="/query/:id" element={<Searchresult />} />
           <Route path="*" element={<Pagenotfound />} />
-          
         </Routes>
+        </UserContext.Provider>
       </Router>
 
     </div>
