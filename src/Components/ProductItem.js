@@ -10,39 +10,47 @@ import { Link } from 'react-router-dom';
 export default function ProductItem({prods}) {
     const user = useCurrentUser()
     const artist = useCurrentArtist()
-
     const [wish, setWish] = useState(false)
 
     const addToWishList = async (product) => {
-      setWish(true)
+      
       if(user) {
         const docRef = doc(db, 'users', `${user?.id}`)
         await updateDoc(docRef, {
             wishList: arrayUnion(product)
         })
+        setWish(true)
+      }else if(!user)
+      {
+        alert("please login to use Wishlist Function")
       }
+
       if(artist) {
         const docRef = doc(db, 'artists', `${artist?.id}`)
         await updateDoc(docRef, {
             wishList: arrayUnion(product)
         })
+        setWish(true)
       }
     }
 
     const removeFromWishList = async (product) => {
-      setWish(false)
+      
       if(user) {
         const docRef = doc(db, 'users', `${user?.id}`)
         await updateDoc(docRef, {
             wishList: arrayRemove(product)
         })
+        setWish(false)
       }
       if(artist) {
         const docRef = doc(db, 'artists', `${artist?.id}`)
         await updateDoc(docRef, {
             wishList: arrayRemove(product)
         })
+        setWish(false)
       }
+
     }
       
     useEffect(() => {
@@ -61,6 +69,7 @@ export default function ProductItem({prods}) {
           checkWish()
       }
     },[user, prods.id, artist])
+    
   return (
     
         <div key={prods.id} className='productSingleItemContainer'>
