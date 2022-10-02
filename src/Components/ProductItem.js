@@ -7,10 +7,18 @@ import { db } from '../firebase-config';
 import "../styles/Product.css"
 import { Link } from 'react-router-dom';
 
-export default function ProductItem({prods}) {
+export default function ProductItem({prods,cartData}) {
+  console.log(cartData)
+    const initCart = JSON.parse(localStorage.getItem('cart')) || []
     const user = useCurrentUser()
     const artist = useCurrentArtist()
     const [wish, setWish] = useState(false)
+    const [btn, setBtn] = useState(true)
+    const [localItem,setLocalitem] = useState(initCart)
+
+    useEffect(() => {
+      localStorage.setItem('cart', JSON.stringify(localItem))
+   },[localItem])
 
     const addToWishList = async (product) => {
       
@@ -69,6 +77,18 @@ export default function ProductItem({prods}) {
           checkWish()
       }
     },[user, prods.id, artist])
+
+
+    /* HANDLE ADD TO CART --- START HERE */
+    const handleAddcart = (e,data) => {
+      setLocalitem([...localItem,{prod: data, id:data?.id, cartAmount:1}])
+    }
+
+
+
+    
+
+  /* HANDLE ADD TO CART --- END HERE */
     
   return (
     
@@ -85,7 +105,7 @@ export default function ProductItem({prods}) {
                     {wish ? <i  id="heart" onClick={() => removeFromWishList(prods)} className='fa-solid fa-heart imagefavoriteIcon' ></i> : <i onClick={() => addToWishList(prods)} id="heart" className='fa-regular fa-heart imagefavoriteIcon' ></i>}
                         <h2 className='priceText'>{prods.price}$</h2>
                         <i className="fa-solid fa-cart-shopping  addCartIcon"></i>
-                        <button className="addToCart" >Add</button>
+                        <button className="addToCart" onClick={(e) => handleAddcart(e,prods)}>Add</button>
                     </div>
                 </div>
     
