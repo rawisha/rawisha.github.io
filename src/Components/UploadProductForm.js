@@ -84,7 +84,7 @@ const UploadProductForm = ({ upload, artist, setUploadReady }) => {
                 <h2>Image uploaded</h2>
                 <img className="success-img" src={successImg} alt="Success" />  
             </div> :
-            <form>
+            <form className='upload-form'>
                 <label className="title">
                     <span>Title</span>
                     <input type="text" onChange={(e) => setTitle(e.target.value)}/>
