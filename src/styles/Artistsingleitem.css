@@ -16,7 +16,7 @@
 .aristsingle--Wrapper img {
     width:200px;
     height:200px;
-    object-fit:contain;
+    object-fit:cover;
 }
 .aristsingle--Wrapper h2 {
     font-size:24px
