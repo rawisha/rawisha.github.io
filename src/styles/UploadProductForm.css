@@ -40,52 +40,59 @@
 }
 
 .upload-btn {
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
-    font-size: 24px;
-    display: grid;
-    place-content: center;
-    border: 1px solid #333;
-    font-weight: bold;
-    line-height: 30px;
-    cursor: pointer;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  font-size: 24px;
+  display: grid;
+  place-content: center;
+  border: 1px solid #333;
+  font-weight: bold;
+  line-height: 30px;
+  cursor: pointer;
 }
 
 .upload-btn span {
-    background: transparent;
+  background: transparent;
 }
 
 .upload-btn:hover {
-    background: rgba(255, 255, 255, .7);
+  background: rgba(255, 255, 255, 0.7);
 }
 
 .upload-btn input {
-    opacity: 0;
+  opacity: 0;
+}
+
+form button {
+  padding: 0.2rem;
+  border-radius: 3px;
+  margin: 0.8rem;
+  cursor: pointer;
 }
 
 .output {
-    margin-top: .8rem;
-    height: 1.2rem;
-    font-size: .8rem;
+  margin-top: 0.8rem;
+  height: 1.2rem;
+  font-size: 0.8rem;
 }
 
 .error {
-    padding: .2rem;
-    color: #ff4a4a;
-    border-radius: 3px;
+  padding: 0.2rem;
+  color: #ff4a4a;
+  border-radius: 3px;
 }
 
 .success-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 3rem;
 }
 
 .success-container img {
-    height: 100px;
-    aspect-ratio: 1;
-    margin: 0 2rem;
+  height: 100px;
+  aspect-ratio: 1;
+  margin: 0 2rem;
 }
