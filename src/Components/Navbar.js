@@ -21,7 +21,6 @@ export default function Navbar() {
     let wishListCount = user?.wishList.length || artist?.wishList?.length;
     let cartCount = user?.cart?.length || artist?.cart?.length || initCart?.length;
 
-    
     // LOGOUT
     const handleSignOut = () => {
         logout();
@@ -32,7 +31,6 @@ export default function Navbar() {
     const categories = useCategories()
 
     /*backend search*/
-
     const [value, setValue] = useState("");
     const [products, setProducts] = useState([]);
     const [productResults, setProductResults] = useState([]);
