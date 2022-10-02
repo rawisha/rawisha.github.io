@@ -1,4 +1,3 @@
-
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword,sendEmailVerification, signOut, signInWithEmailAndPassword} from "firebase/auth";
