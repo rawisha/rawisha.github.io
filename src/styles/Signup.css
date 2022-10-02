@@ -173,3 +173,22 @@ margin-top: 40px;
   margin: 2rem;
   font-size: 2rem;
 }
+
+.upload-profile-pic {
+  margin: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.upload-profile-pic label input {
+  display: none;
+}
+
+.upload-profile-pic label {
+  height: 40px;
+  width: 40px;
+  border: 1px solid var(--menu-border-clr);
+  border-radius: 50%;
+}

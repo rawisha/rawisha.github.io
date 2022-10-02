@@ -1,6 +1,6 @@
 import '../styles/Navbar.css'
 import Logo from "../assets/Logo.svg"
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { db, logout } from '../firebase-config'
 import { onSnapshot, collection, query, where } from 'firebase/firestore'

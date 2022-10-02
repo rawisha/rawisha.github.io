@@ -17,7 +17,7 @@ import Searchresult from './pages/Searchresult';
 import ArtistsingleItem from './Components/ArtistsingleItem';
 import Productpage from './pages/Productpage';
 import Admin from './pages/Admin';
-import {React, useEffect, useState, } from 'react';
+import {React, useEffect } from 'react';
 
 function App() {
 
