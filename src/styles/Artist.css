@@ -55,7 +55,7 @@
 }
 
 
-form {
+.artistSearchContainer form {
     color: #555;
     display: flex;
     align-items: center;

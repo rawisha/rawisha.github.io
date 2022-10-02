@@ -104,6 +104,7 @@ export default function Signup() {
           status: 'pending',
           wishList: [],
           cart: [],
+          itemsSold: [],
           createdAt: time,
           timestamp : serverTimestamp() 
         })
@@ -140,8 +141,6 @@ export default function Signup() {
       setError('Please select an image file (png or jpg)');
     }
   };
-
-  console.log(profilePicUrl)
 
   return (
     <>
