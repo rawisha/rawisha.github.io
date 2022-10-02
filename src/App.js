@@ -11,10 +11,11 @@ import BrowsingBy from './pages/BrowsingBy'
 import Pagenotfound from './Components/Pagenotfound';
 import Artistprofile from './pages/Artistprofile';
 import Artistprofile2 from './pages/Artistprofile2';
+import Artistprofile3 from './pages/Artistprofile3';
+import Artistprofile4 from './pages/Artistprofile4';
 import UnderConstruction from './pages/UnderConstruction'
 import ArtistproductPage from './pages/ArtistproductPage';
 import Searchresult from './pages/Searchresult';
-import ArtistsingleItem from './Components/ArtistsingleItem';
 import Productpage from './pages/Productpage';
 import Admin from './pages/Admin';
 import {React, useEffect } from 'react';
@@ -40,8 +41,9 @@ function App() {
           <Route path="/artist" element={<Artist />} />
           <Route path="/artist/:id" element={<ArtistproductPage />} />
           <Route path="/profile" element={<Artistprofile />} />
-          <Route path="/artist3" element={<Artistprofile2 />} />
-          <Route path="/artist4" element={<ArtistsingleItem />} />
+          <Route path="/profile/products" element={<Artistprofile2 />} />
+          <Route path="/profile/upload" element={<Artistprofile3 />} />
+          <Route path="/profile/settings" element={<Artistprofile4 />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/signin" element={<Login />} />
           <Route path="/wishlist" element={<Wishlist />} />
