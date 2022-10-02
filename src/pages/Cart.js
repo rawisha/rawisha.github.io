@@ -122,12 +122,12 @@ export default function Cart() {
             {cart?.map(item => (
                 <li className="cart-main-list-item" key={item?.id}>
                 <div className="list-item-img">
-                    <img src={item?.prod.imageUrl} alt="cart-list-item" />
+                    <img src={item?.prod?.imageUrl} alt="cart-list-item" />
                 </div>
                 <div className="list-item-details">
-                    <p className='list-item-title'>Product: {item?.prod.title}</p>
+                    <p className='list-item-title'>Product: {item?.prod?.title}</p>
                     <span className='list-item-product-number'>Prod nr: 70332</span>
-                    <p className='list-item-artist'>Made by: {item?.prod.by}</p>
+                    <p className='list-item-artist'>Made by: {item?.prod?.by}</p>
                 </div>
                 <div className="list-item-color">
                     <p>Color: Black</p>
@@ -140,7 +140,7 @@ export default function Cart() {
                     </div>
                 </div>
                 <div className="list-item-price">
-                    <p>Price: {item?.prod.price} $</p>
+                    <p>Price: {item?.prod?.price} $</p>
                 </div>
                 <div className="list-item-remove">
                     <i className='fa-solid fa-plus' onClick={(e) => handleDelete(e,item)}></i>
@@ -154,7 +154,7 @@ export default function Cart() {
                 <p>Back to shop</p></Link>
               </div>
               <div className="cart-main-total-price">
-                <p className='total-price'>Subtotal: {cart.reduce((total, item)=>total+(item.prod.price*item.cartAmount),0)} $</p>
+                <p className='total-price'>Subtotal: {cart.reduce((total, item)=>total+(item?.prod?.price*item?.cartAmount),0)} $</p>
               </div>
             </div>
           </div>
