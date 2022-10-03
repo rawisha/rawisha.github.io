@@ -30,6 +30,7 @@
   height: 45px;
   margin-top: 20px;
   background-color: #272727;
+  cursor: pointer;
 }
 
 .loginForm > button::hover {
@@ -88,6 +89,7 @@ margin-top: 20px;
   margin-left: 240px;
   margin-top: 10px;
   font-size: 1em;
+  cursor: pointer;
 }
 
 .resetBack {

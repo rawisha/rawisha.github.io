@@ -97,7 +97,7 @@ const UploadProductForm = ({ upload, artist, setUploadReady }) => {
                     <span>Price</span>
                     <input type="number" onChange={(e) => setPrice(e.target.value)}/>
                 </label>
-                <select name="category-select" onChange={(e) => setCategory(e.target.value)}>
+                <select name="category-select" className="categorySelect" onChange={(e) => setCategory(e.target.value)}>
                     <option value="">--Select Category--</option>
                     {categories.map(category => (
                     <option key={category.id} value={category.handle}>{category.name}</option>
