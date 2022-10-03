@@ -1,4 +1,8 @@
 import {React,useState,useEffect, useContext} from 'react'
+import useCurrentUser from '../hooks/useCurrentUser';
+import useCurrentArtist from '../hooks/useCurrentArtist';
+import { arrayUnion, arrayRemove, doc, updateDoc } from 'firebase/firestore';
+import { db } from '../firebase-config';
 import '../styles/Productpage.css'
 import Navbar from '../Components/Navbar'
 import { Link, useParams, } from 'react-router-dom'
@@ -7,13 +11,79 @@ import useProductById from '../hooks/useProductById'
 import {UserContext} from '../hooks/UserContext'
 export default function Productpage() {
   const {cartState,setCartState} = useContext(UserContext)
+  const user = useCurrentUser()
+  const artist = useCurrentArtist()
+  const [wish, setWish] = useState(false)
   const { id } = useParams()
   const product = useProductById(id)
   const [item, setItem] = useState(1);
   const [catHandle,setCategoryHandle] = useState('')
-  const [btn, setBtn] = useState(true)
+
+  /* HANDLE WISHLIST -- STARTS HERE*/
+  const addToWishList = async (product) => {
+      console.log(product)
+    if(user) {
+      const docRef = doc(db, 'users', `${user?.id}`)
+      await updateDoc(docRef, {
+          wishList: arrayUnion(product)
+      })
+      setWish(true)
+    }else if(!user && !artist)
+    {
+      alert("please login to use Wishlist Function")
+    }
+
+    if(artist) {
+      const docRef = doc(db, 'artists', `${artist?.id}`)
+      await updateDoc(docRef, {
+          wishList: arrayUnion(product)
+      })
+      setWish(true)
+    }
+  }
+
+  const removeFromWishList = async (product) => {
+    
+    if(user) {
+      const docRef = doc(db, 'users', `${user?.id}`)
+      await updateDoc(docRef, {
+          wishList: arrayRemove(product)
+      })
+      
+      setWish(false)
+    }
+    if(artist) {
+      const docRef = doc(db, 'artists', `${artist?.id}`)
+      await updateDoc(docRef, {
+          wishList: arrayRemove(product)
+      })
+      
+      setWish(false)
+    }
+
+  } 
 
 
+    
+    useEffect(() => {
+      if(user){
+        const checkWish = () => {
+          const data = user?.wishList?.some(el => el.id === product.id)
+            if(data) setWish(true)
+          }
+          checkWish()
+      }
+      if(artist) {
+        const checkWish = () => {
+          const data = artist?.wishList?.some(el => el.id === product.id)
+            if(data) setWish(true)
+          }
+          checkWish()
+      }
+    },[user, product.id, artist])
+    
+  
+  /* HANDLE WISHLIST -- ENDS HERE*/
   useEffect(() => {
     if(product.categoryHandle) {
       setCategoryHandle(product.categoryHandle[0].toUpperCase() + product.categoryHandle.substring(1))
@@ -35,7 +105,6 @@ export default function Productpage() {
   const handleAddcart = (e,data) => {
     e.preventDefault()
     setCartState([...cartState,{prod: product, id:product?.id, cartAmount:item}])
-    setBtn(false)
     addToLDB(data)
   }
 
@@ -90,7 +159,8 @@ export default function Productpage() {
         <button onClick={(e) => handleQuantityMinus(e,item)}>-</button>
         <input type="text" pattern="\d*" minLength="1" placeholder={item} value={item}></input>
         <button onClick={(e) => handleQuantityPlus(e,item)}>+</button>
-        <i className="fa-regular fa-heart favHeart"></i>
+        {wish ? <i className="fa-solid fa-heart favHeart" onClick={() => removeFromWishList(product)}></i> : <i className="fa-regular fa-heart favHeart" onClick={() => addToWishList(product)}></i>}
+        
         </div>
       
         <CartButton id={product.id} />

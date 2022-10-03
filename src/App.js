@@ -18,12 +18,18 @@ import ArtistproductPage from './pages/ArtistproductPage';
 import Searchresult from './pages/Searchresult';
 import Productpage from './pages/Productpage';
 import Admin from './pages/Admin';
+import useCurrentUser from './hooks/useCurrentUser'
+import useCurrentArtist from './hooks/useCurrentArtist'
 import {React, useEffect,useContext, useState } from 'react';
 import {UserContext} from './hooks/UserContext'
+import ProtectedRoutes from './Components/ProtectedRoutes';
+
 function App() {
   const [cartState,setCartState] = useState() 
-
-
+  
+  const user = useCurrentUser()
+  const artist = useCurrentArtist()
+  
   
 
   useEffect(() => {
@@ -47,7 +53,7 @@ function App() {
         <UserContext.Provider value={{cartState,setCartState}}>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/admin" element={<Admin />} />
+          <Route path="/admin" element={<ProtectedRoutes />} />
           <Route path="/product/:id" element={<Productpage />} />
           <Route path="/artist" element={<Artist />} />
           <Route path="/artist/:id" element={<ArtistproductPage />} />
