@@ -2,7 +2,7 @@ import React from 'react'
 import '../styles/Artist.css'
 import Navbar from '../Components/Navbar'
 import Footer from '../Components/Footer'
-import { collection, onSnapshot } from 'firebase/firestore'
+import { collection, onSnapshot, query, where } from 'firebase/firestore'
 import { db } from '../firebase-config'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
@@ -15,7 +15,8 @@ export default function Artist() {
     const [searchTerm, setSearchTerm] = useState('')
     
     useEffect(() => {
-        const unsub = onSnapshot(collection(db, 'artists'), snapshot => {
+        const q = query(collection(db, 'artists'), where('status', '==', 'approved'))
+        const unsub = onSnapshot(q, snapshot => {
             setArtists(snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id})))
         })
         return unsub

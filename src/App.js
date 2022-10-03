@@ -17,18 +17,13 @@ import UnderConstruction from './pages/UnderConstruction'
 import ArtistproductPage from './pages/ArtistproductPage';
 import Searchresult from './pages/Searchresult';
 import Productpage from './pages/Productpage';
-import useCurrentUser from './hooks/useCurrentUser'
-import useCurrentArtist from './hooks/useCurrentArtist'
 import {React, useEffect, useState } from 'react';
 import {UserContext} from './hooks/UserContext'
 import ProtectedRoutes from './Components/ProtectedRoutes';
 
 function App() {
   const [cartState,setCartState] = useState() 
-  
-  const user = useCurrentUser()
-  const artist = useCurrentArtist()
-  
+ 
   useEffect(() => {
     const initCart = JSON.parse(localStorage.getItem('cart')) 
     if ( initCart ) {

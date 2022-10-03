@@ -14,6 +14,7 @@ import { FaUserCog } from 'react-icons/fa';
 
 
 export default function Navbar() {
+    
     const navigate = useNavigate()
     const initCart = JSON.parse(localStorage.getItem('cart'))
     const currentUser = useAuth()

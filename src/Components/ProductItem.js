@@ -108,6 +108,8 @@ export default function ProductItem({prods}) {
     
         <div key={prods.id} className='productSingleItemContainer'>
                        <h2 className='cardTitle'>{prods.title}</h2>
+                       <div className="card-sub-container">
+
                         <h3 className='cardSubTitle'>by {prods.by}</h3>
                         <h3 className='cardSubTitle'><Link to={`/category/`+ prods.categoryHandle}>{prods?.categoryHandle[0].toUpperCase() + prods?.categoryHandle.substring(1)}</Link></h3>
                         
@@ -122,6 +124,7 @@ export default function ProductItem({prods}) {
                 
                       <CartButton id={prods.id} />
                         
+                       </div>
                     </div>
           </div>
     

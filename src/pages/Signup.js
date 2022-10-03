@@ -110,6 +110,7 @@ export default function Signup() {
           wishList: [],
           cart: [],
           itemsSold: [],
+          admin: false,
           createdAt: time,
           timestamp : serverTimestamp()
         })

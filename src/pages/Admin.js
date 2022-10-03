@@ -6,7 +6,7 @@ import { collection, doc, getDocs, query, setDoc, updateDoc, where } from "fireb
 import { db } from '../firebase-config'
 import useFeaturedArtist from "../hooks/useFeaturedArtist"
 import { useEffect, useState } from "react"
-import { FaCheckCircle, FaExpeditedssl, FaEye, FaFileInvoice, FaTimes, FaTruck } from 'react-icons/fa'
+import { FaCheckCircle, FaExpeditedssl, FaEye, FaFileInvoice, FaTimes, FaTruck, FaUserCog } from 'react-icons/fa'
 
 export default function Admin() {
 
@@ -38,6 +38,20 @@ export default function Admin() {
             status: 'approved'
         })
         await setStatus(artistName, 'approved')
+    }
+
+    const handleAdmin = async (id, artist) => {
+        if (artist?.admin) {
+            const docRef = doc(db, 'artists', id)
+            await updateDoc(docRef, {
+            admin: false
+            })
+        } else {
+            const docRef = doc(db, 'artists', id)
+            await updateDoc(docRef, {
+                admin: true
+            })
+        }
     }
 
 
@@ -84,14 +98,8 @@ export default function Admin() {
     const handleHoldOrder = (id) => setOrderStatus(id, 'on-hold')     
     const handleTransportOrder = (id) => setOrderStatus(id, 'transporting')
     const handleDeviveredOrder = (id) => setOrderStatus(id, 'delivered')
-
-    const handleSelected = (order) => {
-        setSelected(order)
-    }
-
-    const handleClose = () => {
-        setSelected(null)
-    }
+    const handleSelected = (order) => setSelected(order)
+    const handleClose = () => setSelected(null)
 
   return (
     <>
@@ -130,6 +138,7 @@ export default function Admin() {
                         <th>Member Since</th>
                         <th>Items Sold</th>
                         <th>Status</th>
+                        <th>Admin</th>
                         <th>Action</th>
                         <th>Featured</th>
                     </tr>
@@ -139,9 +148,11 @@ export default function Admin() {
                         <td>{artist?.createdAt}</td>
                         <td>{artist?.itemsSold}</td>
                         <td>{artist?.status}</td>
+                        <td>{artist?.admin ? 'admin' : ''}</td>
                         <td className="action-cell">
                             <i onClick={() => handleReject(artist.id, artist.artistName)} className="fa-solid fa-ban"></i>
                             <i onClick={() => handleApprove(artist.id, artist.artistName)} className="fa-solid fa-check"></i>
+                            <FaUserCog onClick={() => handleAdmin(artist.id, artist)}/>
                         </td>
                         <td className="featured-radio"><input onChange={(e) => setFeaturedArtist(artist)} checked={featured?.id === artist?.id ? true : false} type="radio" name="featured"/></td>
                     </tr>

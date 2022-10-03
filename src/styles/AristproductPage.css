@@ -4,11 +4,15 @@
     align-items: center;
     justify-content: center;
     margin-top: 40px;
+    flex-wrap: wrap;
 }
 
 .productContainer {
     display: flex;
     flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    flex-wrap: wrap;
 }
 
 .cardTitle, .cardSubTitle, .priceText2{
