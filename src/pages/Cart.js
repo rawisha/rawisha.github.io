@@ -6,7 +6,7 @@ import '../styles/PendingOrder.css'
 import Logo from "../assets/Logo.svg"
 import { Link } from 'react-router-dom'
 import CartListItem from '../Components/CartListItem'
-import { useState,useEffect } from 'react'
+import { useState,useEffect,useContext } from 'react'
 import useCurrentUser from '../hooks/useCurrentUser'
 import useCurrentArtist from '../hooks/useCurrentArtist'
 import Visa from '../assets/visa-logo.png'
@@ -16,14 +16,12 @@ import ApplePay from '../assets/ApplePay.png'
 import ShortUniqueId from 'short-unique-id';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 import { db } from '../firebase-config'
+import {UserContext} from '../hooks/UserContext'
 
 export default function Cart() {
+  const {cartState,setCartState} = useContext(UserContext)
   const user = useCurrentUser()
   const artist = useCurrentArtist()
-  const initCart = JSON.parse(localStorage.getItem('cart')) || []
-  const [newAmount,setNewAmount] = useState()
-  const [cart,setCart] = useState(initCart)
-  const [count,setCount] = useState(0)
 
   const [checkOne, setCheckOne] = useState(true)
   const [checkTwo, setCheckTwo] = useState(false)
@@ -61,40 +59,39 @@ export default function Cart() {
     if(artist) setName( artist ? artist?.firstName + ' ' + artist?.lastName : '')
   }, [user, artist])
 
-  useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cart))
-    setCount(cart.length)
-},[cart,newAmount])
 
-  const handleIncrease = (e,item) => {
-    e.preventDefault()
-    const index = cart.findIndex(f => f.id === item.id)
+
+  const handleIncrease = ({id}) => {
+    if(id){
+      const index = cartState.findIndex(f => f.id === id)
     const data = localStorage.getItem('cart')
     if(data !=null){
       let newData = JSON.parse(data)
-      newData[index].cartAmount = cart[index].cartAmount + 1
+      newData[index].cartAmount = cartState[index].cartAmount + 1
       localStorage.setItem('cart', JSON.stringify(newData));
-      setCart(newData)
+      setCartState(newData)
+    }
+    }
+    return 
+    
+  }
+
+  const handleDecrease = ({id}) => {
+    const index = cartState.findIndex(f => f.id === id)
+    const data = localStorage.getItem('cart')
+    if(data !=null){
+      let newData = JSON.parse(data)
+      newData[index].cartAmount = cartState[index].cartAmount - 1
+      if(newData[index].cartAmount === 0) return
+      localStorage.setItem('cart', JSON.stringify(newData));
+      setCartState(newData)
     }
   }
 
-  const handleDecrease = (e,item) => {
-    e.preventDefault()
-    const index = cart.findIndex(f => f.id === item.id)
-    const data = localStorage.getItem('cart')
-    if(data !=null){
-      let newData = JSON.parse(data)
-      newData[index].cartAmount = newData[index].cartAmount - 1
-      if(newData[index].cartAmount === 0) return
-      localStorage.setItem('cart', JSON.stringify(newData));
-      setCart(newData)
-    } 
-  }
-
-  const handleDelete = (e,item) => {
-    e.preventDefault()
-    const newCart = cart.filter(f => item.id !== f.id)
-    setCart([...newCart])
+  const handleDelete = ({id}) => {
+    const newCart = cartState.filter(f => id !== f.id)
+    localStorage.setItem('cart', JSON.stringify(newCart));
+    setCartState([...newCart])
   }
 
   /* ----- Checkout ----- */
@@ -180,7 +177,7 @@ export default function Cart() {
       setTimeout(() => {
         setPendingOrder(false)
         setSuccess(true)
-        setCart([])
+        setCartState([])
       }, 3000)
     })
     setCheckKiss(true)
@@ -199,7 +196,7 @@ export default function Cart() {
           </div>
           <div className="cart-main">
            <ul className="cart-main-list"> 
-            {cart?.map(item => (
+            {cartState?.map(item => (
                 <li className="cart-main-list-item" key={item?.id}>
                 <div className="list-item-img">
                     <img src={item?.prod?.imageUrl} alt="cart-list-item" />
@@ -215,15 +212,15 @@ export default function Cart() {
                 <div className="list-item-amount-container">
                     <div className="list-item-amount"><p>{item?.cartAmount}</p></div>
                     <div className="list-item-change-amount">
-                    <div className="add"><button onClick={(e) => handleIncrease(e,item)}>+</button></div>
-                    <div className="sub"><button onClick={(e) => handleDecrease(e,item)}>-</button></div>
+                    <div className="add"><button onClick={() => handleIncrease(item)}>+</button></div>
+                    <div className="sub"><button onClick={() => handleDecrease(item)}>-</button></div>
                     </div>
                 </div>
                 <div className="list-item-price">
                     <p>Price: {item?.prod?.price} $</p>
                 </div>
                 <div className="list-item-remove">
-                    <i className='fa-solid fa-plus' onClick={(e) => handleDelete(e,item)}></i>
+                    <i className='fa-solid fa-plus' onClick={() => handleDelete(item)}></i>
                 </div>
             </li>
               ))}
@@ -234,7 +231,7 @@ export default function Cart() {
                 <p>Back to shop</p></Link>
               </div>
               <div className="cart-main-total-price">
-                <p className='total-price'>Subtotal: {cart.reduce((total, item)=>total+(item?.prod?.price*item?.cartAmount),0)} $</p>
+                <p className='total-price'>Subtotal: {cartState && cartState?.reduce((total, item)=>total+(item.prod.price*item.cartAmount),0)} $</p>
               </div>
             </div>
           </div>
