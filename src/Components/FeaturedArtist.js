@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import useFeaturedArtist from '../hooks/useFeaturedArtist'
+import '../styles/Artist.css'
 
 export default function FeaturedArtist() {
 

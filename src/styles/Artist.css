@@ -9,6 +9,7 @@
   margin-top: 40px;
 }
 
+
 .artistContainer > h1 {
   font-size: 48px;
   font-weight: 400;
@@ -28,6 +29,7 @@
 .artistCardContainer {
   margin-top: 25px;
   margin-bottom: 25px;
+
 }
 
 #artistTitle {
@@ -37,7 +39,7 @@
   margin-bottom: 5px;
 }
 
-.artistCardContainer > img {
+.artistCardContainer img {
   margin-top: 5px;
   border-radius: 150px;
   width: 200px;
