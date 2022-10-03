@@ -3,6 +3,7 @@
 .upload-form {
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-direction: column;
     font-size: 1.2rem;
     margin: 1rem;
@@ -10,6 +11,9 @@
 }
 
 .upload-form label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 1rem;
     text-align: center;
 }
@@ -20,8 +24,13 @@
     width: 100%;
 }
 
+.upload-form input {
+  width: 250px;
+}
+
 .upload-form textarea {
     height: 120px;
+    width: 250px;
 }
 
 .upload-form select {
@@ -29,6 +38,7 @@
     outline: none;
     padding: .2rem;
     margin-bottom: 1rem;
+    width: 250px;
 }
 
 .upload-form .title input {
@@ -64,13 +74,6 @@
   opacity: 0;
 }
 
-form button {
-  padding: 0.2rem;
-  border-radius: 3px;
-  margin: 0.8rem;
-  cursor: pointer;
-}
-
 .output {
   margin-top: 0.8rem;
   height: 1.2rem;
@@ -79,7 +82,7 @@ form button {
 
 .error {
   padding: 0.2rem;
-  color: #ff4a4a;
+  color: var(--danger);
   border-radius: 3px;
 }
 

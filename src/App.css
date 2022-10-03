@@ -19,7 +19,7 @@ i {
 }
 
 :root {
-  --danger: red;
+  --danger: #ff4a4a;
   --success: green;
 
   --checkout-bg: #454545;

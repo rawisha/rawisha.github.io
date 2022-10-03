@@ -158,8 +158,8 @@ export default function Signup() {
       <Navbar />
       {success ? <div>
         <div className='logoWrapperWelcome'>
-            <h1 id="logoWelcome">ART<span id="logoWelcomeTwo">ZY</span></h1>
-            <img id="logoWelcome--svg" src={Logo} alt="ARTZY Logo" />
+            <Link to="/"><h1 id="logoWelcome">ART<span id="logoWelcomeTwo">ZY</span></h1>
+            <img id="logoWelcome--svg" src={Logo} alt="ARTZY Logo" /></Link>
         </div>
         <br/>
         <br/>
@@ -168,7 +168,7 @@ export default function Signup() {
                     <h1>Thanks for your registration <b>{currentUser?.firstName  || currentArtist?.firstName} {currentUser?.lastName || currentArtist?.lastName}!</b></h1>
                     <p>A verification link is sent to your e-mail:&nbsp;<b>{currentUser?.eMail || currentArtist?.eMail}!</b></p>
                     <p>Please click on the link in your mail to get verified.</p>
-                    <p><Link id="link" to="/"><b>Home</b></Link></p>
+                    <p><Link id="link" to="/signin"><b>Sign in</b></Link></p>
                 </div>
         </div>
       </div>:
