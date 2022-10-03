@@ -2,7 +2,7 @@ import React from 'react'
 import Navbar from '../Components/Navbar'
 import "../styles/Signup.css"
 import Footer from '../Components/Footer'
-import { signup, db, storage, emailVerification } from '../firebase-config'
+import { signup, db, emailVerification, logout, storage } from '../firebase-config'
 import { useRef, useState } from 'react'
 import { doc , setDoc, serverTimestamp } from 'firebase/firestore'
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
@@ -10,7 +10,7 @@ import { v4 as uuid } from 'uuid'
 import UploadProductForm from '../Components/UploadProductForm'
 import useCurrentUser from '../hooks/useCurrentUser'
 import useCurrentArtist from '../hooks/useCurrentArtist'
-import successImg from '../assets/success.png'
+import Logo from "../assets/Logo.svg"
 import { Link } from 'react-router-dom'
 
 export default function Signup() {
@@ -57,11 +57,15 @@ export default function Signup() {
     setHideElements((hideElements) => !hideElements);
   }
 
+  
+
   async function handleSignupUser(){
     if(firstNameRef.current.value === '') return setError('Please fill in all fields')
     if(lastNameRef.current.value === '') return setError('Please fill in all fields')
     if(emailRef.current.value === '') return setError('Please fill in all fields')
-    if(passwordRef.current.value === '') return setError('Please fill in all fields')
+    if(passwordRef.current.value === '') return setError('Please fill in all fields')   
+
+
     setLoading(true);
     try{
       await signup(emailRef.current.value, passwordRef.current.value).then (cred =>{
@@ -69,18 +73,20 @@ export default function Signup() {
           firstName : firstNameRef.current.value,
           lastName : lastNameRef.current.value,
           eMail : emailRef.current.value,
-          wishList: [],
-          cart: [],
           createdAt: time, 
-          timestamp : serverTimestamp()
+          timestamp : serverTimestamp(),
+          wishList: [],
+          cart: []
         })
         emailVerification();
       })
     } catch (error){
+      if(error.code === 'auth/email-already-in-use') return setError ("Email is already in use! Try another one.");
       setError(error)
     }
     setLoading(false);
     setSuccess(true)
+    logout();
   }
 
   async function handleSignupArtist(){
@@ -91,6 +97,7 @@ export default function Signup() {
     if(emailRef.current.value === '') return setError('Please fill in all fields')
     if(passwordRef.current.value === '') return setError('Please fill in all fields')
     if(textAreaTextRef.current.value === '') return setError('Please fill in all fields')
+
     setLoading(true);
     try{
       await signup(emailRef.current.value, passwordRef.current.value).then (cred =>{
@@ -106,18 +113,22 @@ export default function Signup() {
           cart: [],
           itemsSold: [],
           createdAt: time,
-          timestamp : serverTimestamp() 
+          timestamp : serverTimestamp(),
+          wishList: [],
+          cart: []
         })
         emailVerification();
         setUpload(true)
       })
     } catch (error){
+      if(error.code === 'auth/email-already-in-use') return setError ("Email is already in use! Try another one.");
       setError(error)
     }
     setLoading(false);
     setTimeout(() => {
       setSuccess(true)
     }, 2000)
+    logout();
   }
   
   const types = ['image/png', 'image/jpeg'];
@@ -145,13 +156,22 @@ export default function Signup() {
   return (
     <>
       <Navbar />
-      {success ? 
-      <div className='success-welcome-container'>
-        <h1>Welcome {currentUser?.firstName || currentArtist?.firstName}!</h1>
-        <img src={successImg} alt="success" />
-        <h2>A verificationlink is sent to your e-mail</h2>
-        <Link to="/">Go to Home</Link>
-      </div> :
+      {success ? <div>
+        <div className='logoWrapperWelcome'>
+            <h1 id="logoWelcome">ART<span id="logoWelcomeTwo">ZY</span></h1>
+            <img id="logoWelcome--svg" src={Logo} alt="ARTZY Logo" />
+        </div>
+        <br/>
+        <br/>
+        <div className="welcomeDiv">            
+                <div className='welcomeContent'>
+                    <h1>Thanks for your registration <b>{currentUser?.firstName  || currentArtist?.firstName} {currentUser?.lastName || currentArtist?.lastName}!</b></h1>
+                    <p>A verification link is sent to your e-mail:&nbsp;<b>{currentUser?.eMail || currentArtist?.eMail}!</b></p>
+                    <p>Please click on the link in your mail to get verified.</p>
+                    <p><Link id="link" to="/"><b>Home</b></Link></p>
+                </div>
+        </div>
+      </div>:
       <div className="signupForm">
         <h1 style={{ display: hideElements ? "block" : "none" }}>Register</h1>
         <h1 style={{ display: checked ? "block" : "none" }} >Artist Application</h1>
@@ -165,7 +185,7 @@ export default function Signup() {
         <input type= "text" ref ={artistNameRef} onChange={(e) => setArtist(e.target.value.trim())} style={{ display: checked ? "block" : "none" }} placeholder="Artist Name" required></input>
         <input type = "email" ref = { emailRef }placeholder="Email" required ></input>
         <input type = "password" ref= { passwordRef } placeholder="Password (8 Digits)" minLength="8" required></input>
-        {error && !checked && <p className='error'>{error}</p>}
+        {error && !checked && <p className='errorSignup'>{error}</p>}
         <button disabled = {loading} style={{ display: hideElements ? "block" : "none" }}onClick={handleSignupUser}><h2>Create</h2></button>
       
         <div style={{ display: checked ? "block" : "none" }} className="applicationDiv">
@@ -185,7 +205,8 @@ export default function Signup() {
               </label>
             </div>
             { !error && profilePic && <div>{ profilePic.name }</div> }
-            {error && <p className='error'>{error}</p>}
+            
+            {error && <p className='errorSignup'>{error}</p>}
             <button disabled = {loading} onClick={ () => { handleSignupArtist() } } ><h2>Register</h2></button>
           </div>
         </div>   

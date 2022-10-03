@@ -13,6 +13,7 @@
   align-items: center;
   flex-direction: column;
   margin-top: 40px;
+  width: auto;
 }
 
 .loginForm > input {
@@ -65,10 +66,25 @@
   text-align: center;
 }
 
-.error {
+.errorLogin {
   color: var(--danger);
+  font-size: 1.1em;
+  font-weight: 900;
+
 }
 
 .success {
   color: var(--success);
+}
+
+.reset {
+  margin-left: 240px;
+  margin-top: 10px;
+  font-size: 1em;
+}
+
+.resetBack {
+  margin-left: 320px;
+  margin-top: 10px;
+  font-size: 1em;
 }

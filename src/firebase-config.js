@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { getAuth, createUserWithEmailAndPassword,sendEmailVerification, signOut, signInWithEmailAndPassword} from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword,sendEmailVerification, signOut, signInWithEmailAndPassword, sendPasswordResetEmail} from "firebase/auth";
 import { getStorage } from 'firebase/storage'
 
 // //DB1
@@ -56,4 +56,9 @@ export function logout() {
 export function login(email, password) {
   return signInWithEmailAndPassword(auth, email, password)
 }
+
+export function resetPassword(email){
+  return sendPasswordResetEmail (auth, email)
+}
+
 
