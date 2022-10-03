@@ -2,6 +2,7 @@ import React from 'react'
 import Footer from '../Components/Footer'
 import Navbar from '../Components/Navbar'
 import '../styles/Cart.css'
+import '../styles/PendingOrder.css'
 import Logo from "../assets/Logo.svg"
 import { Link } from 'react-router-dom'
 import CartListItem from '../Components/CartListItem'
@@ -12,6 +13,9 @@ import Visa from '../assets/visa-logo.png'
 import Mastercard from '../assets/Mastercard.png'
 import Paypal from '../assets/paypal.png'
 import ApplePay from '../assets/ApplePay.png'
+import ShortUniqueId from 'short-unique-id';
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
+import { db } from '../firebase-config'
 
 export default function Cart() {
   const user = useCurrentUser()
@@ -46,15 +50,16 @@ export default function Cart() {
   const [email, setEmail] = useState('')
   const [feedback, setFeedback] = useState('')
   const [orderID, setOrderID] = useState('')
-  const [agree, setAgree] = useState(false)
+
+  const [order, setOrder] = useState({})
+  const [orderDetails, setOrderDetails] = useState({})
+  const [pendingOrder, setPendingOrder] = useState(false)
+  const [success, setSuccess] = useState(false)
 
   useEffect( () => {
     if(user) setName( user ? user?.firstName + ' ' + user?.lastName : '')
     if(artist) setName( artist ? artist?.firstName + ' ' + artist?.lastName : '')
   }, [user, artist])
-  
-  useEffect( () => {
-  },[artist])
 
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart))
@@ -93,6 +98,12 @@ export default function Cart() {
   }
 
   /* ----- Checkout ----- */
+  const getOrderId = () => {
+    const uid = new ShortUniqueId()
+    const id = uid.stamp(16).slice(0,8).toUpperCase()
+    return id
+  }
+
   const handleCheckoutZero = (e) => {
     e.preventDefault()
     setCheckOne(true)
@@ -121,27 +132,58 @@ export default function Cart() {
     if(!CVV) return setError('Please fill in CVV')
     setCheckTwo(false)
     setCheckThree(true)
-    setOrderID(123456789)
+    setOrderID(getOrderId())
+    setError('')
   }
   
-  const handleCheckoutThree = (e) => {
+  const handleCheckoutThree = async (e) => {
     e.preventDefault()
-    setCheckThree(false)
-    setCheckKiss(true)
+    if(!email) return setError('Please enter email')
 
-    const order = {
+    const orderDetails = {
       name: name,
       address : address,
       addressTwo : addressTwo,
-
+      city: city,
+      zip: zip,
+      country: country,
+      cardOwner: cardOwner,
+      cardNumber: cardNumber,
+      expiryMonth: expiryMonth,
+      expiryYear: expiryYear,
+      CVV: CVV,
+      email: email,
+      feedback: feedback,
+      orderID: orderID,
+      status: 'pending'
     }
+
+    setOrderDetails(orderDetails)
+
+    const order = JSON.parse(localStorage.getItem('cart'))
+    setOrder(order)
+
+    handleOrder(order, orderDetails)
+    setCheckThree(false)
+    setPendingOrder(true)
+    setError('')
   }
-
-
-  /* ----- Place order ----- */
   
-  const handleOrder = async () => {
-    console.log('order')
+  /* ----- Place order ----- */
+  const handleOrder = async (order, orderDetails) => {    
+    const colRef = collection(db, 'orders')
+    await addDoc(colRef, {
+      order: order,
+      orderDetails: orderDetails,
+      createdAt: serverTimestamp()
+    }).then(() => {
+      setTimeout(() => {
+        setPendingOrder(false)
+        setSuccess(true)
+        setCart([])
+      }, 3000)
+    })
+    setCheckKiss(true)
   }
 
 
@@ -287,19 +329,19 @@ export default function Cart() {
               <label>E-mail for reciept</label>
               <input type="email" onChange={(e) => setEmail(e.target.value)} value={email}/>
               <label>Order ID</label>
-              <input type="text" disabled="true" value={orderID}/>
+              <input type="text" disabled={true} value={orderID}/>
               <label>Anything we should know?</label>
               <textarea onChange={(e) => setFeedback(e.target.value)} cols="30" rows="10"></textarea>
-              <div className="agreement">
-                <input onChange={(e) => setAgree(e.target.value)} className='checkout-agreement' type="checkbox" />
-                <p className='agreement-text'>I agree with terms of sale</p>
-              </div>
             </form>
+            {error && <div className='checkout-error'>{error}</div>}
             <button onClick={handleCheckoutThree} className="order-btn">Place order and mail my reciept</button>
           </div>}
+          {pendingOrder && <div className='pending-order'>
+            <div className="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+          </div>}
+          {success && <></>}
           {checkKiss && <div className="kiss">&#128536;</div>}
         </div>
-
       </div>
 
       <Footer />
