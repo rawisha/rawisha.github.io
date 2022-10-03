@@ -197,7 +197,6 @@ export default function Signup() {
           </div>
           <div className="uploadForm"> 
             <textarea ref={textAreaTextRef} cols="80" rows="15" placeholder='About you and your work'></textarea>
-            {error && <p className='errorSignup'>{error}</p>}
             <div className="upload-profile-pic">
               <h2>Upload a profile picture!</h2>
               <label className="upload-btn">
@@ -206,7 +205,8 @@ export default function Signup() {
               </label>
             </div>
             { !error && profilePic && <div>{ profilePic.name }</div> }
-            {error && <p className='error'>{error}</p>}
+            
+            {error && <p className='errorSignup'>{error}</p>}
             <button disabled = {loading} onClick={ () => { handleSignupArtist() } } ><h2>Register</h2></button>
           </div>
         </div>   

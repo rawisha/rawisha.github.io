@@ -191,7 +191,7 @@ a {
   font-size: 40px;
   width: 121px;
   height: 70px;
-  font-weight: 400;
+  font-weight: 900;
   color: #dc3838;
   margin-left: 90px;
 }
@@ -201,11 +201,11 @@ a {
   font-size: 40px;
   width: 121px;
   height: 70px;
-  font-weight: 400;
+  font-weight: 900;
   color: #ae0c94;
 }
 #logoText--svg {
-  margin-left: 10px;
+  margin-left: 15px;
   scale: 1.5;
 }
 

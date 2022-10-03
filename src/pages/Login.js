@@ -41,14 +41,14 @@ export default function Login() {
     setLoading(true);
     try {
       await resetPassword(emailResetRef.current.value)
-      setSuccess("Reset mail sent! Follow the link and reset your password. You'll be shortly resend back to home.")
+      setSuccess("Reset mail sent! Follow the link and reset your password. You'll be shortly redirected back to home.")
       setTimeout(() => {
         navigate('/')
       }, 4000)
     } catch (error) {
       console.log(error.code);
-      if(error.code === 'auth/invalid-email') return setError ("Account doesn't exist! You'll be shortly resend back to sign in.");
-      if(error.code === 'auth/user-not-found') return setError ("Account doesn't exist! You'll be shortly resend back to sign in");
+      if(error.code === 'auth/invalid-email') return setError ("Account doesn't exist! You'll be shortly redirected back to sign in.");
+      if(error.code === 'auth/user-not-found') return setError ("Account doesn't exist! You'll be shortly redirected back to sign in");
       setError(error)
     }
     setLoading(false);
