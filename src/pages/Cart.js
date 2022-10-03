@@ -5,7 +5,6 @@ import '../styles/Cart.css'
 import '../styles/PendingOrder.css'
 import Logo from "../assets/Logo.svg"
 import { Link } from 'react-router-dom'
-import CartListItem from '../Components/CartListItem'
 import { useState,useEffect,useContext } from 'react'
 import useCurrentUser from '../hooks/useCurrentUser'
 import useCurrentArtist from '../hooks/useCurrentArtist'
@@ -17,6 +16,7 @@ import ShortUniqueId from 'short-unique-id';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 import { db } from '../firebase-config'
 import {UserContext} from '../hooks/UserContext'
+import { FaTimes } from 'react-icons/fa'
 
 export default function Cart() {
   const {cartState,setCartState} = useContext(UserContext)
@@ -234,7 +234,7 @@ export default function Cart() {
                     <p>Price: {item?.prod?.price} $</p>
                 </div>
                 <div className="list-item-remove">
-                    <i className='fa-solid fa-plus' onClick={() => handleDelete(item)}></i>
+                    <FaTimes onClick={() => handleDelete(item)}/>
                 </div>
             </li>
               ))}

@@ -64,8 +64,6 @@ export default function Signup() {
     if(lastNameRef.current.value === '') return setError('Please fill in all fields')
     if(emailRef.current.value === '') return setError('Please fill in all fields')
     if(passwordRef.current.value === '') return setError('Please fill in all fields')   
-
-
     setLoading(true);
     try{
       await signup(emailRef.current.value, passwordRef.current.value).then (cred =>{
@@ -113,9 +111,7 @@ export default function Signup() {
           cart: [],
           itemsSold: [],
           createdAt: time,
-          timestamp : serverTimestamp(),
-          wishList: [],
-          cart: []
+          timestamp : serverTimestamp()
         })
         emailVerification();
         setUpload(true)

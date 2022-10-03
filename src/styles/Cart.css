@@ -43,8 +43,8 @@
 .cart-main-list-item {
     background: var(--cart-bg);
     margin-bottom: .4rem;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(6,  1fr);
     width: 100%;
     padding-right: 3rem;
 }
@@ -126,12 +126,12 @@
     padding-left: 1rem;
 }
 
-.list-item-remove i {
+.list-item-remove svg {
     cursor: pointer;
-    transform: rotate(45deg);
+    font-size: 1.4rem;
 }
 
-.list-item-remove i:hover {
+.list-item-remove svg:hover {
     color: var(--danger);
 }
 
@@ -160,6 +160,7 @@
 
 .cart-main-total-price > p {
     font-weight: 800;
+    font-size: 1.2rem;
 }
 
 

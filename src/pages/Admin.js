@@ -65,7 +65,6 @@ export default function Admin() {
     const pendingOrders = ordersFromDB.filter(order => order.status === 'pending')
 
     const [selected, setSelected] = useState()
-    const [orderCart, setOrderCart] = useState()
 
     const amountOfProductsInOrder = (order) => {
         let amount = 0;
@@ -88,13 +87,10 @@ export default function Admin() {
 
     const handleSelected = (order) => {
         setSelected(order)
-        setOrderCart(order?.orderCart)
-        console.log(order)
     }
 
     const handleClose = () => {
         setSelected(null)
-        setOrderCart(null)
     }
 
   return (

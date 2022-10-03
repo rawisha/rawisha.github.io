@@ -303,3 +303,11 @@ a {
 }
 
 /* --x-- Profile settings link --x-- */
+
+.admin-link {
+  position: absolute;
+  top: .2rem;
+  left: .2rem;
+  color: #ddd;
+  
+}

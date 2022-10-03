@@ -17,10 +17,9 @@ import UnderConstruction from './pages/UnderConstruction'
 import ArtistproductPage from './pages/ArtistproductPage';
 import Searchresult from './pages/Searchresult';
 import Productpage from './pages/Productpage';
-import Admin from './pages/Admin';
 import useCurrentUser from './hooks/useCurrentUser'
 import useCurrentArtist from './hooks/useCurrentArtist'
-import {React, useEffect,useContext, useState } from 'react';
+import {React, useEffect, useState } from 'react';
 import {UserContext} from './hooks/UserContext'
 import ProtectedRoutes from './Components/ProtectedRoutes';
 

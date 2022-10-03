@@ -10,6 +10,7 @@ import useCurrentUser from '../hooks/useCurrentUser';
 import useCategories from '../hooks/useCategories';
 import MenuProductItem from './MenuProductItem';
 import useCurrentArtist from '../hooks/useCurrentArtist'
+import { FaUserCog } from 'react-icons/fa';
 
 
 export default function Navbar() {
@@ -72,7 +73,7 @@ export default function Navbar() {
 
     return (
         <div className='Navbar'>
-            <Link className="admin-link" to="/admin">ADMIN</Link>
+            <Link className="admin-link" to="/admin"><FaUserCog className='admin-icon'/></Link>
             {artist && <>
                 <div className="profile-settings-icon-container">
                 <Link to="/profile"><i className='fa-solid fa-gear profile-settings-icon'></i></Link>
