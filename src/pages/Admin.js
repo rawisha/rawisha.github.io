@@ -4,6 +4,8 @@ import '../styles/Admin.css'
 import useGetAll from '../hooks/useGetAll'
 import { collection, doc, getDocs, query, setDoc, updateDoc, where } from "firebase/firestore"
 import { db } from '../firebase-config'
+import useFeaturedArtist from "../hooks/useFeaturedArtist"
+import { useEffect, useState } from "react"
 
 export default function Admin() {
 
@@ -37,25 +39,52 @@ export default function Admin() {
         await setStatus(artistName, 'approved')
     }
 
-    const setFeatured = async (artist) => {
+
+    // Featured Artist
+    const [featured, setFeatured] = useState()
+    const currentFeatured = useFeaturedArtist()
+
+    const setFeaturedArtist = async (artist) => {
+        setFeatured(artist)
         const docRef = doc(db, 'featured', 'featuredArtist')
         await setDoc(docRef, {
             featuredArtist: artist
+        }).then(() => {
+            setFeatured(artist)
         })
     }
+
+    useEffect(() => {
+        setFeatured(currentFeatured?.featuredArtist)
+    }, [currentFeatured])
+
+    // Orders
+    const orders = useGetAll('orders')
+    const [selected, setSelected] = useState()
+
+    const amountOfProductsInOrder = (order) => {
+        let amount = 0;
+        order.orderCart.forEach(cart => {
+            amount = amount + cart.cartAmount
+        })
+        return amount
+    }
+
+
+
 
   return (
     <>
         <Navbar />
 
         <div className="admin-container">
-            
+
             <h1>Pending Requests</h1>
             <table className="artists-table-pending">
                 <tbody>
                     <tr>
                         <th>Name</th>
-                        <th>Member Since</th>
+                        <th>Applied At</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -74,7 +103,7 @@ export default function Admin() {
             </table>
             
             <h1>Members</h1>
-            <table className="artists-table">
+            <table className="artists-table-members">
                 <tbody>
                     <tr>
                         <th>Name</th>
@@ -94,7 +123,34 @@ export default function Admin() {
                             <i onClick={() => handleReject(artist.id, artist.artistName)} className="fa-solid fa-ban"></i>
                             <i onClick={() => handleApprove(artist.id, artist.artistName)} className="fa-solid fa-check"></i>
                         </td>
-                        <td className="featured-radio"><input onChange={(e) => setFeatured(artist)} type="radio" name="featured"/></td>
+                        <td className="featured-radio"><input onChange={(e) => setFeaturedArtist(artist)} checked={featured?.id === artist?.id ? true : false} type="radio" name="featured"/></td>
+                    </tr>
+                    ))}
+                </tbody>
+            </table>
+            
+            <h1>Orders</h1>
+            <table className="orders-table">
+                <tbody>
+                    <tr>
+                        <th>OrderID</th>
+                        <th>Date</th>
+                        <th>Products</th>
+                        <th>Status</th>
+                        <th>Amount</th>
+                        <th>Action</th>
+                    </tr>
+                    {orders?.map((order, item) => (
+                    <tr key={order?.id}>
+                        <td>{order?.orderID}</td>
+                        <td>{order?.orderDetails?.date}</td>
+                        <td>{amountOfProductsInOrder(order)}</td>
+                        <td>{order?.status}</td>
+                        <td>{order?.total} $</td>
+                        {/* <td className="action-cell">
+                            <i onClick={() => handleReject(artist.id, artist.artistName)} className="fa-solid fa-ban"></i>
+                            <i onClick={() => handleApprove(artist.id, artist.artistName)} className="fa-solid fa-check"></i>
+                        </td> */}
                     </tr>
                     ))}
                 </tbody>

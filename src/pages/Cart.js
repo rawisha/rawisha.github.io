@@ -49,8 +49,6 @@ export default function Cart() {
   const [feedback, setFeedback] = useState('')
   const [orderID, setOrderID] = useState('')
 
-  const [order, setOrder] = useState({})
-  const [orderDetails, setOrderDetails] = useState({})
   const [pendingOrder, setPendingOrder] = useState(false)
   const [success, setSuccess] = useState(false)
 
@@ -58,8 +56,6 @@ export default function Cart() {
     if(user) setName( user ? user?.firstName + ' ' + user?.lastName : '')
     if(artist) setName( artist ? artist?.firstName + ' ' + artist?.lastName : '')
   }, [user, artist])
-
-
 
   const handleIncrease = ({id}) => {
     if(id){
@@ -137,6 +133,25 @@ export default function Cart() {
     e.preventDefault()
     if(!email) return setError('Please enter email')
 
+    const orderCart = JSON.parse(localStorage.getItem('cart'))
+
+    const getCreatedAtString = () => {
+      const addZero = (number) => {
+          if(String(number).length < 2) {
+              number = '0' + number
+          }
+          return number
+      }
+      const date = new Date()
+      const Y = date.getFullYear()
+      const M = date.getMonth()
+      const D = date.getDate()
+      const time = Y + '-' + addZero(M) + '-' + addZero(D)
+      return time
+    }
+  
+    const time = getCreatedAtString()
+
     const orderDetails = {
       name: name,
       address : address,
@@ -152,39 +167,36 @@ export default function Cart() {
       email: email,
       feedback: feedback,
       orderID: orderID,
-      status: 'pending'
+      date: time
     }
 
-    setOrderDetails(orderDetails)
-
-    const order = JSON.parse(localStorage.getItem('cart'))
-    setOrder(order)
-
-    handleOrder(order, orderDetails)
+    handleOrder(orderCart, orderDetails, orderID)
     setCheckThree(false)
     setPendingOrder(true)
     setError('')
   }
   
   /* ----- Place order ----- */
-  const handleOrder = async (order, orderDetails) => {    
+  const handleOrder = async (orderCart, orderDetails, orderID) => {    
+    const total = cartState?.reduce((total, item)=>total+(item.prod.price*item.cartAmount),0)
     const colRef = collection(db, 'orders')
     await addDoc(colRef, {
-      order: order,
+      orderCart: orderCart,
       orderDetails: orderDetails,
+      orderID: orderID,
+      total: total, 
+      status: 'pending',
       createdAt: serverTimestamp()
     }).then(() => {
       setTimeout(() => {
         setPendingOrder(false)
         setSuccess(true)
         setCartState([])
+        localStorage.setItem('cart', JSON.stringify([]))
       }, 3000)
     })
     setCheckKiss(true)
   }
-
-  console.log(cartState)
-
 
   return (
     <>
