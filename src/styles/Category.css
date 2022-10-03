@@ -15,10 +15,7 @@
 }
 
 .categoryView {
-  margin-right: 100px;
-  margin-left: 100px;
-  margin-top: 96px;
-  margin-bottom: 8rem;
+  margin: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;

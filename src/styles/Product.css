@@ -7,7 +7,14 @@
 }
 
 .productSingleItemContainer {
-    margin-left: 40px;
+    margin: 20px 20px;
+    padding: .2rem;
+    box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, .1);
+}
+
+.productSingleItemContainer:hover {
+    transform: scale(1.02);
+    transition: all 100ms ease-in-out;
 }
 
 .categoryTitle {
@@ -39,6 +46,7 @@
 
 .imageContainer img{
     border-radius: 4px;
+    margin-bottom: .2rem;
 }
 
 
