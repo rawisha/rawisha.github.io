@@ -97,7 +97,7 @@ export default function Login() {
             <button disabled={loading} onClick={ () => { handleReset(); backHome() } } style={{ display: clicked ? "block" : "none" }}><h2>Reset Password</h2></button>
 
             <button disabled={loading} onClick={handleLogin} style={{ display: hideElements ? "block" : "none" }}><h2>Login</h2></button>
-            <p>Not a Member?  <a href="/signup">Sign Up!</a></p>
+            <p className="not-a-member">Not a Member? <br></br><a href="/signup">Sign Up!</a></p>
             
           </form>
         </div>
