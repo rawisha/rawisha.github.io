@@ -1,29 +1,28 @@
-
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword,sendEmailVerification, signOut, signInWithEmailAndPassword, sendPasswordResetEmail} from "firebase/auth";
 import { getStorage } from 'firebase/storage'
 
-//DB1
-const firebaseConfig = {
-  apiKey: "AIzaSyDADvlLhOibfEVyk7TRSl-LuWfxDv4KIio",
-  authDomain: "artzy-f21d3.firebaseapp.com",
-  projectId: "artzy-f21d3",
-  storageBucket: "artzy-f21d3.appspot.com",
-  messagingSenderId: "216536498272",
-  appId: "1:216536498272:web:59e0d2bafefca015d24305",
-  measurementId: "G-LEBF2M1R1B"
-};
-
-// // DB2
+// //DB1
 // const firebaseConfig = {
-//   apiKey: "AIzaSyCxF8o0a364xqbrNOWfLfeK98BjKnOHpU4",
-//   authDomain: "artzy-f850f.firebaseapp.com",
-//   projectId: "artzy-f850f",
-//   storageBucket: "artzy-f850f.appspot.com",
-//   messagingSenderId: "458723905927",
-//   appId: "1:458723905927:web:32e62e6cf9fdf3c6600322"
+//   apiKey: "AIzaSyDADvlLhOibfEVyk7TRSl-LuWfxDv4KIio",
+//   authDomain: "artzy-f21d3.firebaseapp.com",
+//   projectId: "artzy-f21d3",
+//   storageBucket: "artzy-f21d3.appspot.com",
+//   messagingSenderId: "216536498272",
+//   appId: "1:216536498272:web:59e0d2bafefca015d24305",
+//   measurementId: "G-LEBF2M1R1B"
 // };
+
+// DB2
+const firebaseConfig = {
+  apiKey: "AIzaSyCxF8o0a364xqbrNOWfLfeK98BjKnOHpU4",
+  authDomain: "artzy-f850f.firebaseapp.com",
+  projectId: "artzy-f850f",
+  storageBucket: "artzy-f850f.appspot.com",
+  messagingSenderId: "458723905927",
+  appId: "1:458723905927:web:32e62e6cf9fdf3c6600322"
+};
 
 // // DB3
 // const firebaseConfig = {

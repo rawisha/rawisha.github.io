@@ -12,7 +12,6 @@ export default function MenuProductItem({ handle }) {
         { products?.slice(0, 10).map(product => (
             <Link to={'/product/' + product?.id} key={product?.id} ><div className="menu-product-list-item">
                 <p>{product?.title}</p>
-                <i className='fa-solid fa-angle-right menu-product-list-item-arrow'></i>
             </div></Link>
         ))} 
         { products.length > 10 ? <div className='menu-product-list-item'><Link to={'/category/' + handle}>More...</Link></div>: null}

@@ -1,10 +1,9 @@
-import React, { useState } from 'react'
 import '../styles/Navbar.css'
 import Logo from "../assets/Logo.svg"
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { db, logout } from '../firebase-config'
-import { onSnapshot, collection } from 'firebase/firestore'
+import { onSnapshot, collection, query, where } from 'firebase/firestore'
 import { Link } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import useCurrentUser from '../hooks/useCurrentUser';
@@ -14,15 +13,13 @@ import useCurrentArtist from '../hooks/useCurrentArtist'
 
 
 export default function Navbar() {
-
     const navigate = useNavigate()
-
+    const initCart = JSON.parse(localStorage.getItem('cart'))
     const currentUser = useAuth()
     const user = useCurrentUser()
     const artist = useCurrentArtist()
-
     let wishListCount = user?.wishList.length || artist?.wishList?.length;
-    let cartCount = user?.cart?.length || artist?.cart?.length;
+    let cartCount = user?.cart?.length || artist?.cart?.length || initCart?.length;
 
     // LOGOUT
     const handleSignOut = () => {
@@ -34,7 +31,6 @@ export default function Navbar() {
     const categories = useCategories()
 
     /*backend search*/
-
     const [value, setValue] = useState("");
     const [products, setProducts] = useState([]);
     const [productResults, setProductResults] = useState([]);
@@ -42,13 +38,15 @@ export default function Navbar() {
     const [artistResults, setArtistResults] = useState(null);
    
     useEffect(() => {
-        const unsub = onSnapshot(collection(db, 'products'), snapshot => {
+        const q = query(collection(db, 'products'), where('status', '==', 'approved'))
+        const unsub = onSnapshot(q, snapshot => {
             setProducts(snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id})))
         })
         return unsub
     }, [])
     useEffect(() => {
-        const unsub = onSnapshot(collection(db, 'artists'), snapshot => {
+        const q = query(collection(db, 'artists'), where('status', '==', 'approved'))
+        const unsub = onSnapshot(q, snapshot => {
             setArtists(snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id})))
         })
         return unsub
@@ -71,7 +69,6 @@ export default function Navbar() {
 
     window.onclick = () => { setValue('') }
     window.onkeydown = (e) => { if(e.key === 'Escape') setValue('') }
-
 
     return (
         <div className='Navbar'>

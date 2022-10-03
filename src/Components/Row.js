@@ -9,7 +9,8 @@ import { Link } from 'react-router-dom';
 
 export default function Row() {
 
-    const artists = useGetAll('artists')
+    const artistsCollection = useGetAll('artists')
+    const artists = artistsCollection.filter(artist => artist.status === 'approved')
     const categories = useCategories()
 
     const shuffle = (array) => {

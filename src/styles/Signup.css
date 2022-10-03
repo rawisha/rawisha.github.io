@@ -218,6 +218,10 @@ margin-top: 40px;
 
 #link {
   display: flex;
+.upload-profile-pic {
+  margin: 2rem;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -236,3 +240,13 @@ margin-top: 40px;
   font-weight: 900;
 }
 
+.upload-profile-pic label input {
+  display: none;
+}
+
+.upload-profile-pic label {
+  height: 40px;
+  width: 40px;
+  border: 1px solid var(--menu-border-clr);
+  border-radius: 50%;
+}

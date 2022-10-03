@@ -2,15 +2,16 @@ import React from 'react'
 import Navbar from '../Components/Navbar'
 import "../styles/Signup.css"
 import Footer from '../Components/Footer'
-import { signup, db, emailVerification, logout } from '../firebase-config'
+import { signup, db, emailVerification, logout, storage } from '../firebase-config'
 import { useRef, useState } from 'react'
 import { doc , setDoc, serverTimestamp } from 'firebase/firestore'
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
+import { v4 as uuid } from 'uuid'
 import UploadProductForm from '../Components/UploadProductForm'
 import useCurrentUser from '../hooks/useCurrentUser'
 import useCurrentArtist from '../hooks/useCurrentArtist'
 import Logo from "../assets/Logo.svg"
 import { Link } from 'react-router-dom'
-
 
 export default function Signup() {
 
@@ -106,8 +107,11 @@ export default function Signup() {
           artistName : artistNameRef.current.value.trim(),
           eMail : emailRef.current.value,
           bio: textAreaTextRef.current.value,
-          profilePic: 'https://firebasestorage.googleapis.com/v0/b/artzy-f21d3.appspot.com/o/profiles%2Fprofile_unknown.jpg?alt=media&token=ca8d2384-4d57-46f9-97b2-a915b9658577',
+          profilePic: profilePicUrl,
           status: 'pending',
+          wishList: [],
+          cart: [],
+          itemsSold: [],
           createdAt: time,
           timestamp : serverTimestamp(),
           wishList: [],
@@ -127,7 +131,27 @@ export default function Signup() {
     logout();
   }
   
-  
+  const types = ['image/png', 'image/jpeg'];
+  const [profilePic, setProfilePic] = useState();
+  const [profilePicUrl, setProfilePicUrl] = useState('https://firebasestorage.googleapis.com/v0/b/artzy-f21d3.appspot.com/o/profiles%2Fprofile_unknown.jpg?alt=media&token=ca8d2384-4d57-46f9-97b2-a915b9658577')
+
+  const handleFile = async (e) => {
+    let selected = e.target.files[0];
+    if (selected && types.includes(selected.type)) {
+      setError('');
+      setProfilePic(selected);
+
+      const imageRef = ref(storage, `profiles/${uuid() + '-' + selected.name}`)
+      await uploadBytes(imageRef, selected).then((snapshot) => {
+        getDownloadURL(snapshot.ref).then(url => {
+          setProfilePicUrl(url)
+        })
+      })
+    } else {
+      setProfilePic(null);
+      setError('Please select an image file (png or jpg)');
+    }
+  };
 
   return (
     <>
@@ -174,6 +198,15 @@ export default function Signup() {
           <div className="uploadForm"> 
             <textarea ref={textAreaTextRef} cols="80" rows="15" placeholder='About you and your work'></textarea>
             {error && <p className='errorSignup'>{error}</p>}
+            <div className="upload-profile-pic">
+              <h2>Upload a profile picture!</h2>
+              <label className="upload-btn">
+                    <span>+</span>
+                    <input type="file" onChange={handleFile} />
+              </label>
+            </div>
+            { !error && profilePic && <div>{ profilePic.name }</div> }
+            {error && <p className='error'>{error}</p>}
             <button disabled = {loading} onClick={ () => { handleSignupArtist() } } ><h2>Register</h2></button>
           </div>
         </div>   

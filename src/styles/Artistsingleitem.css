@@ -1,23 +1,24 @@
 .artistsingle--Container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .aristsingle--Wrapper {
-    display: flex;
-    flex-direction:column;
-    text-align: center;
-    justify-content: center;
-    align-items:center;
-    margin-right: 50px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  margin-right: 50px;
+  color: #202020e7;
 }
 
 .aristsingle--Wrapper img {
-    width:200px;
-    height:200px;
-    object-fit:contain;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
 }
 .aristsingle--Wrapper h2 {
-    font-size:24px
+  font-size: 24px;
 }

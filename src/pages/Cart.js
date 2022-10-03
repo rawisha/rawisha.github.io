@@ -2,73 +2,103 @@ import React from 'react'
 import Footer from '../Components/Footer'
 import Navbar from '../Components/Navbar'
 import '../styles/Cart.css'
+import '../styles/PendingOrder.css'
 import Logo from "../assets/Logo.svg"
 import { Link } from 'react-router-dom'
 import CartListItem from '../Components/CartListItem'
-import { useState,useEffect } from 'react'
+import { useState,useEffect,useContext } from 'react'
 import useCurrentUser from '../hooks/useCurrentUser'
-
+import useCurrentArtist from '../hooks/useCurrentArtist'
+import Visa from '../assets/visa-logo.png'
+import Mastercard from '../assets/Mastercard.png'
+import Paypal from '../assets/paypal.png'
+import ApplePay from '../assets/ApplePay.png'
+import ShortUniqueId from 'short-unique-id';
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
+import { db } from '../firebase-config'
+import {UserContext} from '../hooks/UserContext'
 
 export default function Cart() {
-
+  const {cartState,setCartState} = useContext(UserContext)
   const user = useCurrentUser()
-  const initCart = JSON.parse(localStorage.getItem('cart')) || []
-  const [newAmount,setNewAmount] = useState()
-  const [cart,setCart] = useState(initCart)
+  const artist = useCurrentArtist()
+
   const [checkOne, setCheckOne] = useState(true)
   const [checkTwo, setCheckTwo] = useState(false)
   const [checkThree, setCheckThree] = useState(false)
   const [checkKiss, setCheckKiss] = useState(false)
   
+  const [error, setError] = useState('')
+
   const [name, setName] = useState('')
   const [address, setAddress] = useState('')
   const [addressTwo, setAddressTwo] = useState('')
   const [city, setCity] = useState('')
   const [zip, setZip] = useState('')
   const [country, setCountry] = useState('')
+  
+  const countryList = ['Sweden', 'Denmark', 'Norway', 'Finland', 'UK', 'USA']
 
   const [cardOwner, setCardOwner] = useState('')
+  const [cardNumber, setCardNumber] = useState('')
+  const [expiryMonth, setExpiryMonth] = useState('')
+  const [expiryYear, setExpiryYear] = useState('')
+  const [CVV, setCVV] = useState('')
 
   const [email, setEmail] = useState('')
+  const [feedback, setFeedback] = useState('')
   const [orderID, setOrderID] = useState('')
 
+  const [order, setOrder] = useState({})
+  const [orderDetails, setOrderDetails] = useState({})
+  const [pendingOrder, setPendingOrder] = useState(false)
+  const [success, setSuccess] = useState(false)
+
   useEffect( () => {
-    if(user) {
-      setName( user ? user?.firstName + ' ' + user?.lastName : '')
-    }
-  },[user])
+    if(user) setName( user ? user?.firstName + ' ' + user?.lastName : '')
+    if(artist) setName( artist ? artist?.firstName + ' ' + artist?.lastName : '')
+  }, [user, artist])
 
-  useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cart))
-    
-},[cart,newAmount])
 
-  const handleIncrease = (e,item) => {
-    e.preventDefault()
-    const index = cart.findIndex(f => f.id === item.id)
+
+  const handleIncrease = ({id}) => {
+    if(id){
+      const index = cartState.findIndex(f => f.id === id)
     const data = localStorage.getItem('cart')
     if(data !=null){
       let newData = JSON.parse(data)
-      newData[index].cartAmount = cart[index].cartAmount + 1
+      newData[index].cartAmount = cartState[index].cartAmount + 1
       localStorage.setItem('cart', JSON.stringify(newData));
-      setCart(newData)
+      setCartState(newData)
+    }
+    }
+    return 
+    
+  }
+
+  const handleDecrease = ({id}) => {
+    const index = cartState.findIndex(f => f.id === id)
+    const data = localStorage.getItem('cart')
+    if(data !=null){
+      let newData = JSON.parse(data)
+      newData[index].cartAmount = cartState[index].cartAmount - 1
+      if(newData[index].cartAmount === 0) return
+      localStorage.setItem('cart', JSON.stringify(newData));
+      setCartState(newData)
     }
   }
 
+  const handleDelete = ({id}) => {
+    const newCart = cartState.filter(f => id !== f.id)
+    localStorage.setItem('cart', JSON.stringify(newCart));
+    setCartState([...newCart])
+  }
 
-  const handleDecrease = (e,item) => {
-    e.preventDefault()
-    const index = cart.findIndex(f => f.id === item.id)
-    const data = localStorage.getItem('cart')
-    if(data !=null){
-      let newData = JSON.parse(data)
-      newData[index].cartAmount = newData[index].cartAmount - 1
-      if(newData[index].cartAmount === 0) return
-      localStorage.setItem('cart', JSON.stringify(newData));
-      setCart(newData)
-      
-    }
-    
+  /* ----- Checkout ----- */
+  const getOrderId = () => {
+    const uid = new ShortUniqueId()
+    const id = uid.stamp(16).slice(0,8).toUpperCase()
+    return id
   }
 
   const handleCheckoutZero = (e) => {
@@ -80,31 +110,78 @@ export default function Cart() {
   
   const handleCheckoutOne = (e) => {
     e.preventDefault()
+    if(!name) return setError('Please fill in your name') 
+    if(!address) return setError('Please fill in adress') 
+    if(!city) return setError('Please fill in city') 
+    if(!zip) return setError('Please fill in zip') 
+    if(!country) return setError('Please select country') 
     setCheckOne(false)
     setCheckTwo(true)
     setCheckThree(false)
+    setError('')
   }
   
-  const handleCheckoutTwo = (e) => {
+  const handleCheckoutTwo = async (e) => {
     e.preventDefault()
+    if(!cardOwner) return setError('Please fill in cardowner')
+    if(!cardOwner) return setError('Please fill in cardnumber')
+    if(!expiryMonth || !expiryYear) return setError('Please fill in expiry')
+    if(!CVV) return setError('Please fill in CVV')
     setCheckTwo(false)
     setCheckThree(true)
-    setOrderID(123456789)
+    setOrderID(getOrderId())
+    setError('')
   }
   
-  const handleCheckoutThree = (e) => {
+  const handleCheckoutThree = async (e) => {
     e.preventDefault()
+    if(!email) return setError('Please enter email')
+
+    const orderDetails = {
+      name: name,
+      address : address,
+      addressTwo : addressTwo,
+      city: city,
+      zip: zip,
+      country: country,
+      cardOwner: cardOwner,
+      cardNumber: cardNumber,
+      expiryMonth: expiryMonth,
+      expiryYear: expiryYear,
+      CVV: CVV,
+      email: email,
+      feedback: feedback,
+      orderID: orderID,
+      status: 'pending'
+    }
+
+    setOrderDetails(orderDetails)
+
+    const order = JSON.parse(localStorage.getItem('cart'))
+    setOrder(order)
+
+    handleOrder(order, orderDetails)
     setCheckThree(false)
+    setPendingOrder(true)
+    setError('')
+  }
+  
+  /* ----- Place order ----- */
+  const handleOrder = async (order, orderDetails) => {    
+    const colRef = collection(db, 'orders')
+    await addDoc(colRef, {
+      order: order,
+      orderDetails: orderDetails,
+      createdAt: serverTimestamp()
+    }).then(() => {
+      setTimeout(() => {
+        setPendingOrder(false)
+        setSuccess(true)
+        setCartState([])
+      }, 3000)
+    })
     setCheckKiss(true)
   }
-
-  const handleDelete = (e,item) => {
-    e.preventDefault()
-    const newCart = cart.filter(f => item.id !== f.id)
-    setCart([...newCart])
-    console.log('deleted' + item.id)
-}
-
 
 
 
@@ -119,7 +196,7 @@ export default function Cart() {
           </div>
           <div className="cart-main">
            <ul className="cart-main-list"> 
-            {cart?.map(item => (
+            {cartState?.map(item => (
                 <li className="cart-main-list-item" key={item?.id}>
                 <div className="list-item-img">
                     <img src={item?.prod?.imageUrl} alt="cart-list-item" />
@@ -135,15 +212,15 @@ export default function Cart() {
                 <div className="list-item-amount-container">
                     <div className="list-item-amount"><p>{item?.cartAmount}</p></div>
                     <div className="list-item-change-amount">
-                    <div className="add"><button onClick={(e) => handleIncrease(e,item)}>+</button></div>
-                    <div className="sub"><button onClick={(e) => handleDecrease(e,item)}>-</button></div>
+                    <div className="add"><button onClick={() => handleIncrease(item)}>+</button></div>
+                    <div className="sub"><button onClick={() => handleDecrease(item)}>-</button></div>
                     </div>
                 </div>
                 <div className="list-item-price">
                     <p>Price: {item?.prod?.price} $</p>
                 </div>
                 <div className="list-item-remove">
-                    <i className='fa-solid fa-plus' onClick={(e) => handleDelete(e,item)}></i>
+                    <i className='fa-solid fa-plus' onClick={() => handleDelete(item)}></i>
                 </div>
             </li>
               ))}
@@ -154,7 +231,7 @@ export default function Cart() {
                 <p>Back to shop</p></Link>
               </div>
               <div className="cart-main-total-price">
-                <p className='total-price'>Subtotal: {cart.reduce((total, item)=>total+(item?.prod?.price*item?.cartAmount),0)} $</p>
+                <p className='total-price'>Subtotal: {cartState && cartState?.reduce((total, item)=>total+(item.prod.price*item.cartAmount),0)} $</p>
               </div>
             </div>
           </div>
@@ -189,9 +266,13 @@ export default function Cart() {
               </div>
               <label htmlFor='country'>Country</label>
               <select type="select" name="country" placeholder='select country' onChange={(e) => setCountry(e.target.value)} value={country}>
-                <option value="Sweden">Sweden</option>
+                <option value="">--Select Country--</option>
+                {countryList.map(country => (
+                  <option key={country} value={country}>{country}</option>
+                ))}
               </select>
             </form>
+            {error && <div className='checkout-error'>{error}</div>}
             <button onClick={handleCheckoutOne}>Next step</button>
           </div>}
           {/* Checkout 2 */}
@@ -204,28 +285,32 @@ export default function Cart() {
             <form>
               <i onClick={handleCheckoutZero} className='fa-solid fa-long-arrow-alt-left arrow-back'></i>
               <h2 className='form-title'>Card Details</h2>
-              <label htmlFor='card-owner'>Card Owner</label>
-              <input type="text" name="card-owner" onChange={(e) => setCardOwner(e.target.value)} value={cardOwner}/>
-              <label htmlFor='card-number'>Card Number</label>
-              <input type="text" name="card-number" placeholder='xxxx - xxxx - xxxx - xxxx'/>
               <div className="card-type">
-                {/* <img src="" alt="" /> */}
+                <img src={Visa} alt="visa" />
+                <img src={Mastercard} alt="mastercard" />
+                <img src={Paypal} alt="paypal" />
+                <img src={ApplePay} alt="applepay" />
               </div>
+              <label htmlFor='card-owner'>Card Owner</label>
+              <input type="text" name="card-owner" placeholder="Firstname Lastname" onChange={(e) => setCardOwner(e.target.value)} value={cardOwner}/>
+              <label htmlFor='card-number'>Card Number</label>
+              <input onChange={(e) => setCardNumber(e.target.value)} value={cardNumber} type="text" name="card-number" placeholder='xxxx - xxxx - xxxx - xxxx'/>
               <div className="card-details">
                 <div className="card-expiry-container">
                   <label>Expiry Date</label>
                   <div className="card-expiry">
-                    <input type="number" className='expiry-month' placeholder='MM'/>
+                    <input onChange={(e) => setExpiryMonth(e.target.value)} value={expiryMonth} type="number" className='expiry-month' placeholder='MM'/>
                     <span className='card-expiry-divider'>/</span>
-                    <input type="number" className='expiry-year' placeholder='YY'/>
+                    <input onChange={(e) => setExpiryYear(e.target.value)} value={expiryYear} type="number" className='expiry-year' placeholder='YY'/>
                   </div>
                 </div>
                 <div className="card-cvv">
                   <label>CVV</label>
-                  <input type="number" placeholder='***'/>
+                  <input onChange={(e) => setCVV(e.target.value)} value={CVV} type="number" placeholder='***'/>
                 </div>
               </div>
             </form>
+            {error && <div className='checkout-error'>{error}</div>}
             <button onClick={handleCheckoutTwo}>Checkout</button>
           </div>}
           {/* Checkout 3 */}
@@ -241,15 +326,19 @@ export default function Cart() {
               <label>E-mail for reciept</label>
               <input type="email" onChange={(e) => setEmail(e.target.value)} value={email}/>
               <label>Order ID</label>
-              <input type="text" disabled="true" value={orderID}/>
+              <input type="text" disabled={true} value={orderID}/>
               <label>Anything we should know?</label>
-              <textarea  cols="30" rows="10"></textarea>
+              <textarea onChange={(e) => setFeedback(e.target.value)} cols="30" rows="10"></textarea>
             </form>
-            <button onClick={handleCheckoutThree}>Send reciept</button>
+            {error && <div className='checkout-error'>{error}</div>}
+            <button onClick={handleCheckoutThree} className="order-btn">Place order and mail my reciept</button>
           </div>}
+          {pendingOrder && <div className='pending-order'>
+            <div className="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+          </div>}
+          {success && <></>}
           {checkKiss && <div className="kiss">&#128536;</div>}
         </div>
-
       </div>
 
       <Footer />

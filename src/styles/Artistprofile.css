@@ -133,3 +133,71 @@
     left: 50%;
     transform: translate(-50%);
 }
+
+/* ---- Bio ----- */
+
+.artistInfo {
+    position: relative;
+}
+
+.edit-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.edit-bio {
+    width: 534px;
+    min-height: 40vh;
+}
+
+.action-btns {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.action-btns button {
+    padding: .2rem;
+    margin-top: 1rem;
+    margin-left: 1rem;
+}
+
+/* ---- artistprofile2 ----- */
+
+.products-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 4rem;
+    min-height: 60vh;
+}
+
+
+/* ----- artistprofile3 ----- */
+
+.uploadedImages {
+    margin-bottom: 1rem;
+}
+
+.priceContainer2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.productSingleItemContainer2 {
+    position: relative;
+}
+
+.delete-product {
+    position: absolute;
+    top: 1rem;
+    right: .2rem;
+    cursor: pointer;
+}
+
+.delete-product:hover {
+    color: red;
+}

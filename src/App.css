@@ -7,9 +7,15 @@
   background-color: #eeeded;
 }
 
-h1,h2,h3,h4,p {
+h1,
+h2,
+h3,
+h4,
+p,
+i {
   font-family: "Amiri", serif;
   font-weight: 400;
+  color: #202020e7;
 }
 
 :root {
@@ -24,6 +30,12 @@ h1,h2,h3,h4,p {
 
   --menu-border-clr: #aaa;
   --menu-highlight-clr: aliceblue;
+
+  --dagmara-color-1: #b14e46;
+  --dagmara-color-2: #e3a393;
+  --dagmara-color-3: #cee3e6;
+  --dagmara-color-4: #7483bd;
+  --dagmara-color-5: #35374f;
 }
 
 .pageError {
@@ -43,7 +55,7 @@ h1,h2,h3,h4,p {
 }
 
 input {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 18px;
   outline: none;
 }

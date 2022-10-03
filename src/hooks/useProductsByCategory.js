@@ -15,7 +15,7 @@ const useProductsBy = (categoryRef) => {
         return unsub
     }, [categoryRef])
     
-    return data
+    return data.filter(prod => prod.status === 'approved')
 }
 
 export default useProductsBy;

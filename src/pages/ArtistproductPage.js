@@ -12,7 +12,7 @@ export default function ArtistproductPage() {
     const { id } = useParams()
     const artistContainer = useGetArtistById(id)
     const artist = artistContainer[0]
-    const products = useProductsByArtist('aaa')
+    const products = useProductsByArtist(id)
 
   return (
     <div>
