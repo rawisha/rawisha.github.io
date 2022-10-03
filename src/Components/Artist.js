@@ -6,7 +6,7 @@ import { collection, onSnapshot } from 'firebase/firestore'
 import { db } from '../firebase-config'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import FeaturedArtist from './FeaturedArtist'
+import FeaturedArtist from '../Components/FeaturedArtist'
 
 export default function Artist() {
 
