@@ -17,15 +17,48 @@
 .wishlistWrapper {
     display: flex;
     flex-direction: row;
-    border: solid 1px grey;
     width: 800px;
     height: 496px;
     padding: 5px;
     overflow-y: scroll;
     margin: 0;
     padding: 0;
-    
+    box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, .2);
+    margin-bottom: .2rem;
 }
+
+.wishlistContainer {
+    height: 100%;
+    width: 100%;
+}
+
+.empty-wishlist {
+    flex: 1;
+    height: 100%;
+    width: 100%;
+    display: grid;
+    place-content: center;
+}
+
+/* ----- Scrollbar ----- */
+
+.wishlistWrapper::-webkit-scrollbar {
+    width: 10px;
+}
+
+.wishlistWrapper::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.wishlistWrapper::-webkit-scrollbar-thumb {
+    background: #aaa;
+}
+
+.wishlistWrapper::-webkit-scrollbar-thumb:hover {
+    background: #888;
+}
+
+/* --x-- Scrollbar --x-- */
 
 
 .product {
@@ -95,7 +128,7 @@
     border: none;
     width: 100px;
     height: 69px;
-    
+    cursor: pointer;
 }
 
 #delButton {
@@ -104,9 +137,14 @@
     border: none;
     width: 100px;
     height: 69px;
+    cursor: pointer;
 }
 
 
+.addCartIconWishlist {
+    margin-left: .4rem;
+    background: transparent;
+}
 
 .productColor {
     font-size: 18px;

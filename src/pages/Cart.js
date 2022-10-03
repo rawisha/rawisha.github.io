@@ -210,7 +210,7 @@ export default function Cart() {
           <div className="cart-main">
            <ul className="cart-main-list"> 
             
-            {cartState?.length <= 0 ? <div><h2 style={{display:"flex",justifyContent:'center'}}>Your Cart is Empty</h2></div> : cartState?.map(item => (
+            {cartState?.length <= 0 ? <div className='empty-cart'><h2>Your Cart is Empty</h2></div> : cartState?.map(item => (
                 <li className="cart-main-list-item" key={item?.id}>
                 <div className="list-item-img">
                     <img src={item?.prod?.imageUrl} alt="cart-list-item" />
