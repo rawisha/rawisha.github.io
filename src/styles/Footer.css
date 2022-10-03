@@ -54,7 +54,7 @@
 
 .logoWrapper {
   display: flex;
-  margin-top: 50px;
+  margin-top: 20px;
 }
 
 #logoTextFooter {
@@ -72,7 +72,7 @@
 }
 
 .footerContainer ul {
-  margin-top: 40px;
+  margin-top: 10px;
   list-style: none;
 }
 

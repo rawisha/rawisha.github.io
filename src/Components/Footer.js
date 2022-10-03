@@ -3,6 +3,7 @@ import { db } from "../firebase-config";
 import React from "react";
 import { useState, useRef } from "react";
 import "../styles/Footer.css";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   const emailRef = useRef();
@@ -49,9 +50,9 @@ export default function Footer() {
         </form>
       </div>
       <div className="logoWrapper">
-        <h1 id="logoTextFooter">
+        <Link to="/" ><h1 id="logoTextFooter">
           ART<span id="logoText--span">ZY</span>
-        </h1>
+        </h1></Link>
       </div>
 
       <div className="linkContainer">
