@@ -25,11 +25,11 @@
 }
 
 .loginForm > button {
-  background: #b82020;
+  background: #272727;
   width: 210px;
   height: 45px;
-  margin: 10px 0;
-  background-color: #eee;
+  margin-top: 20px;
+  background-color: #272727;
 }
 
 .loginForm > button::hover {
@@ -38,11 +38,13 @@
 }
 
 .loginForm > button > h2 {
-  background: none;
+  background:none;
+  color: white;
   text-align: center;
   font-size: 28px;
   font-weight: 400;
   align-items: center;
+  
 }
 
 .loginForm > input::placeholder {
@@ -55,7 +57,12 @@
   font-size: 1.6rem;
   margin-bottom: 1rem;
   font-weight: 500;
-  border-bottom: 0.5px solid #20202080;
+  
+}
+
+.not-a-member {
+margin-top: 20px;
+  
 }
 
 .output {
