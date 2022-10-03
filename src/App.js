@@ -45,6 +45,7 @@ function App() {
         <UserContext.Provider value={{cartState,setCartState}}>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/ARTZY" element={<Home />} />
           <Route path="/admin" element={<ProtectedRoutes />} />
           <Route path="/product/:id" element={<Productpage />} />
           <Route path="/artist" element={<Artist />} />
