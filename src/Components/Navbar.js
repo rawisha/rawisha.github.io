@@ -102,7 +102,7 @@ export default function Navbar() {
                     <Link to="/artist"><h1 id='styleSettings' className='artist-link'>Artist</h1></Link>
                 </div>
                 <div className='inputWrapper'>
-                    <input className='inputField' type="text" placeholder='Search for Product or Artist' onChange={(e) => setValue(e.target.value)} value={value}/>
+                    <input className='inputField' type="text" placeholder='Search products or artists' onChange={(e) => setValue(e.target.value)} value={value}/>
                     <i className="fa-solid fa-magnifying-glass searchIcon"></i>
                     {value && <div className="search-results">
                         <div className="product-results" >
