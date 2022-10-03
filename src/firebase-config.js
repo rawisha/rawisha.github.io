@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { getAuth, createUserWithEmailAndPassword,sendEmailVerification, signOut, signInWithEmailAndPassword, sendPasswordResetEmail} from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, sendEmailVerification, signOut, signInWithEmailAndPassword, sendPasswordResetEmail} from "firebase/auth";
 import { getStorage } from 'firebase/storage'
 
 // //DB1

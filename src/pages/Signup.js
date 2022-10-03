@@ -133,7 +133,7 @@ export default function Signup() {
   
   const types = ['image/png', 'image/jpeg'];
   const [profilePic, setProfilePic] = useState();
-  const [profilePicUrl, setProfilePicUrl] = useState('https://firebasestorage.googleapis.com/v0/b/artzy-f21d3.appspot.com/o/profiles%2Fprofile_unknown.jpg?alt=media&token=ca8d2384-4d57-46f9-97b2-a915b9658577')
+  const [profilePicUrl, setProfilePicUrl] = useState('https://firebasestorage.googleapis.com/v0/b/artzyprod-ef753.appspot.com/o/profiles%2FNoPictureProfile.svg?alt=media&token=3f9277ae-8418-4202-9d54-8bdd1c0db486')
 
   const handleFile = async (e) => {
     let selected = e.target.files[0];

@@ -6,6 +6,7 @@ import { collection, doc, getDocs, query, setDoc, updateDoc, where } from "fireb
 import { db } from '../firebase-config'
 import useFeaturedArtist from "../hooks/useFeaturedArtist"
 import { useEffect, useState } from "react"
+import { FaCheckCircle, FaExpeditedssl, FaEye, FaFileInvoice, FaTruck } from 'react-icons/fa'
 
 export default function Admin() {
 
@@ -70,6 +71,9 @@ export default function Admin() {
         return amount
     }
 
+    const handleHoldOrder = () => {
+
+    }
 
 
 
@@ -136,21 +140,26 @@ export default function Admin() {
                         <th>OrderID</th>
                         <th>Date</th>
                         <th>Products</th>
-                        <th>Status</th>
                         <th>Amount</th>
+                        <th>Status</th>
                         <th>Action</th>
+                        <th><FaEye /></th>
                     </tr>
-                    {orders?.map((order, item) => (
+                    {orders?.map((order) => (
                     <tr key={order?.id}>
                         <td>{order?.orderID}</td>
                         <td>{order?.orderDetails?.date}</td>
                         <td>{amountOfProductsInOrder(order)}</td>
-                        <td>{order?.status}</td>
                         <td>{order?.total} $</td>
-                        {/* <td className="action-cell">
-                            <i onClick={() => handleReject(artist.id, artist.artistName)} className="fa-solid fa-ban"></i>
-                            <i onClick={() => handleApprove(artist.id, artist.artistName)} className="fa-solid fa-check"></i>
-                        </td> */}
+                        <td>{order?.status}</td>
+                        <td className="action-cell">
+                            <FaExpeditedssl onClick={() => handleHoldOrder(order.id)}/>
+                            <FaTruck />
+                            <FaCheckCircle />
+                        </td>
+                        <td>
+                            <FaFileInvoice />
+                        </td>
                     </tr>
                     ))}
                 </tbody>
