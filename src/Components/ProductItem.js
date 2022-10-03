@@ -6,16 +6,15 @@ import { arrayUnion, arrayRemove, doc, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase-config';
 import "../styles/Product.css"
 import { Link } from 'react-router-dom';
-import {UserContext} from '../hooks/UserContext'
+import { UserContext } from '../hooks/UserContext'
+
 export default function ProductItem({prods}) {
     const {cartState,setCartState} = useContext(UserContext)
     const user = useCurrentUser()
     const artist = useCurrentArtist()
     const [wish, setWish] = useState(false)
-    const [btn, setBtn] = useState(true)
 
     const addToWishList = async (product) => {
-      
       if(user) {
         const docRef = doc(db, 'users', `${user?.id}`)
         await updateDoc(docRef, {

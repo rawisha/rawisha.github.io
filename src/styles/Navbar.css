@@ -306,8 +306,12 @@ a {
 
 .admin-link {
   position: absolute;
-  top: .2rem;
-  left: .2rem;
-  color: #ddd;
-  
+  top: .4rem;
+  left: .6rem;
+  opacity: .7;
+  font-size: 2rem;
+}
+
+.admin-link:hover {
+  opacity: 1;
 }

@@ -20,7 +20,7 @@ const UploadProductForm = ({ upload, artist, setUploadReady }) => {
     const [error, setError] = useState(null)
     const [success, setSuccess] = useState(false)
   
-    const types = ['image/png', 'image/jpeg'];
+    const types = ['image/png', 'image/jpeg', 'image/svg+xml', 'image/gif'];
   
     const handleFile = (e) => {
       let selected = e.target.files[0];

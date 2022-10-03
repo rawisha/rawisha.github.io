@@ -24,25 +24,25 @@ import { getStorage } from 'firebase/storage'
 //   appId: "1:458723905927:web:32e62e6cf9fdf3c6600322"
 // };
 
-// DB3
-const firebaseConfig = {
-  apiKey: "AIzaSyAWkQ6Kqlwz_jf0wIm-WpgmlLtfiGLCk20",
-  authDomain: "artzy3-7d844.firebaseapp.com",
-  projectId: "artzy3-7d844",
-  storageBucket: "artzy3-7d844.appspot.com",
-  messagingSenderId: "979179349911",
-  appId: "1:979179349911:web:6bbad13cde9922037006d2"
-};
-
-// // DB PRODUCTION DO NOT USE UNLESS NECESSARY
+// // DB3
 // const firebaseConfig = {
-//   apiKey: "AIzaSyBYpDyo595Iwfjo7f5BAxCcjEbOWVtepLM",
-//   authDomain: "artzyprod-ef753.firebaseapp.com",
-//   projectId: "artzyprod-ef753",
-//   storageBucket: "artzyprod-ef753.appspot.com",
-//   messagingSenderId: "789222589511",
-//   appId: "1:789222589511:web:db9b9d8f58966f9ce91d62"
+//   apiKey: "AIzaSyAWkQ6Kqlwz_jf0wIm-WpgmlLtfiGLCk20",
+//   authDomain: "artzy3-7d844.firebaseapp.com",
+//   projectId: "artzy3-7d844",
+//   storageBucket: "artzy3-7d844.appspot.com",
+//   messagingSenderId: "979179349911",
+//   appId: "1:979179349911:web:6bbad13cde9922037006d2"
 // };
+
+// DB PRODUCTION DO NOT USE UNLESS NECESSARY
+const firebaseConfig = {
+  apiKey: "AIzaSyBYpDyo595Iwfjo7f5BAxCcjEbOWVtepLM",
+  authDomain: "artzyprod-ef753.firebaseapp.com",
+  projectId: "artzyprod-ef753",
+  storageBucket: "artzyprod-ef753.appspot.com",
+  messagingSenderId: "789222589511",
+  appId: "1:789222589511:web:db9b9d8f58966f9ce91d62"
+};
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

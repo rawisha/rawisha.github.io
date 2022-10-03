@@ -14,7 +14,7 @@ import { FaUserCog } from 'react-icons/fa';
 
 
 export default function Navbar() {
-    
+
     const navigate = useNavigate()
     const initCart = JSON.parse(localStorage.getItem('cart'))
     const currentUser = useAuth()
@@ -23,6 +23,13 @@ export default function Navbar() {
     let wishListCount = user?.wishList.length || artist?.wishList?.length;
     let cartCount = user?.cart?.length || artist?.cart?.length || initCart?.length;
 
+    const [admin, setAdmin] = useState(false)
+
+    useEffect(() => {
+        if(artist?.admin) {
+            setAdmin(true)
+        }
+    }, [artist])
     // LOGOUT
     const handleSignOut = () => {
         logout();
@@ -74,7 +81,7 @@ export default function Navbar() {
 
     return (
         <div className='Navbar'>
-            <Link className="admin-link" to="/admin"><FaUserCog className='admin-icon'/></Link>
+            {admin && <Link className="admin-link" to="/admin"><FaUserCog className='admin-icon'/></Link>}
             {artist && <>
                 <div className="profile-settings-icon-container">
                 <Link to="/profile"><i className='fa-solid fa-gear profile-settings-icon'></i></Link>

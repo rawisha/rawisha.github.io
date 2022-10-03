@@ -7,6 +7,7 @@ import { db } from '../firebase-config'
 import useFeaturedArtist from "../hooks/useFeaturedArtist"
 import { useEffect, useState } from "react"
 import { FaCheckCircle, FaExpeditedssl, FaEye, FaFileInvoice, FaTimes, FaTruck, FaUserCog } from 'react-icons/fa'
+import { Link } from "react-router-dom"
 
 export default function Admin() {
 
@@ -53,7 +54,6 @@ export default function Admin() {
             })
         }
     }
-
 
     // Featured Artist
     const [featured, setFeatured] = useState()
@@ -144,7 +144,7 @@ export default function Admin() {
                     </tr>
                     {activeArtists?.map(artist => (
                     <tr key={artist?.id}>
-                        <td>{artist?.artistName}</td>
+                        <td>{<Link to={'/artist/' + artist.artistName}>{artist?.artistName}</Link>}</td>
                         <td>{artist?.createdAt}</td>
                         <td>{artist?.itemsSold}</td>
                         <td>{artist?.status}</td>
