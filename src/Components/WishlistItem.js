@@ -23,12 +23,20 @@ export default function WishlistItem({prod}) {
         })
       }
     }
+    
+    const isInCart = (id) => {
+      const index = cartState.findIndex(f => id === f.id)
+      return (index === -1) ? false : true
+    }
 
     const handleAddcart = (e,data) => {
-      console.log(data, "fireed")
-      e.preventDefault()
+      if(!isInCart(data.id)){
+        e.preventDefault()
       setCartState([...cartState,{prod: data, id:data?.id, cartAmount:1}])
       addToLDB(data)
+      }else{
+        removeFromWishList(data)
+      }
     }
   
     const addToLDB = (data) => {
@@ -37,6 +45,7 @@ export default function WishlistItem({prod}) {
       localStorage.setItem('cart', JSON.stringify(db))
       removeFromWishList(data)
     }
+
   return (
     <div>
         <div className='product'>

@@ -157,7 +157,7 @@ export default function Productpage() {
 
         <div className="qantityWish">
         <button onClick={(e) => handleQuantityMinus(e,item)}>-</button>
-        <input type="text" pattern="\d*" minLength="1" placeholder={item} value={item}></input>
+        <div className='quantityHolder'>{item}</div>
         <button onClick={(e) => handleQuantityPlus(e,item)}>+</button>
         {wish ? <i className="fa-solid fa-heart favHeart" onClick={() => removeFromWishList(product)}></i> : <i className="fa-regular fa-heart favHeart" onClick={() => addToWishList(product)}></i>}
         

@@ -77,14 +77,16 @@
     color: #222222;
 }
 
-.qantityWish input{
+.quantityHolder {
     width: 70px;
     height:40px;
     font-size: 25px;
     border:solid 1px grey;
     text-align: center;
+    vertical-align: middle;
     font-family: 'Roboto, sans-serif';
     font-weight: 400;
+    padding-top: 5px;
 }
 
 .qantityWish input::placeholder{

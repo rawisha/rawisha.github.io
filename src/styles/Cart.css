@@ -31,10 +31,11 @@
 }
 
 .empty-cart {
-    height: 45vh;
+    height: 48vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    user-select: none;
 }
 
 .cart-main-list {
