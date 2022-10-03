@@ -1,5 +1,5 @@
 import React from 'react'
-import bild from "../assets/bild.jpg";
+import bild from "../assets/pipilotti.jpg";
 import "../styles/News.css"
 
 export default function News() {

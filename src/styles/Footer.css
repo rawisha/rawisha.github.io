@@ -28,6 +28,7 @@
   outline: none;
   border: 1px solid var(--menu-border-clr);
   margin-left: 1rem;
+  cursor: pointer;
 }
 
 .newsletter-btn i {
