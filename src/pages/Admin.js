@@ -4,9 +4,6 @@ import '../styles/Admin.css'
 import useGetAll from '../hooks/useGetAll'
 import { collection, doc, getDocs, query, setDoc, updateDoc, where } from "firebase/firestore"
 import { db } from '../firebase-config'
-import { useState } from "react"
-import { useEffect } from "react"
-import { async } from "@firebase/util"
 
 export default function Admin() {
 
@@ -30,7 +27,6 @@ export default function Admin() {
             status: 'rejected'
         })
         await setStatus(artistName, 'rejected')
-        
     }
 
     const handleApprove = async (id, artistName) => {
