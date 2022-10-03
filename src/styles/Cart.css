@@ -30,11 +30,43 @@
     min-height: 4rem;
 }
 
+.empty-cart {
+    height: 45vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .cart-main-list {
     list-style: none;
     margin-top: 1rem;
+    min-height: 50vh;
+    max-height: 50vh;
+    overflow-y: scroll;
     width: 100%;
+    box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, .1);
+    margin-bottom: .2rem;
 }
+
+/* ----- Scrollbar ----- */
+
+.cart-main-list::-webkit-scrollbar {
+    width: 10px;
+}
+
+.cart-main-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.cart-main-list::-webkit-scrollbar-thumb {
+    background: #aaa;
+}
+
+.cart-main-list::-webkit-scrollbar-thumb:hover {
+    background: #888;
+}
+
+/* --x-- Scrollbar --x-- */
 
 .cart-main-list-item * {
     background: var(--cart-bg);

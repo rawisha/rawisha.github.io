@@ -33,15 +33,12 @@ export default function ArtistproductPage() {
 
         <div className="productWrapper">
             <h1>Artworks for Sale by {artist?.artistName}</h1>
-            
             <div className="productContainer">
                 {products?.map(product => (
                     <ProductItem prods={product} key={product?.id} />
                 ))}
             </div>
-
         </div>
-
 
         {/* <div className="productWrapper">
             <h1>Print and Support by Arist name </h1>

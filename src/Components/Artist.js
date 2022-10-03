@@ -54,7 +54,7 @@ export default function Artist() {
             <div className='artistSearchContainer'>
                 <h1>Artists</h1>
                 <form>
-                    <button type="submit">Search</button>
+                    <button type="submit" disabled={true}>Search</button>
                     <input onChange={handleSearch} type="search" placeholder='Search by artist...'></input>
                 </form>
                 

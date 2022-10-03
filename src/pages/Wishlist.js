@@ -52,7 +52,7 @@ export default function Wishlist() {
           <div className="wishlistContainer">
           {prods?.length > 0 ? prods.map(product => (
                 <WishlistItem prod={product} key={product.id} />
-            )): <h2>Wishlist is empty...</h2>}
+            )): <div className='empty-wishlist'><h2>Wishlist is empty...</h2></div>}
           </div>
         </div>
       </div> :

@@ -56,7 +56,7 @@ export default function WishlistItem({prod}) {
               <h2>{prod.price} USD</h2>
             </div>
             <div className='adddelButton' >
-            <button id="addButton" onClick={(e) => handleAddcart(e,prod)}>Add</button>
+            <button id="addButton" onClick={(e) => handleAddcart(e,prod)}>Add<i className="fa-solid fa-cart-shopping  addCartIconWishlist"></i></button>
             <button onClick={() => removeFromWishList(prod)} id="delButton">Delete</button>
             </div>
             </div>
