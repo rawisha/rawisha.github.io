@@ -35,8 +35,12 @@
 }
 
 .imgContainer img {
-    width: 600px;
-    height: 600px;
+    float: left;
+    width:  500px;
+    height: 500px;
+    object-fit: cover;
+    margin-top:30px;
+    
 }
 
 .princenTitle{
