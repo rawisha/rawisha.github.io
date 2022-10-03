@@ -65,6 +65,7 @@ export default function Admin() {
     const pendingOrders = ordersFromDB.filter(order => order.status === 'pending')
 
     const [selected, setSelected] = useState()
+    const [orderCart, setOrderCart] = useState()
 
     const amountOfProductsInOrder = (order) => {
         let amount = 0;
@@ -87,11 +88,13 @@ export default function Admin() {
 
     const handleSelected = (order) => {
         setSelected(order)
+        setOrderCart(order?.orderCart)
         console.log(order)
     }
 
     const handleClose = () => {
         setSelected(null)
+        setOrderCart(null)
     }
 
   return (
@@ -231,24 +234,20 @@ export default function Admin() {
                     <tbody>
                         <tr>
                             <th>Product</th>
-                            <th>Member Since</th>
-                            <th>Items Sold</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                            <th>Featured</th>
+                            <th>Category</th>
+                            <th>By Artist</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
                         </tr>
-                        {/* {selected?.map(order => (
-                        <tr key={order?.id}>
-                            <td>{order?.orderName}</td>
-                            <td>{order?.createdAt}</td>
-                            <td>{order?.itemsSold}</td>
-                            <td>{order?.status}</td>
-                            <td className="action-cell">
-                                <i onClick={() => handleReject(order.id, order.orderName)} className="fa-solid fa-ban"></i>
-                                <i onClick={() => handleApprove(order.id, order.orderName)} className="fa-solid fa-check"></i>
-                            </td>
+                        {selected?.orderCart?.map(item => (
+                            <tr key={item?.id}>
+                            <td>{item?.prod?.title}</td>
+                            <td>{item?.prod?.categoryHandle}</td>
+                            <td>{item?.prod?.by}</td>
+                            <td>{item?.cartAmount}</td>
+                            <td>{item?.prod?.price} $</td>
                         </tr>
-                        ))} */}
+                        ))}
                     </tbody>
                 </table>
             </div>}
