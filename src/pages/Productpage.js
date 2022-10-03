@@ -138,7 +138,7 @@ export default function Productpage() {
       <div className="productPage--Container">
         
         <div className="backlinkContainer">
-        <Link to="/" ><i className='fa-solid fa-long-arrow-left'></i>
+        <Link to={"/category/" + product?.categoryHandle} ><i className='fa-solid fa-long-arrow-left'></i>
         <p>Back to Category</p></Link>
         </div>
         

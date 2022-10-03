@@ -129,7 +129,7 @@ a {
   position: absolute;
   height: 100%;
   width: 100%;
-  left: 100%;
+  left: calc(100% - 1px);
   top: -1px;
   border-top: 1px solid var(--menu-border-clr);
   font-size: 1.2rem;
@@ -138,6 +138,7 @@ a {
 .menu-item-products .menu-product-list-item {
   border-right: 1px solid var(--menu-border-clr);
   border-bottom: 1px solid var(--menu-border-clr);
+  border-left: 1px solid var(--menu-border-clr);
 }
 
 .menu-item-products .no-products {

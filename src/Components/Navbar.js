@@ -30,6 +30,7 @@ export default function Navbar() {
             setAdmin(true)
         }
     }, [artist])
+    
     // LOGOUT
     const handleSignOut = () => {
         logout();

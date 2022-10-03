@@ -5,11 +5,22 @@ import useGetAll from '../hooks/useGetAll'
 import { collection, doc, getDocs, query, setDoc, updateDoc, where } from "firebase/firestore"
 import { db } from '../firebase-config'
 import useFeaturedArtist from "../hooks/useFeaturedArtist"
+import useCurrentArtist from "../hooks/useCurrentArtist"
 import { useEffect, useState } from "react"
 import { FaCheckCircle, FaExpeditedssl, FaEye, FaFileInvoice, FaTimes, FaTruck, FaUserCog } from 'react-icons/fa'
 import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 export default function Admin() {
+
+    const artist = useCurrentArtist()
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if(artist?.admin === false) {
+            navigate('/')
+        }
+    }, [artist])
 
     const artists = useGetAll('artists')
     const pendingArtists = artists.filter(artist => artist.status === 'pending')
@@ -113,6 +124,7 @@ export default function Admin() {
                     <tr>
                         <th>Name</th>
                         <th>Applied At</th>
+                        <th>Email</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -120,6 +132,7 @@ export default function Admin() {
                     <tr key={artist?.id}>
                         <td>{artist?.artistName}</td>
                         <td>{artist?.createdAt}</td>
+                        <td>{artist?.eMail}</td>
                         <td>{artist?.status}</td>
                         <td className="action-cell">
                             <i onClick={() => handleReject(artist.id, artist.artistName)} className="fa-solid fa-ban"></i>
@@ -136,6 +149,7 @@ export default function Admin() {
                     <tr>
                         <th>Name</th>
                         <th>Member Since</th>
+                        <th>Email</th>
                         <th>Items Sold</th>
                         <th>Status</th>
                         <th>Admin</th>
@@ -146,6 +160,7 @@ export default function Admin() {
                     <tr key={artist?.id}>
                         <td>{<Link to={'/artist/' + artist.artistName}>{artist?.artistName}</Link>}</td>
                         <td>{artist?.createdAt}</td>
+                        <td>{artist?.eMail}</td>
                         <td>{artist?.itemsSold}</td>
                         <td>{artist?.status}</td>
                         <td>{artist?.admin ? 'admin' : ''}</td>
