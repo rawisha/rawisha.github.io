@@ -35,12 +35,12 @@
 }
 
 .imgContainer img {
+    display: flex;
     float: left;
     width:  500px;
     height: 500px;
     object-fit: cover;
     margin-top:30px;
-    
 }
 
 .princenTitle{
