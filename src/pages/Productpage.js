@@ -1,20 +1,17 @@
-import {React,useState,useEffect} from 'react'
+import {React,useState,useEffect, useContext} from 'react'
 import '../styles/Productpage.css'
 import Navbar from '../Components/Navbar'
 import { Link, useParams, } from 'react-router-dom'
 import Footer from '../Components/Footer'
 import useProductById from '../hooks/useProductById'
-
+import {UserContext} from '../hooks/UserContext'
 export default function Productpage() {
-
+  const {cartState,setCartState} = useContext(UserContext)
   const { id } = useParams()
-  const initCart = JSON.parse(localStorage.getItem('cart')) || []
   const product = useProductById(id)
   const [item, setItem] = useState(1);
-  const [localItem,setLocalitem] = useState(initCart)
   const [catHandle,setCategoryHandle] = useState('')
   const [btn, setBtn] = useState(true)
-  const [count,setCount] = useState(0)
 
 
   useEffect(() => {
@@ -37,20 +34,34 @@ export default function Productpage() {
 
   const handleAddcart = (e,data) => {
     e.preventDefault()
-    setLocalitem([...localItem,{prod: product, id:product?.id, cartAmount:item}])
+    setCartState([...cartState,{prod: product, id:product?.id, cartAmount:item}])
     setBtn(false)
+    addToLDB(data)
+  }
 
+  const addToLDB = (data) => {
+    const db = JSON.parse(localStorage.getItem('cart'))
+    db.push({prod: data, id:data?.id, cartAmount:item})
+    localStorage.setItem('cart', JSON.stringify(db))
   }
  /* Handle quantity -- ENDS HERE*/
 
-  useEffect(() => {
-     localStorage.setItem('cart', JSON.stringify(localItem))
-  },[localItem])
+ const isInCart = (id) => {
+  if ( ! id ) return false
+  
+  const index = cartState.findIndex(f => id === f.id)
+  return (index === -1) ? false : true
+  
+}
 
-  useEffect(() => {
-   setCount(localItem.length)
- },[localItem,count])
- 
+ const CartButton = ({id}) => {
+  if (isInCart(id)) {
+    return <button onClick={(e) => handleAddcart(e,product)} disabled className="addToCart--prodPage">Added to Cart</button>
+  }
+  
+  return <button onClick={(e) => handleAddcart(e,product)} className="addToCart--prodPage">Add to Cart</button>
+  
+}
 
   return (
     <>
@@ -82,7 +93,7 @@ export default function Productpage() {
         <i className="fa-regular fa-heart favHeart"></i>
         </div>
       
-        <button onClick={(e) => handleAddcart(e,product?.id)} className="addToCart--prodPage">{btn ? 'Add to Cart' : 'Added to Cart'}</button>
+        <CartButton id={product.id} />
 
         <div className="descInfo">
           <h4>Description:</h4>
