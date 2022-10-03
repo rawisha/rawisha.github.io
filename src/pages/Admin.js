@@ -2,8 +2,11 @@ import Navbar from "../Components/Navbar"
 import Footer from "../Components/Footer"
 import '../styles/Admin.css'
 import useGetAll from '../hooks/useGetAll'
-import { collection, doc, getDocs, query, updateDoc, where } from "firebase/firestore"
+import { collection, doc, getDocs, query, setDoc, updateDoc, where } from "firebase/firestore"
 import { db } from '../firebase-config'
+import { useState } from "react"
+import { useEffect } from "react"
+import { async } from "@firebase/util"
 
 export default function Admin() {
 
@@ -36,6 +39,13 @@ export default function Admin() {
             status: 'approved'
         })
         await setStatus(artistName, 'approved')
+    }
+
+    const setFeatured = async (artist) => {
+        const docRef = doc(db, 'featured', 'featuredArtist')
+        await setDoc(docRef, {
+            featuredArtist: artist
+        })
     }
 
   return (
@@ -76,6 +86,7 @@ export default function Admin() {
                         <th>Items Sold</th>
                         <th>Status</th>
                         <th>Action</th>
+                        <th>Featured</th>
                     </tr>
                     {activeArtists?.map(artist => (
                     <tr key={artist?.id}>
@@ -87,6 +98,7 @@ export default function Admin() {
                             <i onClick={() => handleReject(artist.id, artist.artistName)} className="fa-solid fa-ban"></i>
                             <i onClick={() => handleApprove(artist.id, artist.artistName)} className="fa-solid fa-check"></i>
                         </td>
+                        <td className="featured-radio"><input onChange={(e) => setFeatured(artist)} type="radio" name="featured"/></td>
                     </tr>
                     ))}
                 </tbody>

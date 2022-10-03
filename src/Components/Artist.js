@@ -2,11 +2,11 @@ import React from 'react'
 import '../styles/Artist.css'
 import Navbar from '../Components/Navbar'
 import Footer from '../Components/Footer'
-import bild from '../assets/bild.jpg'
 import { collection, onSnapshot } from 'firebase/firestore'
 import { db } from '../firebase-config'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import FeaturedArtist from './FeaturedArtist'
 
 export default function Artist() {
 
@@ -48,11 +48,8 @@ export default function Artist() {
     <>
         <Navbar />
         <div className='artistContainer'>
-            <h1>Featured artist of the week</h1>
-            <div className='artistCardContainer'>
-                <h2 id="artistTitle">Pipilotti Rist</h2>
-                <img src={bild} alt="profile_picture"></img>
-            </div>
+            
+            <FeaturedArtist />
 
             <div className='artistSearchContainer'>
                 <h1>Artists</h1>
