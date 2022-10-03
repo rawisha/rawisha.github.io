@@ -30,22 +30,15 @@ function App() {
   const user = useCurrentUser()
   const artist = useCurrentArtist()
   
-  
-
   useEffect(() => {
     const initCart = JSON.parse(localStorage.getItem('cart')) 
     if ( initCart ) {
        setCartState(initCart)
-
-
     }else {
       localStorage.setItem('cart', JSON.stringify([]))
     }
-
   },[])
 
- 
- 
   return (
     <div className="App">
       
