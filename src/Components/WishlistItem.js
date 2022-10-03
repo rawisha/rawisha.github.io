@@ -1,10 +1,11 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import useCurrentUser from '../hooks/useCurrentUser';
 import useCurrentArtist from '../hooks/useCurrentArtist';
 import { arrayRemove, doc, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase-config';
-
+import {UserContext} from '../hooks/UserContext'
 export default function WishlistItem({prod}) {
+  const {cartState,setCartState} = useContext(UserContext)
     const user = useCurrentUser()
     const artist = useCurrentArtist()
   
@@ -23,6 +24,19 @@ export default function WishlistItem({prod}) {
       }
     }
 
+    const handleAddcart = (e,data) => {
+      console.log(data, "fireed")
+      e.preventDefault()
+      setCartState([...cartState,{prod: data, id:data?.id, cartAmount:1}])
+      addToLDB(data)
+    }
+  
+    const addToLDB = (data) => {
+      const db = JSON.parse(localStorage.getItem('cart'))
+      db.push({prod: data, id:data?.id, cartAmount:1})
+      localStorage.setItem('cart', JSON.stringify(db))
+      removeFromWishList(data)
+    }
   return (
     <div>
         <div className='product'>
@@ -41,8 +55,8 @@ export default function WishlistItem({prod}) {
             <div className='productPrice'>
               <h2>{prod.price} USD</h2>
             </div>
-            <div className='adddelButton'>
-            <button id="addButton">Add</button>
+            <div className='adddelButton' >
+            <button id="addButton" onClick={(e) => handleAddcart(e,prod)}>Add</button>
             <button onClick={() => removeFromWishList(prod)} id="delButton">Delete</button>
             </div>
             </div>

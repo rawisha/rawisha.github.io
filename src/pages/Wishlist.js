@@ -2,6 +2,7 @@ import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer'
 import "../styles/Wishlist.css"
 import { useState, useEffect } from 'react';
+
 import WishlistItem from '../Components/WishlistItem'
 import useCurrentUser from '../hooks/useCurrentUser';
 import useCurrentArtist from '../hooks/useCurrentArtist';
@@ -9,6 +10,8 @@ import { useNavigate } from 'react-router-dom';
 
 
 export default function Wishlist() {
+ 
+
   const navigate = useNavigate()
   const currentUser = useCurrentUser()
   const currentArtist = useCurrentArtist()
@@ -35,6 +38,8 @@ export default function Wishlist() {
       setProds(user?.wishList)
     }
   },[user])
+
+  
 
   return (
     <>
