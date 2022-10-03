@@ -72,6 +72,7 @@ export default function Navbar() {
 
     return (
         <div className='Navbar'>
+            <Link className="admin-link" to="/admin">ADMIN</Link>
             {artist && <>
                 <div className="profile-settings-icon-container">
                 <Link to="/profile"><i className='fa-solid fa-gear profile-settings-icon'></i></Link>

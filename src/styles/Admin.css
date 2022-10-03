@@ -10,6 +10,14 @@
     margin-bottom: 2rem;
 }
 
+.artists-table-members {
+    margin-bottom: 2rem;
+}
+
+.orders-table {
+    margin-bottom: 2rem;
+}
+
 table th {
     padding: .4rem 1rem;
     border: 1px solid #aaa;
