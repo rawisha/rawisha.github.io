@@ -6,7 +6,7 @@ import { collection, doc, getDocs, query, setDoc, updateDoc, where } from "fireb
 import { db } from '../firebase-config'
 import useFeaturedArtist from "../hooks/useFeaturedArtist"
 import { useEffect, useState } from "react"
-import { FaCheckCircle, FaExpeditedssl, FaEye, FaFileInvoice, FaTruck } from 'react-icons/fa'
+import { FaCheckCircle, FaExpeditedssl, FaEye, FaFileInvoice, FaTimes, FaTruck } from 'react-icons/fa'
 
 export default function Admin() {
 
@@ -60,7 +60,10 @@ export default function Admin() {
     }, [currentFeatured])
 
     // Orders
-    const orders = useGetAll('orders')
+    const ordersFromDB = useGetAll('orders')
+    const orders = ordersFromDB.filter(order => order.status === 'on-hold' || order.status === 'transporting' || order.status === 'delivered')
+    const pendingOrders = ordersFromDB.filter(order => order.status === 'pending')
+
     const [selected, setSelected] = useState()
 
     const amountOfProductsInOrder = (order) => {
@@ -71,11 +74,25 @@ export default function Admin() {
         return amount
     }
 
-    const handleHoldOrder = () => {
-
+    const setOrderStatus = async (id, status) => {
+        const docRef = await doc(db, 'orders', id)
+        updateDoc(docRef, {
+            status: status
+        })
     }
 
+    const handleHoldOrder = (id) => setOrderStatus(id, 'on-hold')     
+    const handleTransportOrder = (id) => setOrderStatus(id, 'transporting')
+    const handleDeviveredOrder = (id) => setOrderStatus(id, 'delivered')
 
+    const handleSelected = (order) => {
+        setSelected(order)
+        console.log(order)
+    }
+
+    const handleClose = () => {
+        setSelected(null)
+    }
 
   return (
     <>
@@ -145,6 +162,23 @@ export default function Admin() {
                         <th>Action</th>
                         <th><FaEye /></th>
                     </tr>
+                    {pendingOrders?.map((order) => (
+                    <tr key={order?.id}>
+                        <td>{order?.orderID}</td>
+                        <td>{order?.orderDetails?.date}</td>
+                        <td>{amountOfProductsInOrder(order)}</td>
+                        <td>{order?.total} $</td>
+                        <td>{order?.status}</td>
+                        <td className="action-cell">
+                            <FaExpeditedssl onClick={() => handleHoldOrder(order.id)}/>
+                            <FaTruck onClick={() => handleTransportOrder(order.id)}/>
+                            <FaCheckCircle onClick={() => handleDeviveredOrder(order.id)}/>
+                        </td>
+                        <td>
+                            <FaFileInvoice onClick={() => handleSelected(order)}/>
+                        </td>
+                    </tr>
+                    ))}
                     {orders?.map((order) => (
                     <tr key={order?.id}>
                         <td>{order?.orderID}</td>
@@ -154,16 +188,70 @@ export default function Admin() {
                         <td>{order?.status}</td>
                         <td className="action-cell">
                             <FaExpeditedssl onClick={() => handleHoldOrder(order.id)}/>
-                            <FaTruck />
-                            <FaCheckCircle />
+                            <FaTruck onClick={() => handleTransportOrder(order.id)}/>
+                            <FaCheckCircle onClick={() => handleDeviveredOrder(order.id)}/>
                         </td>
                         <td>
-                            <FaFileInvoice />
+                            <FaFileInvoice onClick={() => handleSelected(order)}/>
                         </td>
                     </tr>
                     ))}
                 </tbody>
             </table>
+
+            {selected && <div className="specification">
+                <h1>Specification</h1>
+                <FaTimes className="close-btn" onClick={handleClose}/>
+                <h2>OrderID: {selected.orderID}</h2>
+                <div className="order-specifications">
+                    <div className="customer-info">
+                        <h3>Customer Information</h3>
+                        <p><span>Name:</span> {selected.orderDetails.name}</p>
+                        <p><span>Adress:</span> {selected.orderDetails.address}</p>
+                        <p><span>Adress:</span> {selected.orderDetails.addressTwo}</p>
+                        <p><span>City:</span> {selected.orderDetails.city}</p>
+                        <p><span>Zip:</span> {selected.orderDetails.zip}</p>
+                        <p><span>Country:</span> {selected.orderDetails.country}</p>
+                    </div>
+                    <div className="card-information">
+                        <h3>Payment Details</h3>
+                        <p><span>Card Holder:</span> {selected.orderDetails.cardOwner}</p>
+                        <p><span>Card Number:</span> {'****-****-****-' + selected.orderDetails.cardNumber.slice(12, 4)}</p>
+                        <p><span>Total:</span> {selected.total} $</p>
+                        <h3 className="contact-details">Contact</h3>
+                        <p><span>Email:</span> {selected.orderDetails.email}</p>
+                    </div>
+                </div>
+                <div className="order-feedback">
+                    <h3>Message from customer</h3>
+                    <p>{selected.orderDetails.feedback ? selected.orderDetails.feedback : 'No message'}</p>
+
+                </div>
+                <table className="order-table-specifictation">
+                    <tbody>
+                        <tr>
+                            <th>Product</th>
+                            <th>Member Since</th>
+                            <th>Items Sold</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                            <th>Featured</th>
+                        </tr>
+                        {/* {selected?.map(order => (
+                        <tr key={order?.id}>
+                            <td>{order?.orderName}</td>
+                            <td>{order?.createdAt}</td>
+                            <td>{order?.itemsSold}</td>
+                            <td>{order?.status}</td>
+                            <td className="action-cell">
+                                <i onClick={() => handleReject(order.id, order.orderName)} className="fa-solid fa-ban"></i>
+                                <i onClick={() => handleApprove(order.id, order.orderName)} className="fa-solid fa-check"></i>
+                            </td>
+                        </tr>
+                        ))} */}
+                    </tbody>
+                </table>
+            </div>}
 
         </div>
 

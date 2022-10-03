@@ -14,25 +14,25 @@ import { getStorage } from 'firebase/storage'
 //   measurementId: "G-LEBF2M1R1B"
 // };
 
-// DB2
-const firebaseConfig = {
-  apiKey: "AIzaSyCxF8o0a364xqbrNOWfLfeK98BjKnOHpU4",
-  authDomain: "artzy-f850f.firebaseapp.com",
-  projectId: "artzy-f850f",
-  storageBucket: "artzy-f850f.appspot.com",
-  messagingSenderId: "458723905927",
-  appId: "1:458723905927:web:32e62e6cf9fdf3c6600322"
-};
-
-// // DB3
+// // DB2
 // const firebaseConfig = {
-//   apiKey: "AIzaSyAWkQ6Kqlwz_jf0wIm-WpgmlLtfiGLCk20",
-//   authDomain: "artzy3-7d844.firebaseapp.com",
-//   projectId: "artzy3-7d844",
-//   storageBucket: "artzy3-7d844.appspot.com",
-//   messagingSenderId: "979179349911",
-//   appId: "1:979179349911:web:6bbad13cde9922037006d2"
+//   apiKey: "AIzaSyCxF8o0a364xqbrNOWfLfeK98BjKnOHpU4",
+//   authDomain: "artzy-f850f.firebaseapp.com",
+//   projectId: "artzy-f850f",
+//   storageBucket: "artzy-f850f.appspot.com",
+//   messagingSenderId: "458723905927",
+//   appId: "1:458723905927:web:32e62e6cf9fdf3c6600322"
 // };
+
+// DB3
+const firebaseConfig = {
+  apiKey: "AIzaSyAWkQ6Kqlwz_jf0wIm-WpgmlLtfiGLCk20",
+  authDomain: "artzy3-7d844.firebaseapp.com",
+  projectId: "artzy3-7d844",
+  storageBucket: "artzy3-7d844.appspot.com",
+  messagingSenderId: "979179349911",
+  appId: "1:979179349911:web:6bbad13cde9922037006d2"
+};
 
 // // DB PRODUCTION DO NOT USE UNLESS NECESSARY
 // const firebaseConfig = {
