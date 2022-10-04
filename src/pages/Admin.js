@@ -241,7 +241,7 @@ export default function Admin() {
                     <div className="card-information">
                         <h3>Payment Details</h3>
                         <p><span>Card Holder:</span> {selected.orderDetails.cardOwner}</p>
-                        <p><span>Card Number:</span> {'****-****-****-' + selected.orderDetails.cardNumber.slice(12, 4)}</p>
+                        <p><span>Card Number:</span> {'****-****-****-' + selected?.orderDetails?.cardNumber.slice(-4)}</p>
                         <p><span>Total:</span> {selected.total} $</p>
                         <h3 className="contact-details">Contact</h3>
                         <p><span>Email:</span> {selected.orderDetails.email}</p>
