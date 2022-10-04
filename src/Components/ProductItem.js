@@ -51,7 +51,6 @@ export default function ProductItem({prods}) {
         })
         setWish(false)
       }
-
     }
       
     useEffect(() => {
@@ -74,10 +73,8 @@ export default function ProductItem({prods}) {
 
     /* HANDLE ADD TO CART --- START HERE */
     const handleAddcart = (e,item) => {
-
       setCartState([...cartState,{prod: item, id:item?.id, cartAmount:1}])
       addToLDB(item)
-      
     }
 
     const addToLDB = (item) => {
@@ -90,7 +87,6 @@ export default function ProductItem({prods}) {
     const isInCart = (id) => {
       const index = cartState.findIndex(f => id === f.id)
       return (index === -1) ? false : true
-      
     }
 
   /* HANDLE ADD TO CART --- END HERE */
@@ -99,17 +95,16 @@ export default function ProductItem({prods}) {
     if (isInCart(id)) {
       return <button className="addToCart" disabled onClick={(e) => handleAddcart(e,prods)}>Add</button>
     }
-    
     return <button className="addToCart" onClick={(e) => handleAddcart(e,prods)}>Add</button>
-    
   }
+
   return (
     
         <div key={prods.id} className='productSingleItemContainer'>
                        <h2 className='cardTitle'>{prods.title}</h2>
                        <div className="card-sub-container">
 
-                        <h3 className='cardSubTitle'>by {prods.by}</h3>
+                        <h3 className='cardSubTitle'>by <Link to={'/artist/' + prods.by}>{prods.by}</Link></h3>
                         <h3 className='cardSubTitle'><Link to={`/category/`+ prods.categoryHandle}>{prods?.categoryHandle[0].toUpperCase() + prods?.categoryHandle.substring(1)}</Link></h3>
                         
                         <Link className="linkId" to={'/product/' + prods.id} >
