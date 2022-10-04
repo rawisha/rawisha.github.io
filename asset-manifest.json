@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.5af7200d.css",
+    "main.js": "/static/js/main.cc109fe6.js",
+    "static/media/banner.png": "/static/media/banner.79a393cd76f0a61c6adc.png",
+    "static/media/pipilotti.jpg": "/static/media/pipilotti.f12e84e91b75e4829b66.jpg",
+    "static/media/success.png": "/static/media/success.a7106fd26dcc01d2f79e.png",
+    "static/media/Logo.svg": "/static/media/Logo.7f399a93141d8681d55f528a938a2c4c.svg",
+    "index.html": "/index.html",
+    "main.5af7200d.css.map": "/static/css/main.5af7200d.css.map",
+    "main.cc109fe6.js.map": "/static/js/main.cc109fe6.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5af7200d.css",
+    "static/js/main.cc109fe6.js"
+  ]
+}
