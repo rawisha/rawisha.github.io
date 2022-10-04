@@ -171,7 +171,7 @@ export default function Productpage() {
           <h4 className='designBy'>Category:</h4>
           <p><Link to={'/category/' + product?.categoryHandle}>{catHandle}</Link></p>
           <h4 className='designBy'>Designed By:</h4>
-          <p>{product?.by}</p>
+          <p><Link to={'/artist/' + product?.by}>{product?.by}</Link></p>
         </div>
         </div>
         </div>
