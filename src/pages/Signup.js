@@ -98,7 +98,7 @@ export default function Signup() {
 
     setLoading(true);
     try{
-      await signup(emailRef.current.value, passwordRef.current.value).then (cred =>{
+      await signup(emailRef.current.value, passwordRef.current.value).then(cred => {
         setDoc(doc(db, "artists", cred.user.uid), {
           firstName : firstNameRef.current.value,
           lastName : lastNameRef.current.value,
@@ -124,8 +124,10 @@ export default function Signup() {
     setLoading(false);
     setTimeout(() => {
       setSuccess(true)
-    }, 2000)
-    logout();
+    }, 4000)
+    setTimeout(() => {
+      logout();
+    }, 4000)
   }
   
   const types = ['image/png', 'image/jpeg'];
