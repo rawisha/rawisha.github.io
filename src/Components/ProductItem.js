@@ -51,7 +51,6 @@ export default function ProductItem({prods}) {
         })
         setWish(false)
       }
-
     }
       
     useEffect(() => {
@@ -74,10 +73,8 @@ export default function ProductItem({prods}) {
 
     /* HANDLE ADD TO CART --- START HERE */
     const handleAddcart = (e,item) => {
-
       setCartState([...cartState,{prod: item, id:item?.id, cartAmount:1}])
       addToLDB(item)
-      
     }
 
     const addToLDB = (item) => {
@@ -90,7 +87,6 @@ export default function ProductItem({prods}) {
     const isInCart = (id) => {
       const index = cartState.findIndex(f => id === f.id)
       return (index === -1) ? false : true
-      
     }
 
   /* HANDLE ADD TO CART --- END HERE */
@@ -99,10 +95,9 @@ export default function ProductItem({prods}) {
     if (isInCart(id)) {
       return <button className="addToCart" disabled onClick={(e) => handleAddcart(e,prods)}>Add</button>
     }
-    
     return <button className="addToCart" onClick={(e) => handleAddcart(e,prods)}>Add</button>
-    
   }
+
   return (
     
         <div key={prods.id} className='productSingleItemContainer'>
